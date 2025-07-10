@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { Play } from 'lucide-react';
+import React, { useRef, useState, useEffect, useCallback } from 'react';
 
 interface RobustVideoPlayerProps {
   src: string;
@@ -8,67 +7,79 @@ interface RobustVideoPlayerProps {
 }
 
 const RobustVideoPlayer = ({ src, poster, className }: RobustVideoPlayerProps) => {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [hasError, setHasError] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [hasPlayedOnce, setHasPlayedOnce] = useState(false);
+  const [isFirstView, setIsFirstView] = useState(true);
+  const [showManualButton, setShowManualButton] = useState(false);
 
-  const handlePlay = () => {
-    setIsPlaying(true);
-  };
+  const attemptFirstAutoplay = useCallback(async () => {
+    const video = videoRef.current;
+    if (!video || hasPlayedOnce || !isFirstView) return;
 
-  const handleError = () => {
-    console.error('Erro ao carregar vídeo:', src);
-    setHasError(true);
-  };
+    try {
+      video.muted = true;
+      await video.play();
+      setHasPlayedOnce(true);
+      setIsFirstView(false);
+    } catch (err) {
+      console.warn('Autoplay bloqueado, mostrando botão manual');
+      setShowManualButton(true);
+    }
+  }, [hasPlayedOnce, isFirstView]);
 
-  const handleClick = () => {
-    const video = document.querySelector(`video[src="${src}"]`) as HTMLVideoElement;
-    if (video) {
-      if (video.paused) {
-        video.play();
-        setIsPlaying(true);
-      } else {
-        video.pause();
-        setIsPlaying(false);
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const observer = new IntersectionObserver((entries) => {
+      const [entry] = entries;
+      if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
+        attemptFirstAutoplay();
+        observer.disconnect();
       }
+    }, {
+      threshold: [0.5],
+      rootMargin: '50px'
+    });
+
+    observer.observe(container);
+    return () => observer.disconnect();
+  }, [attemptFirstAutoplay]);
+
+  const handleManualPlay = async () => {
+    const video = videoRef.current;
+    if (!video) return;
+    try {
+      video.muted = true;
+      await video.play();
+      setShowManualButton(false);
+    } catch (err) {
+      console.error('Erro no play manual:', err);
     }
   };
 
   return (
-    <div className={`relative ${className}`}>
+    <div ref={containerRef} className={`relative ${className}`}>
       <video
+        ref={videoRef}
         src={src}
         poster={poster}
         muted
         playsInline
-        preload="metadata"
-        className="w-full rounded-xl shadow-md cursor-pointer"
-        onPlay={handlePlay}
-        onError={handleError}
-        onClick={handleClick}
-        controls
+        preload="auto"
+        crossOrigin="anonymous"
+        className="w-full rounded-xl shadow-md"
       />
 
-      {/* Botão de play sempre visível quando pausado */}
-      {!isPlaying && !hasError && (
-        <div className="absolute inset-0 flex items-center justify-center bg-black/30 rounded-xl cursor-pointer" onClick={handleClick}>
-          <div className="bg-white/90 backdrop-blur-sm rounded-full p-4 hover:bg-white/100 transition-all duration-300">
-            <Play className="w-8 h-8 text-primary ml-1" fill="currentColor" />
-          </div>
-        </div>
-      )}
-
-      {/* Estado de erro */}
-      {hasError && (
-        <div className="absolute inset-0 flex items-center justify-center bg-secondary/20 rounded-xl">
-          <div className="text-center text-muted p-4">
-            <p className="text-sm">Erro ao carregar vídeo</p>
-            <button 
-              onClick={() => window.location.reload()}
-              className="text-xs text-primary hover:underline mt-2"
-            >
-              Recarregar página
-            </button>
-          </div>
+      {showManualButton && (
+        <div className="absolute inset-0 flex items-center justify-center bg-black/30">
+          <button
+            onClick={handleManualPlay}
+            className="bg-white text-black px-5 py-2 rounded-full hover:bg-gray-200"
+          >
+            Reproduzir
+          </button>
         </div>
       )}
     </div>
