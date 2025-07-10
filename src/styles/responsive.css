@@ -1,0 +1,129 @@
+
+/* NIVELA® Design System - Responsive & Professional Styling */
+
+/* Mobile-First Optimizations for Professional Audience */
+@media (max-width: 640px) {
+  .card-premium {
+    @apply p-3 sm:p-4 rounded-lg sm:rounded-xl;
+  }
+  
+  .btn-premium-primary,
+  .btn-premium-secondary,
+  .btn-premium-ghost {
+    @apply px-4 sm:px-6 py-3 text-sm sm:text-base min-h-[48px];
+    touch-action: manipulation;
+  }
+  
+  /* Disable hover effects on touch devices */
+  .hover-lift:hover,
+  .hover-scale:hover {
+    transform: none;
+  }
+  
+  /* Optimize text sizes for mobile readability */
+  h1 {
+    @apply text-4xl sm:text-5xl leading-tight;
+  }
+  
+  h2 {
+    @apply text-xl sm:text-2xl leading-tight;
+  }
+  
+  h3 {
+    @apply text-lg sm:text-xl;
+  }
+  
+  p {
+    @apply text-sm sm:text-base leading-relaxed;
+  }
+}
+
+/* Tablet Optimizations */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .card-premium {
+    @apply p-5 rounded-xl;
+  }
+  
+  /* Better spacing for tablet */
+  .container {
+    @apply px-6;
+  }
+}
+
+/* Desktop Professional Styling */
+@media (min-width: 1025px) {
+  .card-premium {
+    @apply p-6 lg:p-8 rounded-2xl;
+  }
+  
+  /* Enhanced hover effects for desktop */
+  .hover-lift:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-dramatic);
+  }
+  
+  .hover-scale:hover {
+    transform: scale(1.03);
+  }
+}
+
+/* Premium Accessibility for Professional Users */
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-in-up,
+  .animate-fade-in-left,
+  .animate-fade-in-right,
+  .animate-bounce-in,
+  .loading-skeleton,
+  .loading-pulse {
+    animation: none !important;
+  }
+  
+  .hover-lift,
+  .hover-scale,
+  .interactive-premium {
+    transition: none !important;
+  }
+  
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* High contrast mode for accessibility */
+@media (prefers-contrast: high) {
+  .glass-subtle,
+  .glass-medium {
+    background: rgba(255, 255, 255, 0.95) !important;
+    border: 2px solid currentColor !important;
+  }
+  
+  .text-muted {
+    opacity: 0.8 !important;
+  }
+}
+
+/* Professional touch targets */
+.btn-touch-optimized {
+  @apply min-h-[48px] min-w-[48px];
+  touch-action: manipulation;
+}
+
+/* Professional spacing system */
+.section-spacing-mobile {
+  @apply py-8 sm:py-12;
+}
+
+.section-spacing-desktop {
+  @apply py-12 lg:py-16 xl:py-20;
+}
+
+/* Professional grid system */
+.grid-professional {
+  @apply grid gap-4 sm:gap-6 lg:gap-8;
+}
+
+.grid-professional-cards {
+  @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6;
+}

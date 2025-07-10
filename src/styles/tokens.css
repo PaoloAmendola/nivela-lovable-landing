@@ -1,0 +1,31 @@
+
+/* NIVELA® Design System - Design Tokens */
+
+:root {
+  /* Premium spacing scale */
+  --spacing-xs: 0.25rem;    /* 4px */
+  --spacing-sm: 0.5rem;     /* 8px */
+  --spacing-md: 1rem;       /* 16px */
+  --spacing-lg: 1.5rem;     /* 24px */
+  --spacing-xl: 2rem;       /* 32px */
+  --spacing-2xl: 3rem;      /* 48px */
+  --spacing-3xl: 4rem;      /* 64px */
+  
+  /* Premium shadows */
+  --shadow-subtle: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.12);
+  --shadow-medium: 0 8px 24px rgba(0, 0, 0, 0.15);
+  --shadow-dramatic: 0 16px 48px rgba(0, 0, 0, 0.18);
+  --shadow-glow: 0 0 24px rgba(157, 73, 22, 0.3);
+  
+  /* Premium transitions */
+  --transition-quick: 0.15s ease-out;
+  --transition-smooth: 0.3s ease-out;
+  --transition-slow: 0.5s ease-out;
+  --transition-bounce: 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  
+  /* Premium blur effects */
+  --blur-subtle: 8px;
+  --blur-medium: 16px;
+  --blur-strong: 24px;
+}

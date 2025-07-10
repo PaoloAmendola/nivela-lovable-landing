@@ -1,0 +1,33 @@
+
+/* NIVELA® Design System - Premium Buttons */
+
+.btn-premium-primary {
+  @apply bg-gradient-to-r from-primary to-accent text-white font-bold rounded-xl px-6 py-3 
+         shadow-dramatic hover:shadow-glow transition-all duration-300 
+         hover:scale-105 active:scale-95 focus-premium;
+  background-size: 200% 200%;
+  animation: gradient-shift 3s ease infinite;
+}
+
+.btn-premium-secondary {
+  @apply bg-background/90 backdrop-blur-xl border-2 border-accent/30 text-accent 
+         font-bold rounded-xl px-6 py-3 shadow-soft hover:shadow-medium 
+         transition-all duration-300 hover:bg-accent/10 hover:border-accent/50
+         hover:scale-105 active:scale-95 focus-premium;
+}
+
+.btn-premium-ghost {
+  @apply bg-transparent border-2 border-accent/50 text-accent font-bold 
+         rounded-xl px-6 py-3 transition-all duration-300 
+         hover:bg-accent/10 hover:border-accent hover:shadow-glow
+         hover:scale-105 active:scale-95 focus-premium;
+}
+
+.btn-touch-optimized {
+  @apply min-h-[44px] min-w-[44px] touch-manipulation;
+}
+
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}

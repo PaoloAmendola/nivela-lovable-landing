@@ -1,0 +1,88 @@
+
+/* NIVELA® Design System - Premium Animations */
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes fade-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes fade-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes bounce-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.3) translateY(50px);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05) translateY(-10px);
+  }
+  70% {
+    transform: scale(0.95) translateY(5px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes organic-float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg) scale(1);
+  }
+  25% {
+    transform: translateY(-8px) rotate(2deg) scale(1.02);
+  }
+  50% {
+    transform: translateY(-4px) rotate(0deg) scale(1);
+  }
+  75% {
+    transform: translateY(-12px) rotate(-1deg) scale(0.98);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up var(--transition-smooth) cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.animate-fade-in-left {
+  animation: fade-in-left var(--transition-smooth) cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.animate-fade-in-right {
+  animation: fade-in-right var(--transition-smooth) cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.animate-bounce-in {
+  animation: bounce-in var(--transition-bounce) cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.animate-organic-float {
+  animation: organic-float 6s ease-in-out infinite;
+}

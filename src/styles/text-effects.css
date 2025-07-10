@@ -1,0 +1,16 @@
+
+/* NIVELA® Design System - Text Effects */
+
+.text-gradient-primary {
+  background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-elegant {
+  background: linear-gradient(135deg, hsl(var(--accent)) 0%, hsl(var(--foreground)) 50%, hsl(var(--accent)) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}

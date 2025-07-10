@@ -1,0 +1,45 @@
+
+/* NIVELA® Design System - Interactive Elements & Hover Effects */
+
+.focus-premium {
+  @apply focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 focus:ring-offset-background;
+  transition: all var(--transition-quick);
+}
+
+.hover-lift {
+  transition: all var(--transition-smooth);
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-medium);
+}
+
+.hover-scale {
+  transition: all var(--transition-smooth);
+}
+
+.hover-scale:hover {
+  transform: scale(1.05);
+}
+
+.hover-glow {
+  transition: all var(--transition-smooth);
+}
+
+.hover-glow:hover {
+  box-shadow: var(--shadow-glow);
+}
+
+.interactive-premium {
+  @apply transition-all duration-300 ease-out cursor-pointer;
+  will-change: transform;
+}
+
+.interactive-premium:hover {
+  transform: translateY(-2px);
+}
+
+.interactive-premium:active {
+  transform: translateY(0);
+}

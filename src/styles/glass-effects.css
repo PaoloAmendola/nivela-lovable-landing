@@ -1,0 +1,20 @@
+
+/* NIVELA® Design System - Glass Effects */
+
+.glass-subtle {
+  backdrop-filter: blur(var(--blur-subtle));
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-medium {
+  backdrop-filter: blur(var(--blur-medium));
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.glass-strong {
+  backdrop-filter: blur(var(--blur-strong));
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}

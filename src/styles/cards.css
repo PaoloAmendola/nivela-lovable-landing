@@ -1,0 +1,18 @@
+
+/* NIVELA® Design System - Premium Cards */
+
+.card-premium {
+  @apply bg-background/90 backdrop-blur-xl border border-accent/20 rounded-2xl p-6;
+  box-shadow: var(--shadow-soft);
+  transition: all var(--transition-smooth);
+}
+
+.card-premium:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-medium);
+}
+
+.card-floating {
+  @apply card-premium;
+  box-shadow: var(--shadow-dramatic);
+}
