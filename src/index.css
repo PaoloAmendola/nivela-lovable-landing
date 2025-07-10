@@ -23,12 +23,12 @@
     --accent-foreground: 207 56% 9%;
     
     /* Contraste otimizado para público 35-60 anos */
-    --muted: 0 0% 90%; /* #E6E6E6 - contraste aprimorado */
+    --muted: 0 0% 95%; /* #F2F2F2 - contraste máximo para 35-60 anos */
     --muted-foreground: 207 56% 9%;
 
     /* Variáveis para texto com contraste profissional */
-    --text-secondary: 0 0% 85%; /* #D9D9D9 - mais legível */
-    --text-tertiary: 0 0% 75%; /* #BFBFBF - melhor contraste */
+    --text-secondary: 0 0% 90%; /* #E6E6E6 - alta legibilidade */
+    --text-tertiary: 0 0% 80%; /* #CCCCCC - contraste aprimorado */
 
     --card: 207 56% 9%;
     --card-foreground: 0 0% 100%;
@@ -171,17 +171,17 @@
 }
 
 @layer components {
-  /* Tipografia mobile melhorada */
-  .text-mobile-xs { font-size: calc(0.75rem * var(--mobile-font-scale)); line-height: 1.4; }
-  .text-mobile-sm { font-size: calc(0.875rem * var(--mobile-font-scale)); line-height: 1.5; }
-  .text-mobile-base { font-size: calc(1rem * var(--mobile-font-scale)); line-height: 1.6; }
-  .text-mobile-lg { font-size: calc(1.125rem * var(--mobile-font-scale)); line-height: 1.5; }
-  .text-mobile-xl { font-size: calc(1.25rem * var(--mobile-font-scale)); line-height: 1.4; }
-  .text-mobile-2xl { font-size: calc(1.5rem * var(--mobile-font-scale)); line-height: 1.3; }
-  .text-mobile-3xl { font-size: calc(1.875rem * var(--mobile-font-scale)); line-height: 1.2; }
-  .text-mobile-4xl { font-size: calc(2.25rem * var(--mobile-font-scale)); line-height: 1.1; }
-  .text-mobile-5xl { font-size: calc(3rem * var(--mobile-font-scale)); line-height: 1; }
-  .text-mobile-6xl { font-size: calc(3.75rem * var(--mobile-font-scale)); line-height: 1; }
+  /* Tipografia mobile melhorada para público 35-60 anos */
+  .text-mobile-xs { font-size: calc((0.75rem + 2px) * var(--mobile-font-scale)); line-height: 1.5; }
+  .text-mobile-sm { font-size: calc((0.875rem + 2px) * var(--mobile-font-scale)); line-height: 1.6; }
+  .text-mobile-base { font-size: calc((1rem + 2px) * var(--mobile-font-scale)); line-height: 1.7; }
+  .text-mobile-lg { font-size: calc((1.125rem + 2px) * var(--mobile-font-scale)); line-height: 1.6; }
+  .text-mobile-xl { font-size: calc((1.25rem + 2px) * var(--mobile-font-scale)); line-height: 1.5; }
+  .text-mobile-2xl { font-size: calc((1.5rem + 2px) * var(--mobile-font-scale)); line-height: 1.4; }
+  .text-mobile-3xl { font-size: calc((1.875rem + 2px) * var(--mobile-font-scale)); line-height: 1.3; }
+  .text-mobile-4xl { font-size: calc((2.25rem + 2px) * var(--mobile-font-scale)); line-height: 1.2; }
+  .text-mobile-5xl { font-size: calc((3rem + 2px) * var(--mobile-font-scale)); line-height: 1.1; }
+  .text-mobile-6xl { font-size: calc((3.75rem + 2px) * var(--mobile-font-scale)); line-height: 1.1; }
 
   /* Classes de texto com melhor contraste */
   .text-secondary { color: hsl(var(--text-secondary)); }
@@ -287,12 +287,14 @@
     border: 1px solid rgba(255, 255, 255, 0.2);
   }
 
-  /* Gradient Text */
+  /* Gradient Text - Otimizado para melhor visibilidade */
   .gradient-text {
-    background: linear-gradient(135deg, #D9C0AA 0%, #FFFFFF 100%);
+    background: linear-gradient(135deg, hsl(var(--accent)) 0%, hsl(var(--foreground)) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    /* Fallback para browsers sem suporte */
+    color: hsl(var(--accent));
   }
 
   /* Premium Button - Updated to use Montserrat instead of Poppins */

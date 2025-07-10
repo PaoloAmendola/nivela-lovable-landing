@@ -10,8 +10,9 @@
   .btn-premium-primary,
   .btn-premium-secondary,
   .btn-premium-ghost {
-    @apply px-4 sm:px-6 py-3 text-sm sm:text-base min-h-[48px];
+    @apply px-6 sm:px-8 py-4 text-base sm:text-lg min-h-[52px];
     touch-action: manipulation;
+    /* Espaçamento otimizado para público 35-60 anos */
   }
   
   /* Disable hover effects on touch devices */
@@ -20,21 +21,21 @@
     transform: none;
   }
   
-  /* Optimize text sizes for mobile readability */
+  /* Optimize text sizes for mobile readability - Público 35-60 anos */
   h1 {
-    @apply text-4xl sm:text-5xl leading-tight;
+    @apply text-5xl sm:text-6xl leading-tight;
   }
   
   h2 {
-    @apply text-xl sm:text-2xl leading-tight;
+    @apply text-2xl sm:text-3xl leading-tight;
   }
   
   h3 {
-    @apply text-lg sm:text-xl;
+    @apply text-xl sm:text-2xl leading-snug;
   }
   
   p {
-    @apply text-sm sm:text-base leading-relaxed;
+    @apply text-base sm:text-lg leading-relaxed;
   }
 }
 
@@ -104,10 +105,11 @@
   }
 }
 
-/* Professional touch targets */
+/* Professional touch targets - Otimizado para 35-60 anos */
 .btn-touch-optimized {
-  @apply min-h-[48px] min-w-[48px];
+  @apply min-h-[52px] min-w-[52px];
   touch-action: manipulation;
+  /* Maior área de toque para melhor acessibilidade */
 }
 
 /* Professional spacing system */
