@@ -8,9 +8,11 @@ interface SimpleVideoPlayerProps {
 
 const SimpleVideoPlayer = ({ src, className }: SimpleVideoPlayerProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
   const [retryCount, setRetryCount] = useState(0);
+  const [isInView, setIsInView] = useState(false);
   const maxRetries = 3;
   
   // Reset states when src changes or component mounts
@@ -25,6 +27,31 @@ const SimpleVideoPlayer = ({ src, className }: SimpleVideoPlayerProps) => {
       videoRef.current.load();
     }
   }, [src]);
+
+  // Intersection Observer for autoplay
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInView(entry.isIntersecting);
+        if (entry.isIntersecting && videoRef.current) {
+          console.log('🎬 SimpleVideoPlayer: entering view, attempting autoplay');
+          videoRef.current.play().catch((error) => {
+            console.log('🎬 SimpleVideoPlayer: autoplay blocked by browser policy', error);
+          });
+        } else if (!entry.isIntersecting && videoRef.current) {
+          console.log('🎬 SimpleVideoPlayer: leaving view, pausing video');
+          videoRef.current.pause();
+        }
+      },
+      { threshold: 0.5, rootMargin: '50px' }
+    );
+
+    observer.observe(container);
+    return () => observer.disconnect();
+  }, []);
 
   // Cleanup effect
   useEffect(() => {
@@ -129,7 +156,7 @@ const SimpleVideoPlayer = ({ src, className }: SimpleVideoPlayerProps) => {
   }
 
   return (
-    <div className={cn("relative w-full h-full", className)}>
+    <div ref={containerRef} className={cn("relative w-full h-full", className)}>
       {isLoading && (
         <div className="absolute inset-0 flex items-center justify-center bg-muted/20 rounded-lg">
           <div className="animate-spin w-8 h-8 border-2 border-accent border-t-transparent rounded-full" />
@@ -139,7 +166,7 @@ const SimpleVideoPlayer = ({ src, className }: SimpleVideoPlayerProps) => {
       <video
         ref={videoRef}
         src={src}
-        autoPlay={false}
+        autoPlay={true}
         muted
         loop
         playsInline
