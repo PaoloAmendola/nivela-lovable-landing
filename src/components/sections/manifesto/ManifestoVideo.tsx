@@ -1,6 +1,7 @@
+
 import React from 'react';
 import { motion } from 'framer-motion';
-import SimpleVideoPlayer from '@/components/ui/SimpleVideoPlayer';
+import RobustVideoPlayer from '@/components/ui/RobustVideoPlayer';
 import { itemVariants } from './manifesto-animations';
 
 const ManifestoVideo = () => {
@@ -8,8 +9,9 @@ const ManifestoVideo = () => {
     <motion.div variants={itemVariants} className="max-w-4xl mx-auto mb-12 lg:mb-16">
       <div className="relative">
         <div className="aspect-video rounded-lg overflow-hidden">
-          <SimpleVideoPlayer
+          <RobustVideoPlayer
             src="https://xnexfhgtqlryfkyuvihq.supabase.co/storage/v1/object/public/videos/video-manifesto-oficial-compactado.mp4"
+            className="w-full h-full"
           />
         </div>
         

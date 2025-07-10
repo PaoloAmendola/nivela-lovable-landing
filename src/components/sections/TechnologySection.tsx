@@ -2,7 +2,7 @@
 import TechnologyHeader from "./technology/TechnologyHeader";
 import TechnicalBenefits from "./technology/TechnicalBenefits";
 import AmazonianActives from "./technology/AmazonianActives";
-import SimpleVideoPlayer from "@/components/ui/SimpleVideoPlayer";
+import RobustVideoPlayer from "@/components/ui/RobustVideoPlayer";
 
 const TechnologySection = () => {
   console.log('🔬 TechnologySection component rendering');
@@ -46,9 +46,10 @@ const TechnologySection = () => {
                 {/* Video glow effect */}
                 <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 to-accent/20 rounded-2xl blur-xl"></div>
                 <div className="relative w-full aspect-video rounded-xl overflow-hidden">
-                  <SimpleVideoPlayer
-                     src="https://xnexfhgtqlryfkyuvihq.supabase.co/storage/v1/object/public/videos/tecnologia-oficial-compactado.mp4"
-                   />
+                  <RobustVideoPlayer
+                    src="https://xnexfhgtqlryfkyuvihq.supabase.co/storage/v1/object/public/videos/tecnologia-oficial-compactado.mp4"
+                    className="w-full h-full"
+                  />
                 </div>
               </div>
             </div>
