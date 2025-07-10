@@ -40,7 +40,7 @@ const HeroProductImage = ({ shouldReduceAnimations }: HeroProductImageProps) => 
           className="relative"
         >
           <UnifiedImage
-            src="https://gdyjgzxemweigeyxxflq.supabase.co/storage/v1/object/public/fotos/Imagens-oficiais-landing/frasco-trans-comp.png"
+            src="https://xnexfhgtqlryfkyuvihq.supabase.co/storage/v1/object/public/imagens/frasco-trans-comp.png"
             alt="NIVELA® Produto Premium"
             className="w-full h-auto object-contain drop-shadow-2xl"
             width={320}

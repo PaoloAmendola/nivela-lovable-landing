@@ -47,7 +47,7 @@ const TechnologySection = () => {
                 <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 to-accent/20 rounded-2xl blur-xl"></div>
                 <div className="relative w-full aspect-video rounded-xl overflow-hidden">
                   <SimpleVideoPlayer
-                     src="https://gdyjgzxemweigeyxxflq.supabase.co/storage/v1/object/public/videos/OFICIAL-Astroquat-animacaao-julho.mp4"
+                     src="https://xnexfhgtqlryfkyuvihq.supabase.co/storage/v1/object/public/videos/tecnologia-oficial-compactado.mp4"
                    />
                 </div>
               </div>

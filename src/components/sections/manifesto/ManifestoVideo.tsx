@@ -9,7 +9,7 @@ const ManifestoVideo = () => {
       <div className="relative">
         <div className="aspect-video rounded-lg overflow-hidden">
           <SimpleVideoPlayer
-            src="https://gdyjgzxemweigeyxxflq.supabase.co/storage/v1/object/public/videos/heromanifesto-v22222.mp4"
+            src="https://xnexfhgtqlryfkyuvihq.supabase.co/storage/v1/object/public/videos/video-manifesto-oficial-compactado.mp4"
           />
         </div>
         

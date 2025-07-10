@@ -55,7 +55,7 @@ const WhyChooseNivelaSection = () => {
             {/* Imagem do Produto */}
             <motion.div variants={itemVariants} className="relative mt-8">
               <ConsolidatedImage
-                src="https://gdyjgzxemweigeyxxflq.supabase.co/storage/v1/object/public/fotos/Imagens-oficiais-landing/frasco-nivela.png"
+                src="https://xnexfhgtqlryfkyuvihq.supabase.co/storage/v1/object/public/imagens/frasco-nivela.png"
                 alt="NIVELA® - Retexturizador Hidro Nutritivo"
                 width={400}
                 height={400}
