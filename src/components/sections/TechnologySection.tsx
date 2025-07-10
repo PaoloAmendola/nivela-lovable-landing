@@ -45,11 +45,14 @@ const TechnologySection = () => {
               <div className="relative w-full">
                 {/* Video glow effect */}
                 <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 to-accent/20 rounded-2xl blur-xl"></div>
-                <div className="relative w-full aspect-video rounded-xl overflow-hidden">
-                  <RobustVideoPlayer
-                    src="https://xnexfhgtqlryfkyuvihq.supabase.co/storage/v1/object/public/videos/tecnologia-oficial-compactado.mp4"
-                    className="w-full max-w-4xl mx-auto"
-                  />
+                
+                <div className="relative">
+                  <div className="aspect-video rounded-xl overflow-hidden">
+                    <RobustVideoPlayer
+                      src="https://xnexfhgtqlryfkyuvihq.supabase.co/storage/v1/object/public/videos/tecnologia-oficial-compactado.mp4"
+                      className="w-full max-w-4xl mx-auto"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
