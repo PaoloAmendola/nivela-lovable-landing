@@ -1,7 +1,6 @@
-
 import React, { useRef, useState, useEffect, useCallback } from 'react';
 import { cn } from '@/lib/utils';
-import { RefreshCw } from 'lucide-react';
+import { RefreshCw, Play } from 'lucide-react';
 
 interface RobustVideoPlayerProps {
   src: string;
@@ -14,64 +13,59 @@ const RobustVideoPlayer = ({ src, className, poster }: RobustVideoPlayerProps) =
   const containerRef = useRef<HTMLDivElement>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
-  const [canAutoplay, setCanAutoplay] = useState(true);
-  const [isIntersecting, setIsIntersecting] = useState(false);
+  const [hasPlayedOnce, setHasPlayedOnce] = useState(false);
+  const [isFirstView, setIsFirstView] = useState(true);
+  const [showManualButton, setShowManualButton] = useState(false);
   
-  console.log('🎬 RobustVideoPlayer: initializing with src:', src);
+  console.log('🎬 RobustVideoPlayer: initializing with src:', src, 'hasPlayedOnce:', hasPlayedOnce);
 
   // Reset states when src changes
   useEffect(() => {
     console.log('🎬 RobustVideoPlayer: src changed, resetting states');
     setIsLoading(true);
     setHasError(false);
-    setCanAutoplay(true);
+    setHasPlayedOnce(false);
+    setIsFirstView(true);
+    setShowManualButton(false);
     
     if (videoRef.current) {
       videoRef.current.load();
     }
   }, [src]);
 
-  // Intersection Observer for smart autoplay
+  // Simplified Intersection Observer - only for first autoplay
   useEffect(() => {
     const container = containerRef.current;
-    if (!container) return;
+    if (!container || hasPlayedOnce) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        const wasIntersecting = isIntersecting;
-        const nowIntersecting = entry.isIntersecting && entry.intersectionRatio > 0.5;
-        
-        setIsIntersecting(nowIntersecting);
-        
-        if (nowIntersecting && !wasIntersecting && videoRef.current && !hasError) {
-          console.log('🎬 RobustVideoPlayer: entering view, attempting play');
-          handlePlay();
-        } else if (!nowIntersecting && wasIntersecting && videoRef.current) {
-          console.log('🎬 RobustVideoPlayer: leaving view, pausing');
-          videoRef.current.pause();
+        if (entry.isIntersecting && entry.intersectionRatio > 0.5 && isFirstView && !hasError) {
+          console.log('🎬 RobustVideoPlayer: first view detected, attempting autoplay');
+          handleFirstAutoplay();
         }
       },
       { 
-        threshold: [0, 0.5, 1],
+        threshold: [0.5],
         rootMargin: '50px'
       }
     );
 
     observer.observe(container);
     return () => observer.disconnect();
-  }, [isIntersecting, hasError]);
+  }, [hasPlayedOnce, isFirstView, hasError]);
 
-  const handlePlay = useCallback(async () => {
-    if (!videoRef.current || hasError) return;
+  const handleFirstAutoplay = useCallback(async () => {
+    if (!videoRef.current || hasError || hasPlayedOnce) return;
     
     try {
       await videoRef.current.play();
-      console.log('🎬 RobustVideoPlayer: video playing successfully');
+      console.log('🎬 RobustVideoPlayer: first autoplay successful');
     } catch (error) {
-      console.log('🎬 RobustVideoPlayer: autoplay blocked, setting canAutoplay to false', error);
-      setCanAutoplay(false);
+      console.log('🎬 RobustVideoPlayer: autoplay blocked, showing manual button', error);
+      setShowManualButton(true);
     }
-  }, [hasError]);
+  }, [hasError, hasPlayedOnce]);
 
   const handleLoadStart = useCallback(() => {
     console.log('🎬 RobustVideoPlayer: load started');
@@ -82,12 +76,7 @@ const RobustVideoPlayer = ({ src, className, poster }: RobustVideoPlayerProps) =
   const handleCanPlay = useCallback(() => {
     console.log('🎬 RobustVideoPlayer: can play');
     setIsLoading(false);
-    
-    // Try autoplay only if in view and autoplay is allowed
-    if (isIntersecting && canAutoplay && videoRef.current) {
-      handlePlay();
-    }
-  }, [isIntersecting, canAutoplay, handlePlay]);
+  }, []);
   
   const handleError = useCallback((event: any) => {
     console.error('🎬 RobustVideoPlayer: video error occurred', {
@@ -99,29 +88,37 @@ const RobustVideoPlayer = ({ src, className, poster }: RobustVideoPlayerProps) =
     
     setIsLoading(false);
     setHasError(true);
+    setShowManualButton(true);
   }, [src]);
-
-  const handleLoadedData = useCallback(() => {
-    console.log('🎬 RobustVideoPlayer: video data loaded');
-  }, []);
-
-  const handleWaiting = useCallback(() => {
-    console.log('🎬 RobustVideoPlayer: video waiting/buffering');
-  }, []);
 
   const handlePlayEvent = useCallback(() => {
     console.log('🎬 RobustVideoPlayer: play event fired');
-  }, []);
+    if (isFirstView) {
+      setHasPlayedOnce(true);
+      setIsFirstView(false);
+      setShowManualButton(false);
+    }
+  }, [isFirstView]);
 
   const handlePauseEvent = useCallback(() => {
     console.log('🎬 RobustVideoPlayer: pause event fired');
+    if (hasPlayedOnce) {
+      setShowManualButton(true);
+    }
+  }, [hasPlayedOnce]);
+
+  const handleEndedEvent = useCallback(() => {
+    console.log('🎬 RobustVideoPlayer: video ended');
+    setShowManualButton(true);
   }, []);
 
   const manualRetry = useCallback(() => {
     console.log('🎬 RobustVideoPlayer: manual retry triggered');
     setHasError(false);
     setIsLoading(true);
-    setCanAutoplay(true);
+    setHasPlayedOnce(false);
+    setIsFirstView(true);
+    setShowManualButton(false);
     
     if (videoRef.current) {
       videoRef.current.load();
@@ -130,9 +127,11 @@ const RobustVideoPlayer = ({ src, className, poster }: RobustVideoPlayerProps) =
 
   const manualPlay = useCallback(() => {
     console.log('🎬 RobustVideoPlayer: manual play triggered');
-    setCanAutoplay(true);
-    handlePlay();
-  }, [handlePlay]);
+    if (videoRef.current) {
+      setShowManualButton(false);
+      videoRef.current.play();
+    }
+  }, []);
   
   if (hasError) {
     return (
@@ -173,15 +172,20 @@ const RobustVideoPlayer = ({ src, className, poster }: RobustVideoPlayerProps) =
         </div>
       )}
       
-      {!canAutoplay && !isLoading && !hasError && (
+      {showManualButton && !isLoading && !hasError && (
         <div className="absolute inset-0 flex items-center justify-center bg-black/20 rounded-lg z-10">
-          <button 
-            onClick={manualPlay}
-            className="bg-white/90 backdrop-blur-sm text-black px-6 py-3 rounded-full hover:bg-white transition-colors flex items-center gap-2"
-          >
-            <div className="w-0 h-0 border-l-[12px] border-l-black border-y-[8px] border-y-transparent ml-1" />
-            Reproduzir
-          </button>
+          <div className="text-center">
+            <button 
+              onClick={manualPlay}
+              className="bg-white/90 backdrop-blur-sm text-black px-6 py-3 rounded-full hover:bg-white transition-colors flex items-center gap-2 mb-2"
+            >
+              <Play className="w-5 h-5 fill-current" />
+              {hasPlayedOnce ? 'Assistir novamente' : 'Reproduzir'}
+            </button>
+            {hasPlayedOnce && (
+              <div className="text-xs text-white/70">Toque para assistir novamente</div>
+            )}
+          </div>
         </div>
       )}
       
@@ -189,7 +193,7 @@ const RobustVideoPlayer = ({ src, className, poster }: RobustVideoPlayerProps) =
         ref={videoRef}
         src={src}
         poster={poster}
-        autoPlay={false} // Controlled manually
+        autoPlay={true} // Enable initial autoplay
         muted
         loop
         playsInline
@@ -197,10 +201,9 @@ const RobustVideoPlayer = ({ src, className, poster }: RobustVideoPlayerProps) =
         crossOrigin="anonymous"
         onLoadStart={handleLoadStart}
         onCanPlay={handleCanPlay}
-        onLoadedData={handleLoadedData}
-        onWaiting={handleWaiting}
         onPlay={handlePlayEvent}
         onPause={handlePauseEvent}
+        onEnded={handleEndedEvent}
         onError={handleError}
         className={cn(
           "w-full h-full object-cover rounded-lg transition-opacity duration-300",
