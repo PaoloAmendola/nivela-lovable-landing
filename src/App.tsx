@@ -10,11 +10,13 @@ import SEOWrapper from "@/components/SEOWrapper";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 
+// Create QueryClient instance outside component to avoid recreation
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       staleTime: 1000 * 60 * 5, // 5 minutes
       gcTime: 1000 * 60 * 30, // 30 minutes
+      retry: 1,
     },
   },
 });
@@ -26,13 +28,11 @@ const App: React.FC = () => {
         <Toaster />
         <Sonner />
         <BrowserRouter>
-          <AnalyticsProvider 
-            config={{
-              googleAnalyticsId: import.meta.env.VITE_GA_MEASUREMENT_ID,
-              metaPixelId: import.meta.env.VITE_META_PIXEL_ID,
-              enableWebVitals: true,
-              enableStructuredData: true
-            }}
+           <AnalyticsProvider 
+             config={{
+               enableWebVitals: true,
+               enableStructuredData: true
+             }}
           >
             <SEOWrapper>
               <Routes>
