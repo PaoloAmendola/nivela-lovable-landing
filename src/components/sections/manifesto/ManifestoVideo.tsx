@@ -11,7 +11,7 @@ const ManifestoVideo = () => {
         <div className="aspect-video rounded-lg overflow-hidden">
           <RobustVideoPlayer
             src="https://xnexfhgtqlryfkyuvihq.supabase.co/storage/v1/object/public/videos/video-manifesto-oficial-compactado.mp4"
-            className="w-full h-full"
+            className="w-full max-w-4xl mx-auto"
           />
         </div>
         

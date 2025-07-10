@@ -48,7 +48,7 @@ const TechnologySection = () => {
                 <div className="relative w-full aspect-video rounded-xl overflow-hidden">
                   <RobustVideoPlayer
                     src="https://xnexfhgtqlryfkyuvihq.supabase.co/storage/v1/object/public/videos/tecnologia-oficial-compactado.mp4"
-                    className="w-full h-full"
+                    className="w-full max-w-4xl mx-auto"
                   />
                 </div>
               </div>
