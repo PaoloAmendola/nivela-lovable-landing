@@ -1,5 +1,5 @@
 
-import React from 'react';
+import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App.tsx';
 import './index.css';
@@ -46,7 +46,11 @@ const initializeApp = async () => {
   preloadCritical();
   
   // Renderizar app IMEDIATAMENTE
-  root.render(<App />);
+  root.render(
+    <StrictMode>
+      <App />
+    </StrictMode>
+  );
   
   // Service Worker após render (não bloqueia)
   setTimeout(registerSW, 2000);
