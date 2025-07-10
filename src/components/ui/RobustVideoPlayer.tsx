@@ -11,75 +11,150 @@ interface RobustVideoPlayerProps {
 const RobustVideoPlayer = ({ src, className, poster }: RobustVideoPlayerProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const observerRef = useRef<IntersectionObserver | null>(null);
+  const autoplayTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  
+  // Core states
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
+  const [canAutoplay, setCanAutoplay] = useState(true);
+  
+  // Autoplay "once only" logic
   const [hasPlayedOnce, setHasPlayedOnce] = useState(false);
   const [isFirstView, setIsFirstView] = useState(true);
   const [showManualButton, setShowManualButton] = useState(false);
   
-  console.log('🎬 RobustVideoPlayer: initializing with src:', src, 'hasPlayedOnce:', hasPlayedOnce);
+  console.log('🎬 RobustVideoPlayer init:', { src, hasPlayedOnce, isFirstView, showManualButton });
 
-  // Reset states when src changes
+  // Reset all states when src changes
   useEffect(() => {
-    console.log('🎬 RobustVideoPlayer: src changed, resetting states');
+    console.log('🎬 Source changed, resetting all states');
+    
+    // Clear any pending timeouts
+    if (autoplayTimeoutRef.current) {
+      clearTimeout(autoplayTimeoutRef.current);
+      autoplayTimeoutRef.current = null;
+    }
+    
+    // Reset states
     setIsLoading(true);
     setHasError(false);
+    setCanAutoplay(true);
     setHasPlayedOnce(false);
     setIsFirstView(true);
     setShowManualButton(false);
     
+    // Reload video
     if (videoRef.current) {
       videoRef.current.load();
     }
   }, [src]);
 
-  // Simplified Intersection Observer - only for first autoplay
+  // Intersection Observer for first autoplay detection
   useEffect(() => {
     const container = containerRef.current;
-    if (!container || hasPlayedOnce) return;
+    if (!container || hasPlayedOnce || !isFirstView) {
+      return;
+    }
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && entry.intersectionRatio > 0.5 && isFirstView && !hasError) {
-          console.log('🎬 RobustVideoPlayer: first view detected, attempting autoplay');
-          handleFirstAutoplay();
-        }
-      },
-      { 
-        threshold: [0.5],
-        rootMargin: '50px'
-      }
-    );
-
-    observer.observe(container);
-    return () => observer.disconnect();
-  }, [hasPlayedOnce, isFirstView, hasError]);
-
-  const handleFirstAutoplay = useCallback(async () => {
-    if (!videoRef.current || hasError || hasPlayedOnce) return;
+    console.log('🎬 Setting up Intersection Observer');
     
+    const handleIntersection = (entries: IntersectionObserverEntry[]) => {
+      const [entry] = entries;
+      
+      if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
+        console.log('🎬 Video in viewport, attempting first autoplay');
+        
+        // Disconnect observer immediately - we only want this once
+        if (observerRef.current) {
+          observerRef.current.disconnect();
+          observerRef.current = null;
+        }
+        
+        // Debounce autoplay attempt
+        if (autoplayTimeoutRef.current) {
+          clearTimeout(autoplayTimeoutRef.current);
+        }
+        
+        autoplayTimeoutRef.current = setTimeout(() => {
+          attemptFirstAutoplay();
+        }, 100);
+      }
+    };
+
+    observerRef.current = new IntersectionObserver(handleIntersection, {
+      threshold: [0.5],
+      rootMargin: '50px'
+    });
+
+    observerRef.current.observe(container);
+
+    return () => {
+      if (observerRef.current) {
+        observerRef.current.disconnect();
+        observerRef.current = null;
+      }
+      if (autoplayTimeoutRef.current) {
+        clearTimeout(autoplayTimeoutRef.current);
+        autoplayTimeoutRef.current = null;
+      }
+    };
+  }, [hasPlayedOnce, isFirstView]);
+
+  // Attempt first autoplay with proper checks
+  const attemptFirstAutoplay = useCallback(async () => {
+    const video = videoRef.current;
+    if (!video || hasError || hasPlayedOnce || !canAutoplay) {
+      console.log('🎬 Skipping autoplay:', { hasError, hasPlayedOnce, canAutoplay });
+      return;
+    }
+
+    // Check if video is ready to play
+    if (video.readyState < 3) {
+      console.log('🎬 Video not ready, readyState:', video.readyState);
+      setShowManualButton(true);
+      return;
+    }
+
     try {
-      await videoRef.current.play();
-      console.log('🎬 RobustVideoPlayer: first autoplay successful');
+      console.log('🎬 Attempting autoplay...');
+      
+      // Ensure video is muted for autoplay
+      video.muted = true;
+      
+      const playPromise = video.play();
+      await playPromise;
+      
+      console.log('🎬 Autoplay successful!');
+      
     } catch (error) {
-      console.log('🎬 RobustVideoPlayer: autoplay blocked, showing manual button', error);
+      console.log('🎬 Autoplay blocked by browser:', error);
+      setCanAutoplay(false);
       setShowManualButton(true);
     }
-  }, [hasError, hasPlayedOnce]);
+  }, [hasError, hasPlayedOnce, canAutoplay]);
 
+  // Video event handlers with improved logic
   const handleLoadStart = useCallback(() => {
-    console.log('🎬 RobustVideoPlayer: load started');
+    console.log('🎬 Load started');
     setIsLoading(true);
     setHasError(false);
   }, []);
   
   const handleCanPlay = useCallback(() => {
-    console.log('🎬 RobustVideoPlayer: can play');
+    console.log('🎬 Can play - readyState:', videoRef.current?.readyState);
     setIsLoading(false);
-  }, []);
+    
+    // If this is first view and we can autoplay, try it after a small delay
+    if (isFirstView && !hasPlayedOnce && canAutoplay) {
+      setTimeout(() => {
+        attemptFirstAutoplay();
+      }, 200);
+    }
+  }, [isFirstView, hasPlayedOnce, canAutoplay, attemptFirstAutoplay]);
   
   const handleError = useCallback((event: any) => {
-    console.error('🎬 RobustVideoPlayer: video error occurred', {
+    console.error('🎬 Video error:', {
       error: event.target?.error,
       src,
       code: event.target?.error?.code,
@@ -89,10 +164,12 @@ const RobustVideoPlayer = ({ src, className, poster }: RobustVideoPlayerProps) =
     setIsLoading(false);
     setHasError(true);
     setShowManualButton(true);
+    setCanAutoplay(false);
   }, [src]);
 
   const handlePlayEvent = useCallback(() => {
-    console.log('🎬 RobustVideoPlayer: play event fired');
+    console.log('🎬 Play event - transitioning to played state');
+    
     if (isFirstView) {
       setHasPlayedOnce(true);
       setIsFirstView(false);
@@ -101,21 +178,33 @@ const RobustVideoPlayer = ({ src, className, poster }: RobustVideoPlayerProps) =
   }, [isFirstView]);
 
   const handlePauseEvent = useCallback(() => {
-    console.log('🎬 RobustVideoPlayer: pause event fired');
-    if (hasPlayedOnce) {
+    console.log('🎬 Pause event');
+    
+    // Only show manual button if video has played once (not during loading)
+    if (hasPlayedOnce && !isLoading) {
       setShowManualButton(true);
     }
-  }, [hasPlayedOnce]);
+  }, [hasPlayedOnce, isLoading]);
 
   const handleEndedEvent = useCallback(() => {
-    console.log('🎬 RobustVideoPlayer: video ended');
+    console.log('🎬 Video ended - showing replay button');
     setShowManualButton(true);
   }, []);
 
+  // Manual controls
   const manualRetry = useCallback(() => {
-    console.log('🎬 RobustVideoPlayer: manual retry triggered');
+    console.log('🎬 Manual retry - full reset');
+    
+    // Clear timeouts
+    if (autoplayTimeoutRef.current) {
+      clearTimeout(autoplayTimeoutRef.current);
+      autoplayTimeoutRef.current = null;
+    }
+    
+    // Full reset
     setHasError(false);
     setIsLoading(true);
+    setCanAutoplay(true);
     setHasPlayedOnce(false);
     setIsFirstView(true);
     setShowManualButton(false);
@@ -125,11 +214,24 @@ const RobustVideoPlayer = ({ src, className, poster }: RobustVideoPlayerProps) =
     }
   }, []);
 
-  const manualPlay = useCallback(() => {
-    console.log('🎬 RobustVideoPlayer: manual play triggered');
-    if (videoRef.current) {
+  const manualPlay = useCallback(async () => {
+    console.log('🎬 Manual play triggered');
+    const video = videoRef.current;
+    
+    if (!video) return;
+    
+    try {
       setShowManualButton(false);
-      videoRef.current.play();
+      
+      // Ensure video is muted for compatibility
+      video.muted = true;
+      
+      await video.play();
+      console.log('🎬 Manual play successful');
+      
+    } catch (error) {
+      console.error('🎬 Manual play failed:', error);
+      setShowManualButton(true);
     }
   }, []);
   
@@ -193,7 +295,6 @@ const RobustVideoPlayer = ({ src, className, poster }: RobustVideoPlayerProps) =
         ref={videoRef}
         src={src}
         poster={poster}
-        autoPlay={true} // Enable initial autoplay
         muted
         loop
         playsInline
