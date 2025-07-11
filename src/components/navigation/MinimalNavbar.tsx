@@ -1,6 +1,7 @@
 
 import { motion } from "framer-motion";
 import { useScroll } from "@/hooks/use-scroll";
+import { useSmoothScroll } from "@/hooks/use-smooth-scroll";
 import HamburgerMenu from "./HamburgerMenu";
 
 interface MinimalNavbarProps {
@@ -9,6 +10,7 @@ interface MinimalNavbarProps {
 
 const MinimalNavbar = ({ onCTAClick }: MinimalNavbarProps) => {
   const { isScrolled } = useScroll(50);
+  const { scrollToTop } = useSmoothScroll();
 
   return (
     <motion.nav
@@ -27,7 +29,7 @@ const MinimalNavbar = ({ onCTAClick }: MinimalNavbarProps) => {
             className="cursor-pointer"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            onClick={() => scrollToTop({ duration: 800, easing: 'ease-out' })}
           >
             <div className="flex items-center gap-2">
               <div>

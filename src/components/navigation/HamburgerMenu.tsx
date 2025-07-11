@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
+import { useSmoothScroll } from "@/hooks/use-smooth-scroll";
 import { EnhancedButton } from "@/components/ui/EnhancedButton";
 
 interface HamburgerMenuProps {
@@ -9,23 +10,20 @@ interface HamburgerMenuProps {
 }
 
 const HamburgerMenu = ({ onCTAClick }: HamburgerMenuProps) => {
+  const { scrollToElement } = useSmoothScroll();
   const [isOpen, setIsOpen] = useState(false);
 
-  const navItems = [
-    { label: "Tecnologia", href: "#technology" },
-    { label: "Resultados", href: "#proof" },
-    { label: "Exclusividade", href: "#exclusivity" },
-    { label: "Parceria", href: "#distributor" }
-  ];
-
-  const scrollToSection = (href: string) => {
-    const element = document.querySelector(href) || 
-                   document.querySelector(`[data-section="${href.slice(1)}"]`);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+  const handleNavClick = (elementId: string) => {
+    scrollToElement(elementId, { offset: 80, duration: 1000, easing: 'ease-in-out' });
     setIsOpen(false);
   };
+
+  const navItems = [
+    { label: "Tecnologia", target: "technology" },
+    { label: "Resultados", target: "proof" },
+    { label: "Exclusividade", target: "exclusivity" },
+    { label: "Parceria", target: "distributor" }
+  ];
 
   return (
     <>
@@ -102,7 +100,7 @@ const HamburgerMenu = ({ onCTAClick }: HamburgerMenuProps) => {
                       initial={{ opacity: 0, x: 50 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: index * 0.1 }}
-                      onClick={() => scrollToSection(item.href)}
+                      onClick={() => handleNavClick(item.target)}
                       className="w-full text-left py-4 text-lg font-medium text-muted hover:text-foreground transition-colors border-b border-accent/10 last:border-b-0"
                     >
                       {item.label}
