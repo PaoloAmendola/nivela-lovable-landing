@@ -4,7 +4,7 @@ import ManifestoTextSection from "@/components/sections/ManifestoTextSection";
 import ManifestoVideoSection from "@/components/sections/ManifestoVideoSection";
 import TechnologySection from "@/components/sections/TechnologySection";
 import WhyChooseNivelaSection from "@/components/sections/WhyChooseNivelaSection";
-import ExclusivitySection from "@/components/sections/ExclusivitySection";
+import DistributorSection from "@/components/sections/DistributorSection";
 import FAQSection from "@/components/sections/FAQSection";
 import LegalSection from "@/components/sections/LegalSection";
 
@@ -36,8 +36,8 @@ const Index = () => {
         <TechnologySection />
       </section>
       
-      <section data-section="exclusivity" id="exclusivity">
-        <ExclusivitySection onCTAClick={() => setShowForm(true)} />
+      <section data-section="distributor" id="distributor">
+        <DistributorSection onCTAClick={() => setShowForm(true)} />
       </section>
       
       <section data-section="faq" id="faq">
