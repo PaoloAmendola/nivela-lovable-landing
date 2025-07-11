@@ -1,5 +1,5 @@
 
-import React, { useState, lazy, Suspense } from "react";
+import { useState, lazy, Suspense, useEffect } from "react";
 import MinimalNavbar from "@/components/navigation/MinimalNavbar";
 import ScrollIndicator from "@/components/ui/ScrollIndicator";
 import ContactForm from "@/components/forms/ContactForm";
@@ -37,7 +37,7 @@ const DevTools = lazy(() => Promise.all([
   )
 })));
 
-const Index: React.FC = () => {
+const Index = () => {
   const [showForm, setShowForm] = useState(false);
   const [showValidation, setShowValidation] = useState(false);
 
@@ -47,7 +47,7 @@ const Index: React.FC = () => {
   };
 
   // Toggle validation dashboard (lazy load dev tools)
-  React.useEffect(() => {
+  useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
       if (e.ctrlKey && e.shiftKey && e.key === 'V') {
         setShowValidation(!showValidation);
