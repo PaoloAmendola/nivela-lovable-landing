@@ -1,4 +1,3 @@
-
 import { motion, AnimatePresence } from "framer-motion";
 import { EnhancedButton } from "./EnhancedButton";
 import { useScroll } from "@/hooks/use-scroll";
