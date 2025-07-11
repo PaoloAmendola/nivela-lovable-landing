@@ -66,6 +66,7 @@ const RobustVideoPlayer = ({ src, poster, className }: RobustVideoPlayerProps) =
         src={src}
         poster={poster}
         muted
+        loop
         playsInline
         preload="auto"
         crossOrigin="anonymous"
