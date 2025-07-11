@@ -20,11 +20,9 @@ export default {
 		},
 		extend: {
 			fontFamily: {
-				// Essential fonts only for performance
-				'wilkysta': ['Wilkysta', 'serif'],
-				'montserrat': ['Montserrat', 'sans-serif'],
-				'playfair': ['Playfair Display', 'serif'],
-				'poppins': ['Poppins', 'sans-serif'],
+				// Premium Typography System - 2 Fonts Only
+				'playfair': ['Playfair Display', 'serif'], // Headlines & Premium Elements
+				'montserrat': ['Montserrat', 'sans-serif'], // Body & UI Elements
 			},
 			colors: {
 				border: 'hsl(var(--border))',

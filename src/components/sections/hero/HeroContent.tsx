@@ -25,22 +25,22 @@ const HeroContent = ({ onCTAClick, shouldReduceAnimations }: HeroContentProps) =
 
       {/* Título Principal - NIVELA® */}
       <div className="animate-sequential-in opacity-0">
-        <h1 className="font-wilkysta text-hero text-white leading-tight tracking-tight text-center lg:text-left mb-4 lg:mb-6">
+        <h1 className="text-hero text-center lg:text-left mb-4 lg:mb-6">
           NIVELA
-          <span className="text-hero-trademark text-[#9D4916] align-super">®</span>
+          <span className="text-primary align-super text-[0.6em]">®</span>
         </h1>
       </div>
 
       {/* Subtítulo */}
       <div className="animate-sequential-in opacity-0">
-        <h2 className="font-montserrat text-hero-subtitle font-bold text-white leading-tight text-center lg:text-left mb-4">
+        <h2 className="text-hero-subtitle text-center lg:text-left mb-4">
           A evolução da escova progressiva profissional
         </h2>
       </div>
 
       {/* Descrição */}
       <div className="animate-sequential-in opacity-0">
-        <p className="font-poppins text-hero-description text-white/90 text-center lg:text-left mb-8 lg:mb-10">
+        <p className="text-hero-description text-center lg:text-left mb-8 lg:mb-10">
           Desenvolvido com tecnologia patenteada e ativos da Amazônia. Rendimento até 30% superior.
         </p>
       </div>
