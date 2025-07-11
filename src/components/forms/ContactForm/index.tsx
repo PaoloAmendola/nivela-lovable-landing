@@ -1,6 +1,7 @@
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { EnhancedButton } from "@/components/ui/EnhancedButton";
 import SmartLoading from "@/components/ui/SmartLoading";
+import FormProgress from "@/components/ui/FormProgress";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft, ArrowRight, Gift } from "lucide-react";
 import { ContactFormProps } from "./types";
@@ -19,6 +20,8 @@ const ContactForm = ({ isOpen, onClose }: ContactFormProps) => {
     handlePrevStep,
     handleSubmit
   } = useContactForm(onClose);
+
+  const stepTitles = ["Informações Básicas", "Detalhes da Empresa"];
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -39,19 +42,12 @@ const ContactForm = ({ isOpen, onClose }: ContactFormProps) => {
         </DialogHeader>
 
         <form onSubmit={handleSubmit} className="space-y-6 py-4">
-          {/* Step Indicator */}
-          <div className="flex items-center justify-center space-x-2 mb-6">
-            {[1, 2].map((i) => (
-              <motion.div 
-                key={i}
-                className={`w-4 h-4 rounded-full ${
-                  i === step ? 'bg-primary' : i < step ? 'bg-accent' : 'bg-secondary/50'
-                }`}
-                whileHover={{ scale: 1.2 }}
-                transition={{ type: "spring", stiffness: 400, damping: 17 }}
-              />
-            ))}
-          </div>
+          {/* Enhanced Step Progress */}
+          <FormProgress 
+            currentStep={step} 
+            totalSteps={2} 
+            stepTitles={["Dados Básicos", "Detalhes"]}
+          />
 
           <div className="relative overflow-hidden h-96">
             <AnimatePresence mode="wait">

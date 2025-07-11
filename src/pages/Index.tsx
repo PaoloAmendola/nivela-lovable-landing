@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import ScrollProgressIndicator from "@/components/ui/ScrollProgressIndicator";
 import HeroSection from "@/components/sections/HeroSection";
 import ManifestoTextSection from "@/components/sections/ManifestoTextSection";
 import ManifestoVideoSection from "@/components/sections/ManifestoVideoSection";
@@ -23,6 +24,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
+      <ScrollProgressIndicator />
       {/* Accessibility Enhancements */}
       <AccessibilityEnhancements />
       
