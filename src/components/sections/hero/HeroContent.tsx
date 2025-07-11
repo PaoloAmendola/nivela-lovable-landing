@@ -1,5 +1,4 @@
 import { EnhancedButton } from "@/components/ui/EnhancedButton";
-import AnimatedWrapper from "@/components/ui/AnimatedWrapper";
 import { MessageSquare } from "lucide-react";
 import { useCallback, useMemo } from "react";
 
