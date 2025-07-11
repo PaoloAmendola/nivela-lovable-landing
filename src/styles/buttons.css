@@ -11,26 +11,101 @@
 }
 
 .btn-premium-secondary {
-  @apply bg-background/90 backdrop-blur-xl border-3 border-accent/40 text-accent 
-         font-bold rounded-xl px-8 py-4 shadow-[0_8px_30px_-4px_rgba(37,76,90,0.6)] 
-         hover:shadow-[0_12px_40px_-4px_rgba(37,76,90,0.8)] 
-         transition-all duration-300 hover:bg-accent/15 hover:border-accent/70
-         hover:scale-105 active:scale-95 focus-premium relative z-10;
+  @apply bg-gradient-to-r from-accent/20 to-accent/10 backdrop-blur-sm text-accent font-bold rounded-xl px-8 py-4 
+         border-2 border-accent/40 hover:border-accent/60 hover:bg-accent/20 
+         shadow-[0_8px_30px_-4px_rgba(37,76,90,0.6)] hover:shadow-[0_12px_40px_-4px_rgba(37,76,90,0.8)]
+         transition-all duration-300 hover:scale-105 active:scale-95 focus-premium relative z-10;
 }
 
 .btn-premium-ghost {
-  @apply bg-transparent border-3 border-accent/60 text-accent font-bold 
-         rounded-xl px-8 py-4 transition-all duration-300 
-         hover:bg-accent/15 hover:border-accent shadow-[0_8px_30px_-4px_rgba(37,76,90,0.6)]
-         hover:shadow-[0_12px_40px_-4px_rgba(37,76,90,0.8)] backdrop-blur-sm
-         hover:scale-105 active:scale-95 focus-premium relative z-10;
+  @apply bg-transparent text-accent font-semibold rounded-xl px-8 py-4 
+         border-2 border-accent/30 hover:border-accent/50 hover:bg-accent/10 
+         shadow-none hover:shadow-[0_8px_20px_-4px_rgba(37,76,90,0.4)]
+         transition-all duration-300 hover:scale-105 active:scale-95 focus-premium relative z-10;
 }
 
-.btn-touch-optimized {
-  @apply min-h-[44px] min-w-[44px] touch-manipulation;
+/* Enhanced Interactive States */
+.btn-premium-primary:hover {
+  background-position: 100% 100%;
+  filter: brightness(1.05);
 }
 
+.btn-premium-secondary:hover {
+  transform: translateY(-2px) scale(1.05);
+  filter: brightness(1.1);
+}
+
+.btn-premium-ghost:hover {
+  transform: translateY(-1px) scale(1.05);
+  color: hsl(var(--accent));
+}
+
+/* Gradient Animation */
 @keyframes gradient-shift {
   0%, 100% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
+}
+
+/* Active States */
+.btn-premium-primary:active,
+.btn-premium-secondary:active,
+.btn-premium-ghost:active {
+  transform: scale(0.95);
+  transition-duration: 0.1s;
+}
+
+/* Loading States */
+.btn-premium-loading {
+  @apply pointer-events-none opacity-70;
+}
+
+.btn-premium-loading::after {
+  content: '';
+  @apply absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .btn-premium-primary,
+  .btn-premium-secondary,
+  .btn-premium-ghost {
+    @apply px-6 py-3 text-sm font-bold min-h-[48px];
+  }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  .btn-premium-primary {
+    @apply border-4 border-[#9D4916];
+  }
+  
+  .btn-premium-secondary {
+    @apply border-4 border-accent;
+  }
+  
+  .btn-premium-ghost {
+    @apply border-4 border-accent bg-accent/10;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .btn-premium-primary,
+  .btn-premium-secondary,
+  .btn-premium-ghost {
+    @apply transition-none;
+    animation: none;
+  }
+  
+  .btn-premium-primary:hover,
+  .btn-premium-secondary:hover,
+  .btn-premium-ghost:hover {
+    transform: none;
+  }
 }

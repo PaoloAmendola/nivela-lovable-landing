@@ -63,7 +63,7 @@
     --mobile-font-scale: 1;
     --mobile-spacing-scale: 1;
     
-    /* Unified Spacing System - 8px Base Grid */
+    /* UNIFIED SPACING SYSTEM - 8px Base Grid - PADRONIZADO */
     --space-xs: 0.5rem; /* 8px */
     --space-sm: 1rem; /* 16px */
     --space-md: 1.5rem; /* 24px */
@@ -73,24 +73,31 @@
     --space-3xl: 6rem; /* 96px */
     --space-4xl: 8rem; /* 128px */
     
-    /* Responsive Section Spacing */
-    --section-padding: var(--space-3xl); /* 96px desktop */
-    --section-padding-mobile: var(--space-2xl); /* 64px mobile */
-    --section-padding-tablet: 5rem; /* 80px tablet */
+    /* SISTEMA DE SEÇÕES PADRONIZADO - Consistente em toda a landing */
+    --section-spacing-mobile: 4rem; /* 64px - Uniformizado */
+    --section-spacing-tablet: 5rem; /* 80px - Uniformizado */
+    --section-spacing-desktop: 6rem; /* 96px - Uniformizado */
   }
 
-  /* Enhanced Responsive Typography & Spacing */
+  /* BREAKPOINTS UNIFICADOS PARA SEÇÕES */
+  @media (max-width: 768px) {
+    :root {
+      --section-spacing: var(--section-spacing-mobile);
+      --touch-target-min: 48px;
+    }
+  }
+
   @media (min-width: 769px) and (max-width: 1024px) {
     :root {
-      --section-padding: var(--section-padding-tablet);
+      --section-spacing: var(--section-spacing-tablet);
       --touch-target-min: 46px;
     }
   }
 
-  @media (max-width: 768px) {
+  @media (min-width: 1025px) {
     :root {
-      --section-padding: var(--section-padding-mobile);
-      --touch-target-min: 48px;
+      --section-spacing: var(--section-spacing-desktop);
+      --touch-target-min: 44px;
     }
   }
 
@@ -99,7 +106,7 @@
       --mobile-font-scale: 0.95;
       --mobile-spacing-scale: 0.9;
       --touch-target-min: 52px;
-      --section-padding-mobile: var(--space-xl);
+      --section-spacing-mobile: var(--space-xl);
       --text-hero: clamp(2.25rem, 7vw, 3.5rem);
       --text-hero-subtitle: clamp(1.375rem, 4vw, 2rem);
     }
@@ -109,13 +116,11 @@
     :root {
       --mobile-font-scale: 0.9;
       --mobile-spacing-scale: 0.85;
-      --section-padding-mobile: var(--space-lg);
+      --section-spacing-mobile: var(--space-lg);
       --text-hero: clamp(2rem, 6vw, 3rem);
     }
   }
-}
 
-@layer base {
   * {
     @apply border-border;
   }
@@ -297,27 +302,27 @@
   .text-secondary { color: hsl(var(--text-secondary)); }
   .text-tertiary { color: hsl(var(--text-tertiary)); }
 
-  /* Unified Spacing System */
-  .section-padding { 
-    padding-top: var(--section-padding); 
-    padding-bottom: var(--section-padding); 
+  /* SISTEMA DE SEÇÕES PADRONIZADO - APLICADO GLOBALMENTE */
+  .section-spacing { 
+    padding-top: var(--section-spacing-desktop); 
+    padding-bottom: var(--section-spacing-desktop); 
   }
   
   @media (min-width: 769px) and (max-width: 1024px) {
-    .section-padding { 
-      padding-top: var(--section-padding-tablet); 
-      padding-bottom: var(--section-padding-tablet); 
+    .section-spacing { 
+      padding-top: var(--section-spacing-tablet); 
+      padding-bottom: var(--section-spacing-tablet); 
     }
   }
   
   @media (max-width: 768px) {
-    .section-padding { 
-      padding-top: var(--section-padding-mobile); 
-      padding-bottom: var(--section-padding-mobile); 
+    .section-spacing { 
+      padding-top: var(--section-spacing-mobile); 
+      padding-bottom: var(--section-spacing-mobile); 
     }
   }
 
-  /* Responsive Card Spacing */
+  /* Responsive Card Spacing - UNIFICADO */
   .card-spacing {
     padding: var(--space-lg);
   }
@@ -340,7 +345,7 @@
     }
   }
 
-  /* Element Spacing Utilities */
+  /* Element Spacing Utilities - PADRONIZADO */
   .gap-responsive {
     gap: var(--space-md);
   }
@@ -452,9 +457,9 @@
     color: #F5F5F5; /* Maximum contrast on dark backgrounds */
   }
 
-  /* Premium Button - Updated to use Montserrat instead of Poppins */
+  /* Premium Button - Updated to use exact brand color */
   .btn-premium {
-    @apply bg-primary hover:bg-primary/90 text-primary-foreground font-montserrat font-semibold px-8 py-4 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl;
+    @apply bg-gradient-to-r from-[#9D4916] via-[#9D4916] to-[#B8551A] hover:from-[#9D4916]/90 hover:to-[#B8551A]/90 text-primary-foreground font-montserrat font-semibold px-8 py-4 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl;
     will-change: transform;
   }
 
@@ -608,7 +613,7 @@
     transition: transform 300ms ease-in;
   }
 
-  /* CTA Button Fixed Mobile */
+  /* CTA Button Fixed Mobile - REFINADO */
   .cta-fixed-mobile {
     position: fixed;
     bottom: 0;
