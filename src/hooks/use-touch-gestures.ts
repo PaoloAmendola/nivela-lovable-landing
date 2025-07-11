@@ -1,16 +1,25 @@
-
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useRef, useEffect } from 'react';
 
 interface TouchGestureOptions {
   onSwipeLeft?: () => void;
   onSwipeRight?: () => void;
   onSwipeUp?: () => void;
   onSwipeDown?: () => void;
-  onPinch?: (scale: number) => void;
-  onTap?: () => void;
+  onPinchIn?: (scale: number) => void;
+  onPinchOut?: (scale: number) => void;
+  onDoubleTap?: () => void;
   onLongPress?: () => void;
-  threshold?: number;
+  onRotate?: (angle: number) => void;
+  swipeThreshold?: number;
   longPressDelay?: number;
+  doubleTapDelay?: number;
+  preventDefaults?: boolean;
+}
+
+interface TouchPoint {
+  x: number;
+  y: number;
+  timestamp: number;
 }
 
 export const useTouchGestures = (options: TouchGestureOptions = {}) => {
@@ -19,134 +28,208 @@ export const useTouchGestures = (options: TouchGestureOptions = {}) => {
     onSwipeRight,
     onSwipeUp,
     onSwipeDown,
-    onPinch,
-    onTap,
+    onPinchIn,
+    onPinchOut,
+    onDoubleTap,
     onLongPress,
-    threshold = 50,
-    longPressDelay = 500
+    onRotate,
+    swipeThreshold = 50,
+    longPressDelay = 500,
+    doubleTapDelay = 300,
+    preventDefaults = true
   } = options;
 
-  const ref = useRef<HTMLElement>(null);
-  const [touchStart, setTouchStart] = useState<{ x: number; y: number } | null>(null);
-  const [touchEnd, setTouchEnd] = useState<{ x: number; y: number } | null>(null);
-  const [longPressTimer, setLongPressTimer] = useState<NodeJS.Timeout | null>(null);
+  const touchStart = useRef<TouchPoint | null>(null);
+  const lastTap = useRef<TouchPoint | null>(null);
+  const longPressTimer = useRef<NodeJS.Timeout | null>(null);
+  const initialDistance = useRef<number>(0);
+  const initialAngle = useRef<number>(0);
+  const isMultiTouch = useRef<boolean>(false);
 
-  useEffect(() => {
-    const element = ref.current;
-    if (!element) return;
+  const getDistance = useCallback((touch1: Touch, touch2: Touch) => {
+    const dx = touch1.clientX - touch2.clientX;
+    const dy = touch1.clientY - touch2.clientY;
+    return Math.sqrt(dx * dx + dy * dy);
+  }, []);
 
-    const handleTouchStart = (e: TouchEvent) => {
-      const touch = e.touches[0];
-      setTouchStart({ x: touch.clientX, y: touch.clientY });
-      setTouchEnd(null);
+  const getAngle = useCallback((touch1: Touch, touch2: Touch) => {
+    const dx = touch1.clientX - touch2.clientX;
+    const dy = touch1.clientY - touch2.clientY;
+    return Math.atan2(dy, dx) * 180 / Math.PI;
+  }, []);
 
+  const clearLongPressTimer = useCallback(() => {
+    if (longPressTimer.current) {
+      clearTimeout(longPressTimer.current);
+      longPressTimer.current = null;
+    }
+  }, []);
+
+  const handleTouchStart = useCallback((e: TouchEvent) => {
+    if (preventDefaults) {
+      e.preventDefault();
+    }
+
+    const touch = e.touches[0];
+    const now = Date.now();
+    
+    touchStart.current = {
+      x: touch.clientX,
+      y: touch.clientY,
+      timestamp: now
+    };
+
+    // Multi-touch detection
+    if (e.touches.length === 2) {
+      isMultiTouch.current = true;
+      initialDistance.current = getDistance(e.touches[0], e.touches[1]);
+      initialAngle.current = getAngle(e.touches[0], e.touches[1]);
+      clearLongPressTimer();
+    } else {
+      isMultiTouch.current = false;
+      
       // Long press detection
       if (onLongPress) {
-        const timer = setTimeout(() => {
+        longPressTimer.current = setTimeout(() => {
           onLongPress();
-          // Haptic feedback se disponível
-          if ('vibrate' in navigator) {
-            navigator.vibrate(100);
-          }
         }, longPressDelay);
-        setLongPressTimer(timer);
-      }
-    };
-
-    const handleTouchMove = (e: TouchEvent) => {
-      const touch = e.touches[0];
-      setTouchEnd({ x: touch.clientX, y: touch.clientY });
-
-      // Cancel long press if moving
-      if (longPressTimer) {
-        clearTimeout(longPressTimer);
-        setLongPressTimer(null);
       }
 
-      // Pinch gesture detection
-      if (e.touches.length === 2 && onPinch) {
-        e.preventDefault();
-        const touch1 = e.touches[0];
-        const touch2 = e.touches[1];
+      // Double tap detection
+      if (onDoubleTap && lastTap.current) {
+        const timeDiff = now - lastTap.current.timestamp;
         const distance = Math.sqrt(
-          Math.pow(touch2.clientX - touch1.clientX, 2) +
-          Math.pow(touch2.clientY - touch1.clientY, 2)
+          Math.pow(touch.clientX - lastTap.current.x, 2) +
+          Math.pow(touch.clientY - lastTap.current.y, 2)
         );
-        // Calculate scale based on initial distance
-        onPinch(distance / 100); // Normalize scale
-      }
-    };
 
-    const handleTouchEnd = (e: TouchEvent) => {
-      if (longPressTimer) {
-        clearTimeout(longPressTimer);
-        setLongPressTimer(null);
-      }
-
-      if (!touchStart || !touchEnd) {
-        // Simple tap
-        if (onTap && !touchEnd) {
-          onTap();
-          if ('vibrate' in navigator) {
-            navigator.vibrate(50); // Light haptic feedback
-          }
-        }
-        return;
-      }
-
-      const deltaX = touchEnd.x - touchStart.x;
-      const deltaY = touchEnd.y - touchStart.y;
-      const absDeltaX = Math.abs(deltaX);
-      const absDeltaY = Math.abs(deltaY);
-
-      // Determine swipe direction
-      if (Math.max(absDeltaX, absDeltaY) > threshold) {
-        if (absDeltaX > absDeltaY) {
-          // Horizontal swipe
-          if (deltaX > 0 && onSwipeRight) {
-            onSwipeRight();
-            if ('vibrate' in navigator) {
-              navigator.vibrate(75);
-            }
-          } else if (deltaX < 0 && onSwipeLeft) {
-            onSwipeLeft();
-            if ('vibrate' in navigator) {
-              navigator.vibrate(75);
-            }
-          }
-        } else {
-          // Vertical swipe
-          if (deltaY > 0 && onSwipeDown) {
-            onSwipeDown();
-            if ('vibrate' in navigator) {
-              navigator.vibrate(75);
-            }
-          } else if (deltaY < 0 && onSwipeUp) {
-            onSwipeUp();
-            if ('vibrate' in navigator) {
-              navigator.vibrate(75);
-            }
-          }
+        if (timeDiff < doubleTapDelay && distance < 30) {
+          onDoubleTap();
+          lastTap.current = null;
+          clearLongPressTimer();
+          return;
         }
       }
 
-      setTouchStart(null);
-      setTouchEnd(null);
-    };
+      lastTap.current = { x: touch.clientX, y: touch.clientY, timestamp: now };
+    }
+  }, [
+    preventDefaults,
+    onLongPress,
+    onDoubleTap,
+    longPressDelay,
+    doubleTapDelay,
+    getDistance,
+    getAngle,
+    clearLongPressTimer
+  ]);
 
-    element.addEventListener('touchstart', handleTouchStart, { passive: false });
-    element.addEventListener('touchmove', handleTouchMove, { passive: false });
-    element.addEventListener('touchend', handleTouchEnd, { passive: true });
+  const handleTouchMove = useCallback((e: TouchEvent) => {
+    if (preventDefaults) {
+      e.preventDefault();
+    }
+
+    clearLongPressTimer();
+
+    if (isMultiTouch.current && e.touches.length === 2) {
+      // Pinch gesture
+      const currentDistance = getDistance(e.touches[0], e.touches[1]);
+      const scale = currentDistance / initialDistance.current;
+      
+      if (scale > 1.1 && onPinchOut) {
+        onPinchOut(scale);
+      } else if (scale < 0.9 && onPinchIn) {
+        onPinchIn(scale);
+      }
+
+      // Rotation gesture
+      if (onRotate) {
+        const currentAngle = getAngle(e.touches[0], e.touches[1]);
+        const angleDiff = currentAngle - initialAngle.current;
+        onRotate(angleDiff);
+      }
+    }
+  }, [
+    preventDefaults,
+    onPinchIn,
+    onPinchOut,
+    onRotate,
+    getDistance,
+    getAngle,
+    clearLongPressTimer
+  ]);
+
+  const handleTouchEnd = useCallback((e: TouchEvent) => {
+    if (preventDefaults) {
+      e.preventDefault();
+    }
+
+    clearLongPressTimer();
+
+    if (!touchStart.current || isMultiTouch.current) {
+      isMultiTouch.current = false;
+      return;
+    }
+
+    const touch = e.changedTouches[0];
+    const deltaX = touch.clientX - touchStart.current.x;
+    const deltaY = touch.clientY - touchStart.current.y;
+    const absDeltaX = Math.abs(deltaX);
+    const absDeltaY = Math.abs(deltaY);
+
+    // Swipe detection
+    if (Math.max(absDeltaX, absDeltaY) > swipeThreshold) {
+      if (absDeltaX > absDeltaY) {
+        // Horizontal swipe
+        if (deltaX > 0 && onSwipeRight) {
+          onSwipeRight();
+        } else if (deltaX < 0 && onSwipeLeft) {
+          onSwipeLeft();
+        }
+      } else {
+        // Vertical swipe
+        if (deltaY > 0 && onSwipeDown) {
+          onSwipeDown();
+        } else if (deltaY < 0 && onSwipeUp) {
+          onSwipeUp();
+        }
+      }
+    }
+
+    touchStart.current = null;
+  }, [
+    preventDefaults,
+    onSwipeLeft,
+    onSwipeRight,
+    onSwipeUp,
+    onSwipeDown,
+    swipeThreshold,
+    clearLongPressTimer
+  ]);
+
+  const attachGestures = useCallback((element: HTMLElement | null) => {
+    if (!element) return;
+
+    element.addEventListener('touchstart', handleTouchStart, { passive: !preventDefaults });
+    element.addEventListener('touchmove', handleTouchMove, { passive: !preventDefaults });
+    element.addEventListener('touchend', handleTouchEnd, { passive: !preventDefaults });
 
     return () => {
       element.removeEventListener('touchstart', handleTouchStart);
       element.removeEventListener('touchmove', handleTouchMove);
       element.removeEventListener('touchend', handleTouchEnd);
-      if (longPressTimer) {
-        clearTimeout(longPressTimer);
-      }
+      clearLongPressTimer();
     };
-  }, [touchStart, touchEnd, threshold, longPressDelay, onSwipeLeft, onSwipeRight, onSwipeUp, onSwipeDown, onPinch, onTap, onLongPress, longPressTimer]);
+  }, [handleTouchStart, handleTouchMove, handleTouchEnd, preventDefaults, clearLongPressTimer]);
 
-  return ref;
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => {
+      clearLongPressTimer();
+    };
+  }, [clearLongPressTimer]);
+
+  return {
+    attachGestures
+  };
 };

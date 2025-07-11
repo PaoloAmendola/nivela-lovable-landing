@@ -11,6 +11,8 @@ interface HeroProductShowcaseProps {
 const HeroProductShowcase = ({ shouldReduceAnimations }: HeroProductShowcaseProps) => {
   const [imageLoaded, setImageLoaded] = useState(false);
 
+  const [isZoomed, setIsZoomed] = useState(false);
+
   return (
     <AnimatedWrapper 
       variant="slideLeft" 
