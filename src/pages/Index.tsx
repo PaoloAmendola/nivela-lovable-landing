@@ -5,6 +5,7 @@ import ManifestoVideoSection from "@/components/sections/ManifestoVideoSection";
 import TechnologySection from "@/components/sections/TechnologySection";
 import WhyChooseNivelaSection from "@/components/sections/WhyChooseNivelaSection";
 import DistributorSection from "@/components/sections/DistributorSection";
+import EcosystemSection from "@/components/sections/EcosystemSection";
 import FAQSection from "@/components/sections/FAQSection";
 import LegalSection from "@/components/sections/LegalSection";
 
@@ -34,6 +35,10 @@ const Index = () => {
       
       <section data-section="technology" id="technology">
         <TechnologySection />
+      </section>
+      
+      <section data-section="ecosystem" id="ecosystem">
+        <EcosystemSection />
       </section>
       
       <section data-section="distributor" id="distributor">
