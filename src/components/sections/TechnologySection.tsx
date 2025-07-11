@@ -47,10 +47,10 @@ const TechnologySection = () => {
                 <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 to-accent/20 rounded-2xl blur-xl"></div>
                 
                 <div className="relative">
-                  <div className="aspect-video rounded-xl overflow-hidden">
+                  <div className="aspect-[4/3] lg:aspect-[3/2] rounded-xl overflow-hidden">
                     <RobustVideoPlayer
                       src="https://xnexfhgtqlryfkyuvihq.supabase.co/storage/v1/object/public/videos/tecnologia-oficial-compactado.mp4"
-                      className="w-full max-w-4xl mx-auto"
+                      className="w-full h-full object-cover"
                     />
                   </div>
                 </div>
@@ -72,7 +72,7 @@ const TechnologySection = () => {
                   A Sinergia perfeita entre Ciência e Natureza
                 </h3>
                 
-                <p className="text-muted font-montserrat leading-relaxed">
+                <p className="text-contrast font-montserrat leading-relaxed">
                   Nossa tecnologia ASTRO QUAT V3® potencializa os benefícios únicos dos ativos amazônicos, 
                   criando uma fórmula que une o melhor da ciência molecular com a sabedoria da natureza brasileira.
                 </p>

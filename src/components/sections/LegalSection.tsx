@@ -29,12 +29,12 @@ const LegalSection = () => {
                   <span>WhatsApp: (21) 3950-0901</span>
                 </p>
                 <p className="flex items-center gap-2">
-                  <Phone className="w-4 h-4 text-accent" strokeWidth={1.5} />
-                  <span>(21) 3269-0484</span>
+                  <Phone className="w-4 h-4 text-brand-secondary" strokeWidth={1.5} />
+                  <span className="text-contrast">(21) 3269-0484</span>
                 </p>
                 <p className="flex items-center gap-2">
-                  <Mail className="w-4 h-4 text-accent" strokeWidth={1.5} />
-                  <span>comercial@bembeauty.com.br</span>
+                  <Mail className="w-4 h-4 text-brand-secondary" strokeWidth={1.5} />
+                  <span className="text-contrast">comercial@bembeauty.com.br</span>
                 </p>
               </div>
             </div>
@@ -47,8 +47,8 @@ const LegalSection = () => {
               </h4>
               <div className="space-y-2 text-sm">
                 <p className="flex items-center gap-2">
-                  <Globe className="w-4 h-4 text-accent" strokeWidth={1.5} />
-                  <span>www.bembeauty.com.br</span>
+                  <Globe className="w-4 h-4 text-brand-secondary" strokeWidth={1.5} />
+                  <span className="text-contrast">www.bembeauty.com.br</span>
                 </p>
                 <p className="flex items-center gap-2">
                   <Instagram className="w-4 h-4 text-pink-500" strokeWidth={1.5} />
@@ -70,13 +70,13 @@ const LegalSection = () => {
               <div className="space-y-3 text-sm">
                 <div>
                   <p className="font-semibold text-foreground">Matriz - RJ</p>
-                  <p className="text-muted">Av. Cesário de Melo, nº 3006</p>
-                  <p className="text-muted">Campo Grande - Rio de Janeiro - RJ</p>
+                  <p className="text-contrast">Av. Cesário de Melo, nº 3006</p>
+                  <p className="text-contrast">Campo Grande - Rio de Janeiro - RJ</p>
                 </div>
                 <div>
                   <p className="font-semibold text-foreground">Centro Logístico - ES</p>
-                  <p className="text-muted">Rod. Gov. Mário Covas, Galpão 04</p>
-                  <p className="text-muted">Guarapari - ES</p>
+                  <p className="text-contrast">Rod. Gov. Mário Covas, Galpão 04</p>
+                  <p className="text-contrast">Guarapari - ES</p>
                 </div>
               </div>
             </div>
@@ -86,25 +86,12 @@ const LegalSection = () => {
           {/* Legal Footer */}
           <Separator className="bg-accent/20 mb-8" />
           
-          <div className="text-xs text-muted space-y-4">
-            <p>
-              NIVELA® é uma marca registrada da Bem Beauty Professional. Todos os direitos reservados.
-              CNPJ: 51.635.148/0001-33. © 2025 Bem Beauty Professional.
-            </p>
-            <p>
-              Os resultados podem variar de acordo com o tipo de cabelo, condições prévias e procedimento de aplicação.
-              Sempre siga as instruções de uso e realize o teste de mecha antes da aplicação completa.
-            </p>
-            <div className="flex justify-center space-x-6 py-4">
-              <a href="#" className="hover:text-accent transition-colors">Política de Privacidade</a>
-              <a href="#" className="hover:text-accent transition-colors">Termos de Uso</a>
-              <a href="#" className="hover:text-accent transition-colors flex items-center gap-1">
-                <Video className="w-4 h-4" strokeWidth={1.5} />
-                Vídeo Passo a Passo
-              </a>
-              <a href="#" className="hover:text-accent transition-colors">Contato</a>
+            <div className="text-xs text-contrast space-y-4">
+              <p className="text-center">
+                NIVELA® é uma marca registrada da Bem Beauty Professional. Todos os direitos reservados.
+                CNPJ: 51.635.148/0001-33. © 2025 Bem Beauty Professional.
+              </p>
             </div>
-          </div>
         </div>
       </div>
     </section>
