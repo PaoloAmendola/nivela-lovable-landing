@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
+import { useHapticFeedback } from "@/hooks/use-haptic-feedback";
 import { useSmoothScroll } from "@/hooks/use-smooth-scroll";
 import { EnhancedButton } from "@/components/ui/EnhancedButton";
 
@@ -10,12 +11,19 @@ interface HamburgerMenuProps {
 }
 
 const HamburgerMenu = ({ onCTAClick }: HamburgerMenuProps) => {
+  const { hapticClick, hapticSelect } = useHapticFeedback();
   const { scrollToElement } = useSmoothScroll();
   const [isOpen, setIsOpen] = useState(false);
 
   const handleNavClick = (elementId: string) => {
+    hapticSelect();
     scrollToElement(elementId, { offset: 80, duration: 1000, easing: 'ease-in-out' });
     setIsOpen(false);
+  };
+
+  const toggleMenu = () => {
+    hapticClick();
+    setIsOpen(!isOpen);
   };
 
   const navItems = [
@@ -30,7 +38,7 @@ const HamburgerMenu = ({ onCTAClick }: HamburgerMenuProps) => {
       {/* Hamburger Button */}
       <motion.button
         className="relative z-50 p-3 bg-background/10 backdrop-blur-sm border border-accent/20 rounded-xl hover:bg-background/20 transition-all duration-300"
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={toggleMenu}
         whileTap={{ scale: 0.95 }}
         aria-label="Menu de navegação"
       >

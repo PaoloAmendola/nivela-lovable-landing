@@ -20,11 +20,11 @@ const PremiumCard = ({
   hapticFeedback = true,
   onClick 
 }: PremiumCardProps) => {
-  const { triggerLightHaptic } = useHapticFeedback({ enabled: hapticFeedback });
+  const { hapticClick } = useHapticFeedback();
 
   const handleClick = () => {
     if (hapticFeedback) {
-      triggerLightHaptic();
+      hapticClick();
     }
     onClick?.();
   };

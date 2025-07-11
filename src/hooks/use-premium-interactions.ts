@@ -10,11 +10,11 @@ interface PremiumInteractionOptions {
 
 export const usePremiumInteractions = (options: PremiumInteractionOptions = {}) => {
   const { hapticEnabled = true, soundEnabled = false, animationEnabled = true } = options;
-  const { triggerLightHaptic, triggerMediumHaptic, triggerSuccessHaptic } = useHapticFeedback({ enabled: hapticEnabled });
+  const { hapticClick, hapticImpact, hapticSuccess } = useHapticFeedback();
 
   const handlePremiumClick = useCallback((callback?: () => void) => {
     if (hapticEnabled) {
-      triggerLightHaptic();
+      hapticClick();
     }
     
     if (soundEnabled && 'AudioContext' in window) {
@@ -37,26 +37,26 @@ export const usePremiumInteractions = (options: PremiumInteractionOptions = {}) 
     }
     
     callback?.();
-  }, [hapticEnabled, soundEnabled, triggerLightHaptic]);
+  }, [hapticEnabled, soundEnabled, hapticClick]);
 
   const handlePremiumHover = useCallback(() => {
     if (hapticEnabled) {
-      triggerLightHaptic();
+      hapticClick();
     }
-  }, [hapticEnabled, triggerLightHaptic]);
+  }, [hapticEnabled, hapticClick]);
 
   const handlePremiumSuccess = useCallback((callback?: () => void) => {
     if (hapticEnabled) {
-      triggerSuccessHaptic();
+      hapticSuccess();
     }
     callback?.();
-  }, [hapticEnabled, triggerSuccessHaptic]);
+  }, [hapticEnabled, hapticSuccess]);
 
   const handlePremiumFocus = useCallback(() => {
     if (hapticEnabled) {
-      triggerMediumHaptic();
+      hapticImpact('medium');
     }
-  }, [hapticEnabled, triggerMediumHaptic]);
+  }, [hapticEnabled, hapticImpact]);
 
   return {
     handlePremiumClick,

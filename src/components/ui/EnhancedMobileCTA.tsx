@@ -1,4 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
+import { useHapticFeedback } from "@/hooks/use-haptic-feedback";
 import { EnhancedButton } from "./EnhancedButton";
 import { useScroll } from "@/hooks/use-scroll";
 import StyledIcon from "./StyledIcon";
@@ -9,9 +10,15 @@ interface EnhancedMobileCTAProps {
 }
 
 const EnhancedMobileCTA = ({ onClick }: EnhancedMobileCTAProps) => {
+  const { hapticImpact } = useHapticFeedback();
   const { scrollDirection, isScrolled } = useScroll(100);
   
   const shouldShow = !isScrolled || scrollDirection === 'up';
+
+  const handleCTAClick = () => {
+    hapticImpact('strong');
+    onClick();
+  };
 
   return (
     <AnimatePresence>
@@ -37,7 +44,7 @@ const EnhancedMobileCTA = ({ onClick }: EnhancedMobileCTAProps) => {
           </div>
           
           <EnhancedButton
-            onClick={onClick}
+            onClick={handleCTAClick}
             variant="premium"
             className="w-full py-4 text-base font-bold bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 shadow-lg"
             aria-label="Abrir formulário de contato"
