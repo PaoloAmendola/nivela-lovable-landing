@@ -26,8 +26,8 @@ const HeroContent = ({ onCTAClick, shouldReduceAnimations }: HeroContentProps) =
       {/* Título Principal - NIVELA® */}
       <div className="animate-sequential-in opacity-0">
         <h1 className="text-hero text-center lg:text-left mb-4 lg:mb-6">
-          NIVELA
-          <span className="text-primary align-super text-[0.6em]">®</span>
+          <span className="gradient-text">NIVELA</span>
+          <sup className="text-2xl sm:text-3xl lg:text-4xl text-primary/80 font-light">®</sup>
         </h1>
       </div>
 
@@ -73,7 +73,9 @@ const HeroContent = ({ onCTAClick, shouldReduceAnimations }: HeroContentProps) =
         <div className="flex flex-col gap-4 justify-center lg:justify-start items-center lg:items-start mb-6">
           <EnhancedButton
             onClick={onCTAClick}
-            className="bg-[#9D4916] hover:bg-[#8A3F13] text-white font-bold text-lg px-8 py-4 rounded shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-105 w-full max-w-sm flex items-center justify-center gap-3"
+            variant="premium"
+            size="lg"
+            className="text-lg px-8 py-4 min-h-[60px] w-full max-w-sm shadow-elegant hover:shadow-glow hover-glow"
           >
             <MessageSquare className="w-6 h-6" strokeWidth={1.5} />
             QUERO USAR NO MEU SALÃO
@@ -81,7 +83,9 @@ const HeroContent = ({ onCTAClick, shouldReduceAnimations }: HeroContentProps) =
           
           <EnhancedButton
             onClick={onCTAClick}
-            className="bg-[#9D4916] hover:bg-[#8A3F13] text-white font-bold text-lg px-8 py-4 rounded shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-105 w-full max-w-sm flex items-center justify-center gap-3"
+            variant="outline"
+            size="lg"
+            className="text-lg px-8 py-4 min-h-[60px] w-full max-w-sm border-primary/30 text-primary hover:bg-primary/10 shadow-elegant"
           >
             <MessageSquare className="w-6 h-6" strokeWidth={1.5} />
             QUERO DISTRIBUIR

@@ -1,4 +1,4 @@
-import { useState, lazy, Suspense, useEffect } from "react";
+import { useState } from "react";
 import HeroSection from "@/components/sections/HeroSection";
 import ManifestoTextSection from "@/components/sections/ManifestoTextSection";
 import ManifestoVideoSection from "@/components/sections/ManifestoVideoSection";
@@ -8,14 +8,25 @@ import DistributorSection from "@/components/sections/DistributorSection";
 import EcosystemSection from "@/components/sections/EcosystemSection";
 import FAQSection from "@/components/sections/FAQSection";
 import LegalSection from "@/components/sections/LegalSection";
+import PremiumNavbar from "@/components/navigation/PremiumNavbar";
+import PremiumContactModal from "@/components/forms/PremiumContactModal";
+import AccessibilityEnhancements from "@/components/accessibility/AccessibilityEnhancements";
+import { usePerformanceOptimization } from "@/hooks/use-performance-optimization";
 
 const Index = () => {
   const [showForm, setShowForm] = useState(false);
   
-  console.log("Index component rendering with state");
+  // Initialize performance optimizations
+  usePerformanceOptimization();
 
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
+      {/* Accessibility Enhancements */}
+      <AccessibilityEnhancements />
+      
+      {/* Premium Navigation */}
+      <PremiumNavbar onCTAClick={() => setShowForm(true)} />
+      
       {/* Seções Críticas */}
       <section data-section="hero" id="hero">
         <HeroSection onCTAClick={() => setShowForm(true)} />
@@ -53,19 +64,11 @@ const Index = () => {
         <LegalSection />
       </section>
 
-      {showForm && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-white p-8 rounded-lg">
-            <h2>Contact Form</h2>
-            <button 
-              onClick={() => setShowForm(false)}
-              className="mt-4 px-4 py-2 bg-primary text-white rounded"
-            >
-              Fechar
-            </button>
-          </div>
-        </div>
-      )}
+      {/* Premium Contact Modal */}
+      <PremiumContactModal 
+        isOpen={showForm} 
+        onClose={() => setShowForm(false)} 
+      />
     </div>
   );
 };
