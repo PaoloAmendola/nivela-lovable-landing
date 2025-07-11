@@ -5,6 +5,8 @@ import ManifestoVideoSection from "@/components/sections/ManifestoVideoSection";
 import TechnologySection from "@/components/sections/TechnologySection";
 import WhyChooseNivelaSection from "@/components/sections/WhyChooseNivelaSection";
 import ExclusivitySection from "@/components/sections/ExclusivitySection";
+import FAQSection from "@/components/sections/FAQSection";
+import LegalSection from "@/components/sections/LegalSection";
 
 const Index = () => {
   const [showForm, setShowForm] = useState(false);
@@ -36,6 +38,14 @@ const Index = () => {
       
       <section data-section="exclusivity" id="exclusivity">
         <ExclusivitySection onCTAClick={() => setShowForm(true)} />
+      </section>
+      
+      <section data-section="faq" id="faq">
+        <FAQSection />
+      </section>
+      
+      <section data-section="footer" id="footer">
+        <LegalSection />
       </section>
 
       {showForm && (
