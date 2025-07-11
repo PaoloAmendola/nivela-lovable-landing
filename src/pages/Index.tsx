@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import HeroSection from "@/components/sections/HeroSection";
 import ManifestoTextSection from "@/components/sections/ManifestoTextSection";
 import ManifestoVideoSection from "@/components/sections/ManifestoVideoSection";
