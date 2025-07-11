@@ -4,17 +4,11 @@ import { motion } from "framer-motion";
 interface FAQSearchProps {
   searchTerm: string;
   onSearchChange: (term: string) => void;
-  selectedCategory: string;
-  onCategoryChange: (category: string) => void;
-  categories: string[];
 }
 
 const FAQSearch = ({ 
   searchTerm, 
-  onSearchChange, 
-  selectedCategory, 
-  onCategoryChange, 
-  categories 
+  onSearchChange
 }: FAQSearchProps) => {
   return (
     <motion.div 
@@ -34,32 +28,6 @@ const FAQSearch = ({
         />
       </div>
 
-      {/* Category Chips */}
-      <div className="flex flex-wrap gap-2 justify-center">
-        <button
-          onClick={() => onCategoryChange("")}
-          className={`px-3 py-1.5 rounded-full text-sm font-medium transition-all duration-300 ${
-            selectedCategory === ""
-              ? "bg-brand-primary text-white"
-              : "bg-background/50 text-brand-secondary border border-border/50 hover:border-brand-primary/30"
-          }`}
-        >
-          Todas
-        </button>
-        {categories.map((category) => (
-          <button
-            key={category}
-            onClick={() => onCategoryChange(category)}
-            className={`px-3 py-1.5 rounded-full text-sm font-medium transition-all duration-300 capitalize ${
-              selectedCategory === category
-                ? "bg-brand-primary text-white"
-                : "bg-background/50 text-brand-secondary border border-border/50 hover:border-brand-primary/30"
-            }`}
-          >
-            {category}
-          </button>
-        ))}
-      </div>
     </motion.div>
   );
 };

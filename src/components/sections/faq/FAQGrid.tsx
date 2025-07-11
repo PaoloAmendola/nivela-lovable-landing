@@ -17,8 +17,6 @@ interface FAQGridProps {
 const FAQGrid = ({ faqData }: FAQGridProps) => {
   const [openItems, setOpenItems] = useState<number[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("");
-
   const toggleItem = (index: number) => {
     setOpenItems(prev =>
       prev.includes(index)
@@ -27,30 +25,23 @@ const FAQGrid = ({ faqData }: FAQGridProps) => {
     );
   };
 
-  // Filter FAQs based on search and category
+  // Filter FAQs based on search only
   const filteredFAQs = faqData.filter(faq => {
     const matchesSearch = faq.question.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          faq.answer.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCategory = selectedCategory === "" || faq.category === selectedCategory;
-    return matchesSearch && matchesCategory;
+    return matchesSearch;
   });
-
-  // Get unique categories
-  const categories = Array.from(new Set(faqData.map(faq => faq.category)));
 
   return (
     <div className="max-w-4xl mx-auto">
-      {/* Search and Filter */}
+      {/* Search */}
       <FAQSearch
         searchTerm={searchTerm}
         onSearchChange={setSearchTerm}
-        selectedCategory={selectedCategory}
-        onCategoryChange={setSelectedCategory}
-        categories={categories}
       />
 
       {/* Results Count */}
-      {(searchTerm || selectedCategory) && (
+      {searchTerm && (
         <motion.p 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -63,7 +54,7 @@ const FAQGrid = ({ faqData }: FAQGridProps) => {
       {/* FAQ List */}
       <AnimatePresence mode="wait">
         <motion.div 
-          key={`${searchTerm}-${selectedCategory}`}
+          key={searchTerm}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -79,7 +70,6 @@ const FAQGrid = ({ faqData }: FAQGridProps) => {
                 key={`${faq.question}-${originalIndex}`}
                 question={faq.question}
                 answer={faq.answer}
-                category={faq.category}
                 isOpen={openItems.includes(originalIndex)}
                 onToggle={() => toggleItem(originalIndex)}
                 index={index}
@@ -90,7 +80,7 @@ const FAQGrid = ({ faqData }: FAQGridProps) => {
       </AnimatePresence>
 
       {/* No Results */}
-      {filteredFAQs.length === 0 && (searchTerm || selectedCategory) && (
+      {filteredFAQs.length === 0 && searchTerm && (
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -100,13 +90,10 @@ const FAQGrid = ({ faqData }: FAQGridProps) => {
             Nenhuma pergunta encontrada
           </p>
           <button
-            onClick={() => {
-              setSearchTerm("");
-              setSelectedCategory("");
-            }}
+            onClick={() => setSearchTerm("")}
             className="text-brand-primary font-medium hover:underline transition-colors"
           >
-            Limpar filtros
+            Limpar busca
           </button>
         </motion.div>
       )}

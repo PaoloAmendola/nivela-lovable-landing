@@ -7,7 +7,6 @@ import { motion } from "framer-motion";
 interface FAQItemProps {
   question: string;
   answer: string;
-  category: string;
   isOpen: boolean;
   onToggle: () => void;
   index: number;
@@ -16,7 +15,6 @@ interface FAQItemProps {
 const FAQItem = ({ 
   question, 
   answer, 
-  category, 
   isOpen, 
   onToggle, 
   index
@@ -37,9 +35,6 @@ const FAQItem = ({
             <CardContent className="p-6">
               <div className="flex items-center justify-between gap-4">
                 <div className="text-left flex-1">
-                  <div className="inline-block px-2 py-1 rounded text-xs font-medium text-brand-primary bg-brand-primary/10 mb-3 capitalize">
-                    {category}
-                  </div>
                   <h3 className="font-semibold text-lg text-contrast leading-snug">
                     {question}
                   </h3>
