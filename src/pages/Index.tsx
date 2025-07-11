@@ -11,6 +11,7 @@ import LegalSection from "@/components/sections/LegalSection";
 import PremiumNavbar from "@/components/navigation/PremiumNavbar";
 import PremiumContactModal from "@/components/forms/PremiumContactModal";
 import AccessibilityEnhancements from "@/components/accessibility/AccessibilityEnhancements";
+import OptimizedLazySection from "@/components/ui/OptimizedLazySection";
 import EnhancedMobileCTA from "@/components/ui/EnhancedMobileCTA";
 import { usePerformanceOptimization } from "@/hooks/use-performance-optimization";
 
@@ -42,23 +43,33 @@ const Index = () => {
       </section>
       
       <section data-section="why-choose" id="why-choose">
-        <WhyChooseNivelaSection />
+        <OptimizedLazySection skeleton="card" delay={100}>
+          <WhyChooseNivelaSection />
+        </OptimizedLazySection>
       </section>
       
       <section data-section="technology" id="technology">
-        <TechnologySection />
+        <OptimizedLazySection skeleton="card" delay={150}>
+          <TechnologySection />
+        </OptimizedLazySection>
       </section>
       
       <section data-section="ecosystem" id="ecosystem">
-        <EcosystemSection />
+        <OptimizedLazySection skeleton="card" delay={200}>
+          <EcosystemSection />
+        </OptimizedLazySection>
       </section>
       
       <section data-section="distributor" id="distributor">
-        <DistributorSection onCTAClick={() => setShowForm(true)} />
+        <OptimizedLazySection skeleton="card" delay={250}>
+          <DistributorSection onCTAClick={() => setShowForm(true)} />
+        </OptimizedLazySection>
       </section>
       
       <section data-section="faq" id="faq">
-        <FAQSection />
+        <OptimizedLazySection skeleton="card" delay={300}>
+          <FAQSection />
+        </OptimizedLazySection>
       </section>
       
       <section data-section="footer" id="footer">

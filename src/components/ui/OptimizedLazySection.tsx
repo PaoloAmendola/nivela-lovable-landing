@@ -1,78 +1,78 @@
-
-import { Suspense, ReactNode, memo, CSSProperties, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
-import { SectionSkeleton } from "./SkeletonLoader";
-import { motion } from "framer-motion";
-import ErrorBoundary from "./ErrorBoundary";
+import PremiumSkeletonLoader from "./PremiumSkeletonLoader";
 
 interface OptimizedLazySectionProps {
-  children: ReactNode;
-  fallback?: ReactNode;
+  children: React.ReactNode;
+  skeleton?: "hero" | "card" | "text" | "image";
+  skeletonLines?: number;
+  threshold?: number;
   className?: string;
-  id?: string;
-  'data-section'?: string;
-  preload?: boolean;
-  style?: CSSProperties;
-  priority?: 'high' | 'medium' | 'low';
+  delay?: number;
 }
 
-const OptimizedLazySection = memo(({ 
-  children, 
-  fallback = <SectionSkeleton />, 
+const OptimizedLazySection = ({
+  children,
+  skeleton = "card",
+  skeletonLines = 3,
+  threshold = 0.1,
   className = "",
-  id,
-  'data-section': dataSection,
-  preload = false,
-  style,
-  priority = 'medium'
+  delay = 0
 }: OptimizedLazySectionProps) => {
-  const [hasRendered, setHasRendered] = useState(preload);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [showContent, setShowContent] = useState(false);
   
-  // Configuração mais agressiva baseada na prioridade
-  const rootMargin = priority === 'high' ? '400px' : priority === 'medium' ? '200px' : '50px';
-  const threshold = priority === 'high' ? 0.01 : 0.1;
-  
-  const { ref, hasIntersected } = useIntersectionObserver({
+  const { ref, isIntersecting } = useIntersectionObserver({
     threshold,
-    rootMargin,
-    freezeOnceVisible: true // Performance: para de observar após ser visível
+    rootMargin: "50px"
   });
 
-  const shouldRender = hasIntersected || preload;
-
-  // Delay para renderização baseado na prioridade
   useEffect(() => {
-    if (shouldRender && !hasRendered) {
-      const delay = priority === 'high' ? 0 : priority === 'medium' ? 50 : 100;
-      const timer = setTimeout(() => setHasRendered(true), delay);
+    if (isIntersecting && !isLoaded) {
+      const timer = setTimeout(() => {
+        setIsLoaded(true);
+        // Pequeno delay para transição suave
+        setTimeout(() => setShowContent(true), 100);
+      }, delay);
+      
       return () => clearTimeout(timer);
     }
-  }, [shouldRender, hasRendered, priority]);
+  }, [isIntersecting, isLoaded, delay]);
 
   return (
-    <motion.section
-      ref={ref}
-      id={id}
-      data-section={dataSection}
-      className={className}
-      style={{
-        ...style,
-        contentVisibility: hasRendered ? 'visible' : 'auto',
-        containIntrinsicSize: hasRendered ? 'none' : '100vw 400px'
-      }}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: hasRendered ? 1 : 0 }}
-      transition={{ duration: 0.3 }}
-    >
-      <ErrorBoundary>
-        <Suspense fallback={fallback}>
-          {hasRendered ? children : fallback}
-        </Suspense>
-      </ErrorBoundary>
-    </motion.section>
+    <div ref={ref} className={className}>
+      <AnimatePresence mode="wait">
+        {!showContent ? (
+          <motion.div
+            key="skeleton"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            <PremiumSkeletonLoader 
+              variant={skeleton} 
+              lines={skeletonLines}
+              className="min-h-[200px]"
+            />
+          </motion.div>
+        ) : (
+          <motion.div
+            key="content"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ 
+              duration: 0.6,
+              ease: "easeOut"
+            }}
+          >
+            {children}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
   );
-});
-
-OptimizedLazySection.displayName = 'OptimizedLazySection';
+};
 
 export default OptimizedLazySection;
