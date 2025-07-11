@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
+import EnhancedLoadingState from "./EnhancedLoadingState";
 import PremiumSkeletonLoader from "./PremiumSkeletonLoader";
 
 interface OptimizedLazySectionProps {
@@ -50,11 +51,13 @@ const OptimizedLazySection = ({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
+            className="min-h-[300px] flex items-center justify-center"
           >
-            <PremiumSkeletonLoader 
-              variant={skeleton} 
-              lines={skeletonLines}
-              className="min-h-[200px]"
+            <EnhancedLoadingState 
+              variant="elegant"
+              size="lg"
+              message="Carregando seção..."
+              className="w-full max-w-sm"
             />
           </motion.div>
         ) : (
