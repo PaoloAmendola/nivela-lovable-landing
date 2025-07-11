@@ -1,37 +1,29 @@
 
-import { MessageCircle, HelpCircle } from "lucide-react";
+import { HelpCircle } from "lucide-react";
 import { motion } from "framer-motion";
+import { Badge } from "@/components/ui/badge";
 
 const FAQHeader = () => {
   return (
-    <div className="max-w-4xl mx-auto text-center mb-16">
+    <div className="max-w-3xl mx-auto text-center mb-12">
       <motion.div 
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ type: "spring", stiffness: 300, damping: 20 }}
-        className="inline-flex items-center gap-2 bg-brand-primary/10 border border-brand-primary/30 px-6 py-3 rounded-full mb-8 shadow-lg"
-      >
-        <HelpCircle className="w-5 h-5 text-brand-primary" />
-        <span className="text-brand-primary font-semibold text-sm font-montserrat">Dúvidas Frequentes</span>
-      </motion.div>
-      
-      <motion.h2 
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.2, type: "spring", stiffness: 300, damping: 20 }}
-        className="text-3xl md:text-4xl lg:text-5xl font-playfair font-bold gradient-text mb-6 lg:mb-8"
-      >
-        Perguntas Frequentes
-      </motion.h2>
-      
-      <motion.p 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.4 }}
-        className="text-base md:text-lg font-montserrat text-contrast leading-relaxed max-w-3xl mx-auto"
+        transition={{ duration: 0.6 }}
       >
-        Esclarecimentos para decisões profissionais seguras
-      </motion.p>
+        <Badge variant="outline" className="mb-6 border-brand-primary/30 text-brand-primary bg-brand-primary/5">
+          <HelpCircle className="w-4 h-4 mr-2" />
+          Dúvidas Frequentes
+        </Badge>
+        
+        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold gradient-text mb-6">
+          Perguntas Frequentes
+        </h2>
+        
+        <p className="text-lg text-brand-secondary leading-relaxed">
+          Esclarecimentos essenciais sobre NIVELA® e nosso ecossistema
+        </p>
+      </motion.div>
     </div>
   );
 };

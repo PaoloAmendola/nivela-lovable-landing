@@ -12,10 +12,9 @@ interface FAQData {
 
 interface FAQGridProps {
   faqData: FAQData[];
-  categoryColors: Record<string, string>;
 }
 
-const FAQGrid = ({ faqData, categoryColors }: FAQGridProps) => {
+const FAQGrid = ({ faqData }: FAQGridProps) => {
   const [openItems, setOpenItems] = useState<number[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -40,7 +39,7 @@ const FAQGrid = ({ faqData, categoryColors }: FAQGridProps) => {
   const categories = Array.from(new Set(faqData.map(faq => faq.category)));
 
   return (
-    <div className="max-w-6xl mx-auto">
+    <div className="max-w-4xl mx-auto">
       {/* Search and Filter */}
       <FAQSearch
         searchTerm={searchTerm}
@@ -55,13 +54,13 @@ const FAQGrid = ({ faqData, categoryColors }: FAQGridProps) => {
         <motion.p 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="text-center text-brand-secondary font-montserrat mb-8"
+          className="text-center text-brand-secondary text-sm mb-6"
         >
           {filteredFAQs.length} pergunta{filteredFAQs.length !== 1 ? 's' : ''} encontrada{filteredFAQs.length !== 1 ? 's' : ''}
         </motion.p>
       )}
 
-      {/* FAQ Grid */}
+      {/* FAQ List */}
       <AnimatePresence mode="wait">
         <motion.div 
           key={`${searchTerm}-${selectedCategory}`}
@@ -69,7 +68,7 @@ const FAQGrid = ({ faqData, categoryColors }: FAQGridProps) => {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.3 }}
-          className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8"
+          className="space-y-4"
         >
           {filteredFAQs.map((faq, index) => {
             const originalIndex = faqData.findIndex(item => 
@@ -84,7 +83,6 @@ const FAQGrid = ({ faqData, categoryColors }: FAQGridProps) => {
                 isOpen={openItems.includes(originalIndex)}
                 onToggle={() => toggleItem(originalIndex)}
                 index={index}
-                categoryColors={categoryColors}
               />
             );
           })}
@@ -98,20 +96,18 @@ const FAQGrid = ({ faqData, categoryColors }: FAQGridProps) => {
           animate={{ opacity: 1, y: 0 }}
           className="text-center py-12"
         >
-          <p className="text-brand-secondary font-montserrat text-lg mb-4">
+          <p className="text-brand-secondary text-lg mb-4">
             Nenhuma pergunta encontrada
           </p>
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+          <button
             onClick={() => {
               setSearchTerm("");
               setSelectedCategory("");
             }}
-            className="text-brand-primary font-medium hover:underline"
+            className="text-brand-primary font-medium hover:underline transition-colors"
           >
             Limpar filtros
-          </motion.button>
+          </button>
         </motion.div>
       )}
     </div>

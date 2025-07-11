@@ -47,22 +47,11 @@ const FAQSection = () => {
     }
   ];
 
-  const categoryColors = {
-    formol: "text-emerald-600",
-    textura: "text-blue-600", 
-    aplicação: "text-violet-600",
-    treinamento: "text-amber-600",
-    suporte: "text-orange-600",
-    compatibilidade: "text-teal-600",
-    autorização: "text-rose-600",
-    marketing: "text-pink-600"
-  };
-
   return (
-    <section className="py-12 lg:py-16 bg-transparent">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-16 lg:py-20">
+      <div className="container mx-auto px-4 sm:px-6">
         <FAQHeader />
-        <FAQGrid faqData={faqData} categoryColors={categoryColors} />
+        <FAQGrid faqData={faqData} />
         <FAQCTA />
       </div>
     </section>
