@@ -2,6 +2,9 @@ import { useState, lazy, Suspense, useEffect } from "react";
 import HeroSection from "@/components/sections/HeroSection";
 import ManifestoTextSection from "@/components/sections/ManifestoTextSection";
 import ManifestoVideoSection from "@/components/sections/ManifestoVideoSection";
+import TechnologySection from "@/components/sections/TechnologySection";
+import WhyChooseNivelaSection from "@/components/sections/WhyChooseNivelaSection";
+import ExclusivitySection from "@/components/sections/ExclusivitySection";
 
 const Index = () => {
   const [showForm, setShowForm] = useState(false);
@@ -21,6 +24,18 @@ const Index = () => {
       
       <section data-section="manifesto-video" id="manifesto-video">
         <ManifestoVideoSection />
+      </section>
+      
+      <section data-section="technology" id="technology">
+        <TechnologySection />
+      </section>
+      
+      <section data-section="why-choose" id="why-choose">
+        <WhyChooseNivelaSection />
+      </section>
+      
+      <section data-section="exclusivity" id="exclusivity">
+        <ExclusivitySection onCTAClick={() => setShowForm(true)} />
       </section>
 
       {showForm && (
