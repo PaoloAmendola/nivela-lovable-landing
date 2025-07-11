@@ -4,6 +4,7 @@ import { createRoot } from 'react-dom/client';
 import App from './App.tsx';
 import './index.css';
 import { logger } from './lib/logger';
+import { initializeOptimizations } from './utils/deploy-optimization';
 
 // Otimização crítica de inicialização
 const initializeApp = async () => {
@@ -41,6 +42,9 @@ const initializeApp = async () => {
       }
     }
   };
+
+  // Inicializar otimizações de deploy
+  initializeOptimizations();
 
   // Preload recursos críticos
   preloadCritical();

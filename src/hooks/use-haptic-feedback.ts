@@ -35,7 +35,7 @@ export const useHapticFeedback = () => {
         (window as any).hapticFeedback?.[hapticType]?.();
         return;
       } catch (error) {
-        console.debug('Native haptic feedback failed:', error);
+        // Native haptic feedback not available
       }
     }
 
@@ -63,7 +63,7 @@ export const useHapticFeedback = () => {
 
         navigator.vibrate(vibrationPattern);
       } catch (error) {
-        console.debug('Vibration API failed:', error);
+        // Vibration API not available
       }
     }
   }, []);

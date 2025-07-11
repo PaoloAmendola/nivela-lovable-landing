@@ -23,7 +23,7 @@ const RobustVideoPlayer = ({ src, poster, className }: RobustVideoPlayerProps) =
       setHasPlayedOnce(true);
       setIsFirstView(false);
     } catch (err) {
-      console.warn('Autoplay bloqueado, mostrando botão manual');
+      // Autoplay blocked, show manual button
       setShowManualButton(true);
     }
   }, [hasPlayedOnce, isFirstView]);
@@ -55,7 +55,7 @@ const RobustVideoPlayer = ({ src, poster, className }: RobustVideoPlayerProps) =
       await video.play();
       setShowManualButton(false);
     } catch (err) {
-      console.error('Erro no play manual:', err);
+      // Manual play error - silent fail
     }
   };
 

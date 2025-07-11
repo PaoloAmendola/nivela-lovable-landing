@@ -37,7 +37,7 @@ export const useCoreWebVitals = () => {
       [metric.name.toLowerCase()]: metric.value
     }));
 
-    // Log para debugging em desenvolvimento
+    // Performance monitoring in production
     if (process.env.NODE_ENV === 'development') {
       logger.info(`[Web Vitals] ${metric.name}:`, {
         value: metric.value,

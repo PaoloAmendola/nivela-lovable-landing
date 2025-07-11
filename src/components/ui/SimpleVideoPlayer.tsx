@@ -17,7 +17,7 @@ const SimpleVideoPlayer = ({ src, className }: SimpleVideoPlayerProps) => {
   
   // Reset states when src changes or component mounts
   useEffect(() => {
-    console.log('🎬 SimpleVideoPlayer: src changed or mounted', { src, timestamp: new Date().toISOString() });
+    // Reset states when src changes or component mounts
     setIsLoading(true);
     setHasError(false);
     setRetryCount(0);
@@ -37,12 +37,12 @@ const SimpleVideoPlayer = ({ src, className }: SimpleVideoPlayerProps) => {
       ([entry]) => {
         setIsInView(entry.isIntersecting);
         if (entry.isIntersecting && videoRef.current) {
-          console.log('🎬 SimpleVideoPlayer: entering view, attempting autoplay');
-          videoRef.current.play().catch((error) => {
-            console.log('🎬 SimpleVideoPlayer: autoplay blocked by browser policy', error);
+          // Attempt autoplay when entering view
+          videoRef.current.play().catch(() => {
+            // Autoplay blocked - expected behavior
           });
         } else if (!entry.isIntersecting && videoRef.current) {
-          console.log('🎬 SimpleVideoPlayer: leaving view, pausing video');
+          // Pause when leaving view
           videoRef.current.pause();
         }
       },
@@ -59,7 +59,7 @@ const SimpleVideoPlayer = ({ src, className }: SimpleVideoPlayerProps) => {
     if (!video) return;
 
     const cleanup = () => {
-      console.log('🎬 SimpleVideoPlayer: cleanup');
+      // Clean up video resources
       video.pause();
       video.removeAttribute('src');
       video.load();
@@ -69,36 +69,26 @@ const SimpleVideoPlayer = ({ src, className }: SimpleVideoPlayerProps) => {
   }, []);
 
   const handleLoadStart = useCallback(() => {
-    console.log('🎬 SimpleVideoPlayer: loadstart event');
     setIsLoading(true);
     setHasError(false);
   }, []);
   
   const handleCanPlay = useCallback(() => {
-    console.log('🎬 SimpleVideoPlayer: canplay event');
     setIsLoading(false);
     setHasError(false);
     
     // Try to auto-play
     if (videoRef.current) {
-      videoRef.current.play().catch((error) => {
-        console.log('🎬 SimpleVideoPlayer: autoplay blocked (normal behavior)', error);
+      videoRef.current.play().catch(() => {
+        // Autoplay blocked - normal behavior
       });
     }
   }, []);
   
   const handleError = useCallback((event: any) => {
-    console.error('🎬 SimpleVideoPlayer: error event', { 
-      error: event, 
-      retryCount, 
-      maxRetries,
-      src 
-    });
-    
-    // Auto-retry with exponential backoff
+    // Handle video loading errors
     if (retryCount < maxRetries) {
       const delay = Math.pow(2, retryCount) * 1000; // 1s, 2s, 4s
-      console.log(`🎬 SimpleVideoPlayer: auto-retry in ${delay}ms (attempt ${retryCount + 1}/${maxRetries})`);
       
       setTimeout(() => {
         setRetryCount(prev => prev + 1);
@@ -110,26 +100,25 @@ const SimpleVideoPlayer = ({ src, className }: SimpleVideoPlayerProps) => {
         }
       }, delay);
     } else {
-      console.error('🎬 SimpleVideoPlayer: max retries exceeded, showing error state');
+      // Max retries exceeded, show error state
       setIsLoading(false);
       setHasError(true);
     }
   }, [retryCount, maxRetries, src]);
 
   const handleLoadedData = useCallback(() => {
-    console.log('🎬 SimpleVideoPlayer: loadeddata event - video fully loaded');
+    // Video fully loaded
   }, []);
 
   const handleWaiting = useCallback(() => {
-    console.log('🎬 SimpleVideoPlayer: waiting event - buffering');
+    // Video buffering
   }, []);
 
   const handlePlay = useCallback(() => {
-    console.log('🎬 SimpleVideoPlayer: play event');
+    // Video started playing
   }, []);
 
   const manualRetry = useCallback(() => {
-    console.log('🎬 SimpleVideoPlayer: manual retry triggered');
     setRetryCount(0);
     setHasError(false);
     setIsLoading(true);

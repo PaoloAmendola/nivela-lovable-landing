@@ -5,8 +5,6 @@ import AmazonianActives from "./technology/AmazonianActives";
 import RobustVideoPlayer from "@/components/ui/RobustVideoPlayer";
 
 const TechnologySection = () => {
-  console.log('🔬 TechnologySection component rendering');
-
   return (
     <section className="py-12 lg:py-16 bg-transparent relative overflow-hidden">
       {/* Enhanced Background with Tech-Nature Connection */}

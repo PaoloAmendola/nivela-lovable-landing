@@ -32,14 +32,14 @@
     <meta name="keywords" content="NIVELA, tratamento capilar, ASTRO QUAT V3, sem formol, bem beauty, salão profissional, alisamento, cabelo" />
     <meta name="author" content="Bem Beauty Professional" />
     <meta name="robots" content="index, follow" />
-    <link rel="canonical" href="https://nivela.com.br" />
+    <link rel="canonical" href="https://1070e5f3-bd5c-4b1b-aa35-fa452e6734f2.lovableproject.com" />
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://nivela.com.br" />
+    <meta property="og:url" content="https://1070e5f3-bd5c-4b1b-aa35-fa452e6734f2.lovableproject.com" />
     <meta property="og:title" content="NIVELA® - Tratamento Capilar Revolucionário" />
     <meta property="og:description" content="Tecnologia ASTRO QUAT V3. Sem formol, sem fumaça, 100% performance." />
-    <meta property="og:image" content="https://nivela.com.br/og-image.jpg" />
+    <meta property="og:image" content="https://1070e5f3-bd5c-4b1b-aa35-fa452e6734f2.lovableproject.com/lovable-uploads/35c523c0-e991-4c45-9e0b-08ebd975b908.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:locale" content="pt_BR" />
@@ -47,10 +47,10 @@
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://nivela.com.br" />
+    <meta property="twitter:url" content="https://1070e5f3-bd5c-4b1b-aa35-fa452e6734f2.lovableproject.com" />
     <meta property="twitter:title" content="NIVELA® - Tratamento Capilar Revolucionário" />
     <meta property="twitter:description" content="Tecnologia ASTRO QUAT V3. Sem formol, sem fumaça, 100% performance." />
-    <meta property="twitter:image" content="https://nivela.com.br/og-image.jpg" />
+    <meta property="twitter:image" content="https://1070e5f3-bd5c-4b1b-aa35-fa452e6734f2.lovableproject.com/lovable-uploads/35c523c0-e991-4c45-9e0b-08ebd975b908.png" />
     
     <!-- Critical Resource Hints -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -88,12 +88,12 @@
       
       // PWA Install prompt tracking
       window.addEventListener('beforeinstallprompt', (e) => {
-        console.log('PWA install prompt available');
+        window.deferredPrompt = e;
       });
       
       // Track PWA usage
       if (window.matchMedia('(display-mode: standalone)').matches) {
-        console.log('Running as PWA');
+        document.documentElement.classList.add('pwa-mode');
       }
     </script>
   </body>
