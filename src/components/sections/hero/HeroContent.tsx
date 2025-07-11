@@ -68,35 +68,30 @@ const HeroContent = ({ onCTAClick, shouldReduceAnimations }: HeroContentProps) =
         </div>
       </div>
 
-      {/* CTA Buttons */}
-      <div className="animate-sequential-in opacity-0">
-        <div className="flex flex-col gap-4 justify-center lg:justify-start items-center lg:items-start mb-6">
-          <EnhancedButton
-            onClick={onCTAClick}
-            variant="premium"
-            size="lg"
-            className="text-lg px-8 py-4 min-h-[60px] w-full max-w-sm shadow-elegant hover:shadow-glow hover-glow"
-          >
-            <MessageSquare className="w-6 h-6" strokeWidth={1.5} />
-            QUERO USAR NO MEU SALÃO
-          </EnhancedButton>
-          
-          <EnhancedButton
-            onClick={onCTAClick}
-            variant="outline"
-            size="lg"
-            className="text-lg px-8 py-4 min-h-[60px] w-full max-w-sm border-primary/30 text-primary hover:bg-primary/10 shadow-elegant"
-          >
-            <MessageSquare className="w-6 h-6" strokeWidth={1.5} />
-            QUERO DISTRIBUIR
-          </EnhancedButton>
+        {/* CTA Buttons - Enhanced for Maximum Visibility */}
+        <div className="animate-sequential-in opacity-0">
+          <div className="flex flex-col gap-5 justify-center lg:justify-start items-center lg:items-start">
+            <EnhancedButton
+              onClick={onCTAClick}
+              variant="premium"
+              size="lg"
+              className="text-lg font-bold px-10 py-5 min-h-[68px] w-full max-w-sm relative z-20 shadow-[0_12px_40px_-4px_rgba(157,73,22,0.8)] hover:shadow-[0_20px_60px_-4px_rgba(157,73,22,0.9)] bg-gradient-to-r from-primary via-accent to-primary bg-size-200 hover:bg-position-100 border-2 border-primary/20 hover:border-primary/40"
+            >
+              <MessageSquare className="w-7 h-7" strokeWidth={2} />
+              QUERO USAR NO MEU SALÃO
+            </EnhancedButton>
+            
+            <EnhancedButton
+              onClick={onCTAClick}
+              variant="outline"
+              size="lg"
+              className="text-lg font-bold px-10 py-5 min-h-[68px] w-full max-w-sm relative z-20 border-3 border-accent/60 text-accent hover:border-accent bg-transparent hover:bg-accent/15 shadow-[0_8px_30px_-4px_rgba(37,76,90,0.6)] hover:shadow-[0_12px_40px_-4px_rgba(37,76,90,0.8)] backdrop-blur-sm"
+            >
+              <MessageSquare className="w-7 h-7" strokeWidth={2} />
+              QUERO DISTRIBUIR
+            </EnhancedButton>
+          </div>
         </div>
-        
-        {/* Sub-text */}
-        <p className="text-sm text-white/60 text-center lg:text-left">
-          💬 WhatsApp direto • Resposta em minutos • Condições especiais
-        </p>
-      </div>
     </div>
   );
 };

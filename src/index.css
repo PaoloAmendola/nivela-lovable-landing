@@ -49,34 +49,59 @@
 
     --radius: 0.75rem;
 
-    /* Premium Typography Scale */
-    --text-hero: clamp(2.5rem, 8vw, 4.5rem); /* 40px-72px */
-    --text-hero-subtitle: clamp(1.5rem, 4vw, 2.25rem); /* 24px-36px */
-    --text-hero-description: clamp(1rem, 2.5vw, 1.25rem); /* 16px-20px */
-    --text-section-title: clamp(2rem, 5vw, 3rem); /* 32px-48px */
-    --text-section-subtitle: clamp(1.25rem, 3vw, 1.75rem); /* 20px-28px */
-    --text-body-large: clamp(1.125rem, 2vw, 1.25rem); /* 18px-20px */
-    --text-body: clamp(1rem, 1.5vw, 1.125rem); /* 16px-18px */
+    /* Unified Premium Typography Scale - Mobile-First Approach */
+    --text-hero: clamp(2.75rem, 8vw, 5rem); /* 44px-80px - Enhanced for impact */
+    --text-hero-subtitle: clamp(1.5rem, 4vw, 2.5rem); /* 24px-40px - Better hierarchy */
+    --text-hero-description: clamp(1.125rem, 2.5vw, 1.375rem); /* 18px-22px - Improved readability */
+    --text-section-title: clamp(2.25rem, 5vw, 3.5rem); /* 36px-56px - More prominent */
+    --text-section-subtitle: clamp(1.375rem, 3vw, 2rem); /* 22px-32px - Better scaling */
+    --text-body-large: clamp(1.25rem, 2vw, 1.5rem); /* 20px-24px - Professional readability */
+    --text-body: clamp(1.125rem, 1.5vw, 1.25rem); /* 18px-20px - Optimal for 35-60 age group */
 
     /* Mobile optimization variables */
     --touch-target-min: 44px;
     --mobile-font-scale: 1;
     --mobile-spacing-scale: 1;
     
-    /* Premium spacing system */
-    --section-padding: 6rem; /* 96px */
-    --section-padding-mobile: 4rem; /* 64px */
+    /* Unified Spacing System - 8px Base Grid */
+    --space-xs: 0.5rem; /* 8px */
+    --space-sm: 1rem; /* 16px */
+    --space-md: 1.5rem; /* 24px */
+    --space-lg: 2rem; /* 32px */
+    --space-xl: 3rem; /* 48px */
+    --space-2xl: 4rem; /* 64px */
+    --space-3xl: 6rem; /* 96px */
+    --space-4xl: 8rem; /* 128px */
+    
+    /* Responsive Section Spacing */
+    --section-padding: var(--space-3xl); /* 96px desktop */
+    --section-padding-mobile: var(--space-2xl); /* 64px mobile */
+    --section-padding-tablet: 5rem; /* 80px tablet */
   }
 
-  /* Enhanced media queries for premium typography */
+  /* Enhanced Responsive Typography & Spacing */
+  @media (min-width: 769px) and (max-width: 1024px) {
+    :root {
+      --section-padding: var(--section-padding-tablet);
+      --touch-target-min: 46px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    :root {
+      --section-padding: var(--section-padding-mobile);
+      --touch-target-min: 48px;
+    }
+  }
+
   @media (max-width: 375px) {
     :root {
       --mobile-font-scale: 0.95;
       --mobile-spacing-scale: 0.9;
-      --touch-target-min: 48px;
-      --section-padding-mobile: 3rem;
-      --text-hero: clamp(2rem, 6vw, 3rem);
-      --text-hero-subtitle: clamp(1.25rem, 3vw, 1.75rem);
+      --touch-target-min: 52px;
+      --section-padding-mobile: var(--space-xl);
+      --text-hero: clamp(2.25rem, 7vw, 3.5rem);
+      --text-hero-subtitle: clamp(1.375rem, 4vw, 2rem);
     }
   }
 
@@ -84,8 +109,8 @@
     :root {
       --mobile-font-scale: 0.9;
       --mobile-spacing-scale: 0.85;
-      --section-padding-mobile: 2.5rem;
-      --text-hero: clamp(1.75rem, 5vw, 2.5rem);
+      --section-padding-mobile: var(--space-lg);
+      --text-hero: clamp(2rem, 6vw, 3rem);
     }
   }
 }
@@ -272,10 +297,17 @@
   .text-secondary { color: hsl(var(--text-secondary)); }
   .text-tertiary { color: hsl(var(--text-tertiary)); }
 
-  /* Spacing System */
+  /* Unified Spacing System */
   .section-padding { 
     padding-top: var(--section-padding); 
     padding-bottom: var(--section-padding); 
+  }
+  
+  @media (min-width: 769px) and (max-width: 1024px) {
+    .section-padding { 
+      padding-top: var(--section-padding-tablet); 
+      padding-bottom: var(--section-padding-tablet); 
+    }
   }
   
   @media (max-width: 768px) {
@@ -285,13 +317,37 @@
     }
   }
 
+  /* Responsive Card Spacing */
   .card-spacing {
-    padding: calc(2rem * var(--mobile-spacing-scale));
+    padding: var(--space-lg);
+  }
+
+  @media (min-width: 769px) and (max-width: 1024px) {
+    .card-spacing {
+      padding: var(--space-md);
+    }
   }
 
   @media (max-width: 768px) {
     .card-spacing {
-      padding: calc(1.5rem * var(--mobile-spacing-scale));
+      padding: var(--space-md);
+    }
+  }
+
+  @media (max-width: 375px) {
+    .card-spacing {
+      padding: var(--space-sm);
+    }
+  }
+
+  /* Element Spacing Utilities */
+  .gap-responsive {
+    gap: var(--space-md);
+  }
+
+  @media (max-width: 768px) {
+    .gap-responsive {
+      gap: var(--space-sm);
     }
   }
 

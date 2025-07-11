@@ -2,25 +2,28 @@
 /* NIVELA® Design System - Premium Buttons */
 
 .btn-premium-primary {
-  @apply bg-gradient-to-r from-primary to-accent text-white font-bold rounded-xl px-6 py-3 
-         shadow-dramatic hover:shadow-glow transition-all duration-300 
-         hover:scale-105 active:scale-95 focus-premium;
+  @apply bg-gradient-to-r from-primary via-accent to-primary text-white font-extrabold rounded-xl px-8 py-4 
+         shadow-[0_12px_40px_-4px_rgba(157,73,22,0.8)] hover:shadow-[0_20px_60px_-4px_rgba(157,73,22,0.9)] 
+         transition-all duration-300 hover:scale-105 active:scale-95 focus-premium
+         border-2 border-primary/20 hover:border-primary/40 relative z-10;
   background-size: 200% 200%;
   animation: gradient-shift 3s ease infinite;
 }
 
 .btn-premium-secondary {
-  @apply bg-background/90 backdrop-blur-xl border-2 border-accent/30 text-accent 
-         font-bold rounded-xl px-6 py-3 shadow-soft hover:shadow-medium 
-         transition-all duration-300 hover:bg-accent/10 hover:border-accent/50
-         hover:scale-105 active:scale-95 focus-premium;
+  @apply bg-background/90 backdrop-blur-xl border-3 border-accent/40 text-accent 
+         font-bold rounded-xl px-8 py-4 shadow-[0_8px_30px_-4px_rgba(37,76,90,0.6)] 
+         hover:shadow-[0_12px_40px_-4px_rgba(37,76,90,0.8)] 
+         transition-all duration-300 hover:bg-accent/15 hover:border-accent/70
+         hover:scale-105 active:scale-95 focus-premium relative z-10;
 }
 
 .btn-premium-ghost {
-  @apply bg-transparent border-2 border-accent/50 text-accent font-bold 
-         rounded-xl px-6 py-3 transition-all duration-300 
-         hover:bg-accent/10 hover:border-accent hover:shadow-glow
-         hover:scale-105 active:scale-95 focus-premium;
+  @apply bg-transparent border-3 border-accent/60 text-accent font-bold 
+         rounded-xl px-8 py-4 transition-all duration-300 
+         hover:bg-accent/15 hover:border-accent shadow-[0_8px_30px_-4px_rgba(37,76,90,0.6)]
+         hover:shadow-[0_12px_40px_-4px_rgba(37,76,90,0.8)] backdrop-blur-sm
+         hover:scale-105 active:scale-95 focus-premium relative z-10;
 }
 
 .btn-touch-optimized {

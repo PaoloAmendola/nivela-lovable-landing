@@ -1,0 +1,90 @@
+/* NIVELA® Design System - Additional Utilities */
+
+/* Enhanced Button Effects */
+.bg-size-200 {
+  background-size: 200% 200%;
+}
+
+.bg-position-100 {
+  background-position: 100% 100%;
+}
+
+.border-3 {
+  border-width: 3px;
+}
+
+/* Z-index Utilities */
+.z-5 { z-index: 5; }
+.z-15 { z-index: 15; }
+.z-25 { z-index: 25; }
+.z-35 { z-index: 35; }
+.z-45 { z-index: 45; }
+
+/* Enhanced Shadows for CTAs */
+.shadow-cta-primary {
+  box-shadow: 0 12px 40px -4px rgba(157, 73, 22, 0.8);
+}
+
+.shadow-cta-primary-hover {
+  box-shadow: 0 20px 60px -4px rgba(157, 73, 22, 0.9);
+}
+
+.shadow-cta-secondary {
+  box-shadow: 0 8px 30px -4px rgba(37, 76, 90, 0.6);
+}
+
+.shadow-cta-secondary-hover {
+  box-shadow: 0 12px 40px -4px rgba(37, 76, 90, 0.8);
+}
+
+/* Creative Pills Enhancement */
+.creative-pill {
+  @apply inline-flex items-center gap-2 px-4 py-2 rounded-full border backdrop-blur-sm;
+  position: relative;
+  z-index: 1;
+}
+
+.creative-pill-dot {
+  @apply w-2 h-2 rounded-full;
+}
+
+/* Focus States for Accessibility */
+.focus-premium {
+  @apply focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary/30 focus-visible:ring-offset-2 focus-visible:ring-offset-background;
+}
+
+/* Interactive Elements */
+.interactive-premium {
+  @apply transition-all duration-300 ease-out;
+  will-change: transform;
+}
+
+.hover-glow:hover {
+  filter: drop-shadow(0 0 20px rgba(157, 73, 22, 0.5));
+}
+
+/* Typography Enhancements */
+.text-gradient-enhanced {
+  background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 50%, hsl(var(--secondary)) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Responsive Touch Targets */
+@media (max-width: 768px) {
+  .btn-touch-optimized {
+    min-height: 52px;
+    min-width: 52px;
+  }
+}
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: high) {
+  .btn-premium-primary,
+  .btn-premium-secondary,
+  .btn-premium-ghost {
+    border-width: 3px;
+    font-weight: 900;
+  }
+}
