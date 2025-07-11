@@ -66,7 +66,7 @@ const DistributorSection = ({ onCTAClick }: DistributorSectionProps) => {
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-6">
             Seja um Distribuidor
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl text-foreground/80 max-w-3xl mx-auto leading-relaxed">
             Transforme seu negócio com produtos premium NIVELA®. 
             <span className="text-foreground font-semibold"> Oportunidade limitada para profissionais qualificados.</span>
           </p>
@@ -92,7 +92,7 @@ const DistributorSection = ({ onCTAClick }: DistributorSectionProps) => {
                   <div className="text-3xl font-bold text-foreground mb-2">
                     {stat.number}
                   </div>
-                  <div className="text-muted-foreground font-medium">
+                  <div className="text-foreground/70 font-medium">
                     {stat.label}
                   </div>
                 </CardContent>
@@ -135,7 +135,7 @@ const DistributorSection = ({ onCTAClick }: DistributorSectionProps) => {
                       <h3 className="text-lg font-bold text-foreground mb-3">
                         {benefit.title}
                       </h3>
-                      <p className="text-muted-foreground leading-relaxed">
+                      <p className="text-foreground/70 leading-relaxed">
                         {benefit.description}
                       </p>
                     </Card>
@@ -162,7 +162,7 @@ const DistributorSection = ({ onCTAClick }: DistributorSectionProps) => {
                 <h3 className="text-2xl font-bold text-foreground mb-4">
                   Inicie Sua Jornada
                 </h3>
-                <p className="text-muted-foreground mb-6">
+                <p className="text-foreground/70 mb-6">
                   Processo simplificado para distribuidores qualificados
                 </p>
                 <Button 
@@ -188,12 +188,12 @@ const DistributorSection = ({ onCTAClick }: DistributorSectionProps) => {
                   "Material de vendas profissional",
                   "Treinamento especializado",
                   "Portal exclusivo do distribuidor"
-                ].map((item, index) => (
-                  <li key={index} className="flex items-center text-muted-foreground">
-                    <div className="w-2 h-2 bg-primary rounded-full mr-3 flex-shrink-0"></div>
-                    {item}
-                  </li>
-                ))}
+                 ].map((item, index) => (
+                   <li key={index} className="flex items-center text-foreground/70">
+                     <div className="w-2 h-2 bg-primary rounded-full mr-3 flex-shrink-0"></div>
+                     {item}
+                   </li>
+                 ))}
               </ul>
             </Card>
           </motion.div>
