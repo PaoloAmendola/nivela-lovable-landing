@@ -43,9 +43,11 @@ const HeroProductImage = ({ shouldReduceAnimations }: HeroProductImageProps) => 
             src="/lovable-uploads/a7abdd1a-341f-47f5-ac11-9963fecf6f84.png"
             alt="NIVELA® Retexturizador Hidro Nutritivo - Frasco 1kg BEM BEAUTY Professional"
             className="w-full h-auto object-contain drop-shadow-2xl max-w-[300px] md:max-w-[400px] lg:max-w-[500px]"
-            width={400}
-            height={600}
+            width={500}
+            height={750}
             priority={true}
+            quality={90}
+            sizes="(max-width: 768px) 300px, (max-width: 1024px) 400px, 500px"
             onLoad={() => setImageLoaded(true)}
           />
           

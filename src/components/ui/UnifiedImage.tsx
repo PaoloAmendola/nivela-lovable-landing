@@ -45,22 +45,35 @@ const UnifiedImage = React.memo(({
 
   // Generate optimized srcSet
   const generateSrcSet = useCallback((baseSrc: string) => {
-    if (!baseSrc.includes('unsplash.com')) return '';
+    // Support multiple image providers and local files
+    const breakpoints = [480, 768, 1024, 1280, 1920];
     
-    const breakpoints = [640, 768, 1024, 1280];
-    const baseUrl = baseSrc.split('?')[0];
+    // For Unsplash images
+    if (baseSrc.includes('unsplash.com')) {
+      const baseUrl = baseSrc.split('?')[0];
+      return breakpoints
+        .filter(bp => !width || bp <= width * 2)
+        .map(bp => {
+          const params = new URLSearchParams();
+          params.set('w', bp.toString());
+          params.set('q', quality.toString());
+          params.set('fm', 'webp');
+          params.set('auto', 'format,compress');
+          return `${baseUrl}?${params.toString()} ${bp}w`;
+        })
+        .join(', ');
+    }
     
-    return breakpoints
-      .filter(bp => !width || bp <= width * 2)
-      .map(bp => {
-        const params = new URLSearchParams();
-        params.set('w', bp.toString());
-        params.set('q', quality.toString());
-        params.set('fm', 'webp');
-        params.set('auto', 'format,compress');
-        return `${baseUrl}?${params.toString()} ${bp}w`;
-      })
-      .join(', ');
+    // For other external images, try WebP conversion
+    if (baseSrc.startsWith('http')) {
+      return breakpoints
+        .filter(bp => !width || bp <= width * 2)
+        .map(bp => `${baseSrc}?w=${bp}&q=${quality}&format=webp ${bp}w`)
+        .join(', ');
+    }
+    
+    // For local files, return as-is
+    return '';
   }, [quality, width]);
 
   // Load image when in viewport or priority
