@@ -26,12 +26,12 @@ const Index = () => {
         <ManifestoVideoSection />
       </section>
       
-      <section data-section="technology" id="technology">
-        <TechnologySection />
-      </section>
-      
       <section data-section="why-choose" id="why-choose">
         <WhyChooseNivelaSection />
+      </section>
+      
+      <section data-section="technology" id="technology">
+        <TechnologySection />
       </section>
       
       <section data-section="exclusivity" id="exclusivity">
