@@ -14,16 +14,34 @@ import PremiumContactModal from "@/components/forms/PremiumContactModal";
 import AccessibilityEnhancements from "@/components/accessibility/AccessibilityEnhancements";
 import OptimizedLazySection from "@/components/ui/OptimizedLazySection";
 import EnhancedMobileCTA from "@/components/ui/EnhancedMobileCTA";
+import PullToRefresh from "@/components/ui/PullToRefresh";
 import { usePerformanceOptimization } from "@/hooks/use-performance-optimization";
+import { useToast } from "@/hooks/use-toast";
 
 const Index = () => {
   const [showForm, setShowForm] = useState(false);
+  const { toast } = useToast();
   
   // Initialize performance optimizations
   usePerformanceOptimization();
 
+  const handleRefresh = async () => {
+    // Simulate content refresh
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    
+    // Reset scroll position
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    
+    // Show success feedback
+    toast({
+      title: "Página atualizada",
+      description: "Conteúdo recarregado com sucesso!",
+    });
+  };
+
   return (
-    <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
+    <PullToRefresh onRefresh={handleRefresh}>
+      <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
       <ScrollProgressIndicator />
       {/* Accessibility Enhancements */}
       <AccessibilityEnhancements />
@@ -86,7 +104,8 @@ const Index = () => {
         isOpen={showForm} 
         onClose={() => setShowForm(false)} 
       />
-    </div>
+      </div>
+    </PullToRefresh>
   );
 };
 
