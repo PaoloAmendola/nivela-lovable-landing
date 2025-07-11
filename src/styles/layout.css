@@ -1,0 +1,161 @@
+/* NIVELA® Design System - Layout & Spacing */
+
+@layer components {
+  /* Espaçamento responsivo melhorado */
+  .section-padding { 
+    padding-top: var(--section-padding); 
+    padding-bottom: var(--section-padding); 
+  }
+  
+  @media (max-width: 768px) {
+    .section-padding { 
+      padding-top: var(--section-padding-mobile); 
+      padding-bottom: var(--section-padding-mobile); 
+    }
+  }
+
+  .card-spacing {
+    padding: calc(2rem * var(--mobile-spacing-scale));
+  }
+
+  @media (max-width: 768px) {
+    .card-spacing {
+      padding: calc(1.5rem * var(--mobile-spacing-scale));
+    }
+  }
+
+  /* Section Gradients - B2B Professional */
+  .section-gradient-to-secondary {
+    background: linear-gradient(180deg, 
+      hsl(var(--background)) 0%, 
+      hsl(var(--background)) 40%, 
+      hsla(var(--secondary), 0.3) 70%, 
+      hsl(var(--secondary)) 100%
+    );
+  }
+
+  .section-gradient-to-background {
+    background: linear-gradient(180deg, 
+      hsl(var(--secondary)) 0%, 
+      hsla(var(--secondary), 0.7) 30%, 
+      hsla(var(--background), 0.5) 70%, 
+      hsl(var(--background)) 100%
+    );
+  }
+
+  .section-gradient-secondary-to-background {
+    background: linear-gradient(180deg, 
+      hsl(var(--secondary)) 0%, 
+      hsla(var(--secondary), 0.8) 20%, 
+      hsla(var(--background), 0.6) 60%, 
+      hsl(var(--background)) 100%
+    );
+  }
+
+  .section-gradient-background-to-secondary {
+    background: linear-gradient(180deg, 
+      hsl(var(--background)) 0%, 
+      hsla(var(--background), 0.8) 30%, 
+      hsla(var(--secondary), 0.4) 70%, 
+      hsl(var(--secondary)) 100%
+    );
+  }
+
+  .section-gradient-accent-blend {
+    background: linear-gradient(180deg, 
+      hsl(var(--background)) 0%, 
+      hsla(var(--accent), 0.1) 30%, 
+      hsla(var(--secondary), 0.6) 70%, 
+      hsl(var(--secondary)) 100%
+    );
+  }
+
+  .section-gradient-reverse {
+    background: linear-gradient(180deg, 
+      hsl(var(--secondary)) 0%, 
+      hsla(var(--accent), 0.15) 25%, 
+      hsla(var(--background), 0.7) 75%, 
+      hsl(var(--background)) 100%
+    );
+  }
+
+  .section-gradient-final {
+    background: linear-gradient(180deg, 
+      hsl(var(--secondary)) 0%, 
+      hsla(var(--secondary), 0.8) 20%, 
+      hsla(var(--background), 0.9) 60%, 
+      hsl(var(--background)) 100%
+    );
+  }
+
+  /* Conversion Section Gradients */
+  .section-gradient-urgency {
+    background: linear-gradient(135deg, #fef2f2 0%, #fef7cd 50%, #fef2f2 100%);
+  }
+
+  .section-gradient-exclusivity {
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 50%, #f8fafc 100%);
+  }
+
+  .section-gradient-calculator {
+    background: linear-gradient(135deg, #f0f9ff 0%, #ecfdf5 50%, #f0f9ff 100%);
+  }
+
+  .section-gradient-trust {
+    background: linear-gradient(135deg, #eff6ff 0%, #f0fdf4 50%, #eff6ff 100%);
+  }
+
+  .section-gradient-faq {
+    background: linear-gradient(135deg, #fafafa 0%, #f8fafc 50%, #fafafa 100%);
+  }
+
+  /* Scroll snap for sections */
+  .scroll-snap {
+    scroll-snap-type: y mandatory;
+  }
+
+  .scroll-snap-section {
+    scroll-snap-align: start;
+  }
+}
+
+/* Melhorias específicas para dispositivos móveis */
+@media (max-width: 768px) {
+  .mobile-optimized {
+    font-size: calc(1rem * var(--mobile-font-scale));
+    padding: calc(1rem * var(--mobile-spacing-scale));
+  }
+
+  /* Melhor experiência de toque */
+  button, a, [role="button"] {
+    min-height: var(--touch-target-min);
+    padding: calc(0.75rem * var(--mobile-spacing-scale)) calc(1rem * var(--mobile-spacing-scale));
+  }
+
+  /* Reduzir espaçamentos em telas muito pequenas */
+  .container {
+    padding-left: calc(1rem * var(--mobile-spacing-scale));
+    padding-right: calc(1rem * var(--mobile-spacing-scale));
+  }
+
+  /* Mobile optimizations for conversion elements */
+  .conversion-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .roi-calculator {
+    padding: 16px;
+  }
+  
+  .urgency-timer {
+    font-size: 1.5rem;
+  }
+}
+
+/* Container queries for better responsive design */
+@container (min-width: 768px) {
+  .container-responsive {
+    padding: 2rem;
+  }
+}

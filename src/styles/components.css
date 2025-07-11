@@ -1,0 +1,179 @@
+/* NIVELA® Design System - Component Styles */
+
+@layer components {
+  /* Premium Button */
+  .btn-premium {
+    @apply bg-primary hover:bg-primary/90 text-primary-foreground font-montserrat font-semibold px-8 py-4 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl;
+    will-change: transform;
+  }
+
+  /* Enhanced Navigation */
+  .nav-blur {
+    backdrop-filter: blur(20px);
+    background: rgba(13, 24, 28, 0.95);
+    border-bottom: 1px solid rgba(217, 192, 170, 0.2);
+  }
+
+  /* Mobile Menu */
+  .mobile-menu {
+    backdrop-filter: blur(20px);
+    background: rgba(13, 24, 28, 0.98);
+    border-left: 1px solid rgba(217, 192, 170, 0.2);
+  }
+
+  /* CTA Button Fixed Mobile */
+  .cta-fixed-mobile {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    padding: calc(16px * var(--mobile-spacing-scale));
+    background: linear-gradient(to top, rgba(13, 24, 28, 1) 0%, rgba(13, 24, 28, 0.95) 100%);
+    border-top: 1px solid rgba(217, 192, 170, 0.2);
+    backdrop-filter: blur(10px);
+    will-change: transform;
+    backface-visibility: hidden;
+    /* Melhor suporte a touch */
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Glassmorphism Effect */
+  .glass {
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  /* Enhanced interactive elements */
+  .interactive-element {
+    @apply transition-all duration-300 ease-out transform-gpu;
+  }
+
+  .interactive-element:hover {
+    @apply scale-105 shadow-lg;
+  }
+
+  .interactive-element:active {
+    @apply scale-95;
+  }
+
+  /* Hero Video Overlay */
+  .hero-overlay {
+    background: linear-gradient(135deg, rgba(13, 24, 28, 0.95) 0%, rgba(37, 76, 90, 0.85) 50%, rgba(13, 24, 28, 0.95) 100%);
+  }
+
+  /* Hero Section Components */
+  .creative-pill {
+    padding: 8px 16px;
+    border-radius: 9999px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border-width: 1px;
+  }
+
+  .creative-pill-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* Background Pattern */
+  .hero-pattern {
+    background-image: 
+      radial-gradient(circle at 25% 25%, hsl(var(--secondary)) 0%, transparent 50%),
+      radial-gradient(circle at 75% 75%, hsl(var(--accent)) 0%, transparent 50%);
+    opacity: 0.1;
+  }
+
+  /* Enhanced hover effects for conversion elements */
+  .conversion-card {
+    transition: all 0.3s ease;
+  }
+
+  .conversion-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  }
+
+  /* ROI Calculator specific styles */
+  .roi-highlight {
+    background: linear-gradient(135deg, #10b981, #059669);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* Trust section badge animations */
+  .trust-badge {
+    transition: all 0.3s ease;
+  }
+
+  .trust-badge:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  }
+
+  /* FAQ accordion enhancements */
+  .faq-item {
+    border-radius: 12px;
+    transition: all 0.3s ease;
+  }
+
+  .faq-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  }
+
+  /* Loading states */
+  .loading-shimmer {
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+
+  /* Performance optimizations for GPU acceleration */
+  .gpu-accelerated {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+  }
+
+  /* Security classes */
+  .no-select {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  .no-context-menu {
+    -webkit-touch-callout: none;
+  }
+
+  .secure-content {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+    pointer-events: none;
+  }
+
+  .secure-content * {
+    pointer-events: auto;
+  }
+
+  /* Performance classes baseadas no dispositivo */
+  .reduce-motion {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .low-quality-images img {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+}
