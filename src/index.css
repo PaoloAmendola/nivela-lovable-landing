@@ -10,7 +10,7 @@
 @layer base {
   :root {
     /* NIVELA® Brand Colors - Document Specification */
-    --primary: 29 72% 40%; /* #9D4916 - Brand Accent */
+    --primary: 23 75% 35%; /* #9D4916 - CARAMELO/PANTONE 2021C Exato */
     --primary-foreground: 210 40% 98%;
     
     --secondary: 30 25% 71%; /* #D9C0AA - Secondary Brand */

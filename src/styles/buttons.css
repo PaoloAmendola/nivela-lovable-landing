@@ -2,10 +2,10 @@
 /* NIVELA® Design System - Premium Buttons */
 
 .btn-premium-primary {
-  @apply bg-gradient-to-r from-primary via-accent to-primary text-white font-extrabold rounded-xl px-8 py-4 
+  @apply bg-gradient-to-r from-[#9D4916] via-[#9D4916] to-[#B8551A] text-white font-extrabold rounded-xl px-8 py-4 
          shadow-[0_12px_40px_-4px_rgba(157,73,22,0.8)] hover:shadow-[0_20px_60px_-4px_rgba(157,73,22,0.9)] 
          transition-all duration-300 hover:scale-105 active:scale-95 focus-premium
-         border-2 border-primary/20 hover:border-primary/40 relative z-10;
+         border-2 border-[#9D4916]/20 hover:border-[#9D4916]/40 relative z-10;
   background-size: 200% 200%;
   animation: gradient-shift 3s ease infinite;
 }

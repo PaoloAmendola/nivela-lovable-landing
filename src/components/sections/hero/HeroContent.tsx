@@ -75,7 +75,7 @@ const HeroContent = ({ onCTAClick, shouldReduceAnimations }: HeroContentProps) =
               onClick={onCTAClick}
               variant="premium"
               size="lg"
-              className="text-lg font-bold px-10 py-5 min-h-[68px] w-full max-w-sm relative z-20 shadow-[0_12px_40px_-4px_rgba(157,73,22,0.8)] hover:shadow-[0_20px_60px_-4px_rgba(157,73,22,0.9)] bg-gradient-to-r from-primary via-accent to-primary bg-size-200 hover:bg-position-100 border-2 border-primary/20 hover:border-primary/40"
+              className="text-lg font-bold px-10 py-5 min-h-[68px] w-full max-w-sm relative z-20 shadow-[0_12px_40px_-4px_rgba(157,73,22,0.8)] hover:shadow-[0_20px_60px_-4px_rgba(157,73,22,0.9)] bg-gradient-to-r from-[#9D4916] via-[#9D4916] to-[#B8551A] bg-size-200 hover:bg-position-100 border-2 border-[#9D4916]/20 hover:border-[#9D4916]/40"
             >
               <MessageSquare className="w-7 h-7" strokeWidth={2} />
               QUERO USAR NO MEU SALÃO
