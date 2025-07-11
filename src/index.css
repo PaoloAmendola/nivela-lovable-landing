@@ -371,15 +371,24 @@
     border: 1px solid rgba(255, 255, 255, 0.2);
   }
 
-  /* Gradient Text - Premium Warm Gradient */
+  /* Gradient Text - Cores da Marca NIVELA® */
   .gradient-text {
-    background: linear-gradient(135deg, hsl(var(--primary)) 0%, #D4AF37 100%);
+    background: linear-gradient(135deg, #9D4916 0%, #D9C0AA 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     font-weight: 600;
     /* Fallback para browsers sem suporte */
-    color: hsl(var(--primary));
+    color: #9D4916;
+  }
+
+  /* Classes utilitárias para cores da marca */
+  .text-brand-primary {
+    color: #9D4916;
+  }
+
+  .text-brand-secondary {
+    color: #D9C0AA;
   }
 
   /* Premium Button - Updated to use Montserrat instead of Poppins */

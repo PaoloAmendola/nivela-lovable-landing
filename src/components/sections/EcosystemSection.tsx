@@ -57,7 +57,7 @@ const EcosystemSection = () => {
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-playfair font-bold gradient-text mb-6 lg:mb-8">
             BemTECH™
           </h2>
-          <h3 className="text-xl md:text-2xl lg:text-3xl font-playfair font-semibold text-foreground mb-4">
+          <h3 className="text-xl md:text-2xl lg:text-3xl font-playfair font-semibold gradient-text mb-4">
             O primeiro ecossistema digital do setor de Beleza
           </h3>
           <p className="text-base md:text-lg font-montserrat text-muted leading-relaxed max-w-4xl mx-auto">
@@ -81,7 +81,7 @@ const EcosystemSection = () => {
                     <h3 className="text-lg md:text-xl font-montserrat font-semibold text-foreground mb-1">
                       {feature.title}
                     </h3>
-                    <p className="text-base font-montserrat font-medium text-accent mb-2">
+                    <p className="text-base font-montserrat font-medium text-brand-secondary mb-2">
                       {feature.subtitle}
                     </p>
                   </div>
