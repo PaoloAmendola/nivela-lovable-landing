@@ -1,10 +1,8 @@
 
 import { useFastMobile } from "@/hooks/use-fast-mobile";
-import HeroBackground from "./hero/HeroBackground";
 import HeroContent from "./hero/HeroContent";
 import HeroProductImage from "./hero/HeroProductImage";
-import ExclusivityRibbon from "./hero/ExclusivityRibbon";
-import { Crown } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 
 interface HeroSectionProps {
   onCTAClick: () => void;
@@ -27,17 +25,11 @@ const HeroSection = ({ onCTAClick }: HeroSectionProps) => {
       className="relative min-h-screen flex items-center overflow-hidden pt-12" 
       role="banner" 
       aria-label="NIVELA® - Retexturizador Hidro Nutritivo Premium"
-      style={{ 
-        backgroundColor: '#0D181C',
-        background: 'linear-gradient(135deg, #0D181C 0%, #1a1a1a 50%, #0D181C 100%)'
-      }}
+      style={{ backgroundColor: '#0D181C' }}
     >
 
-      {/* Badge Ribbon Flutuante */}
-      <ExclusivityRibbon />
-      
-      {/* Background sofisticado */}
-      <HeroBackground />
+      {/* Background Pattern */}
+      <div className="absolute inset-0 hero-pattern pointer-events-none"></div>
 
       {/* Layout Principal */}
       <div className="relative z-10 container mx-auto px-6 lg:px-8">
@@ -68,14 +60,14 @@ const HeroSection = ({ onCTAClick }: HeroSectionProps) => {
         </div>
       </div>
 
-      {/* Scroll indicator discreto */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 opacity-60">
+      {/* Scroll Indicator - Document Specification */}
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
         <button 
           onClick={scrollToNext}
-          className="animate-bounce text-accent/60 hover:text-accent transition-colors"
+          className="animate-float text-[#D9C0AA] hover:text-[#D9C0AA]/80 transition-colors"
           aria-label="Rolar para próxima seção"
         >
-          <div className="w-1 h-8 bg-current rounded-full" />
+          <ChevronDown className="w-6 h-6" strokeWidth={1.5} />
         </button>
       </div>
     </section>

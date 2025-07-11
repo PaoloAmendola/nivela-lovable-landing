@@ -24,6 +24,7 @@ export default {
 				'wilkysta': ['Wilkysta', 'serif'],
 				'montserrat': ['Montserrat', 'sans-serif'],
 				'playfair': ['Playfair Display', 'serif'],
+				'poppins': ['Poppins', 'sans-serif'],
 			},
 			colors: {
 				border: 'hsl(var(--border))',

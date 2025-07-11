@@ -40,11 +40,11 @@ const HeroProductImage = ({ shouldReduceAnimations }: HeroProductImageProps) => 
           className="relative"
         >
           <UnifiedImage
-            src="https://xnexfhgtqlryfkyuvihq.supabase.co/storage/v1/object/public/imagens/frasco-trans-comp.png"
-            alt="NIVELA® Produto Premium"
-            className="w-full h-auto object-contain drop-shadow-2xl"
-            width={320}
-            height={400}
+            src="/nivela-semfundo_1750873452711.png"
+            alt="NIVELA® Retexturizador Hidro Nutritivo - Frasco 1L com tecnologia ASTRO QUAT V3"
+            className="w-full h-auto object-contain drop-shadow-2xl max-w-[300px] md:max-w-[400px] lg:max-w-[500px]"
+            width={400}
+            height={600}
             priority={true}
             onLoad={() => setImageLoaded(true)}
           />

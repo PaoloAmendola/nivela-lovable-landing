@@ -9,18 +9,21 @@
 
 @layer base {
   :root {
-    /* Bem Beauty Colors */
-    --primary: 29 72% 40%; /* #9D4916 */
+    /* NIVELA® Brand Colors - Document Specification */
+    --primary: 29 72% 40%; /* #9D4916 - Brand Accent */
     --primary-foreground: 210 40% 98%;
     
-    --secondary: 196 43% 22%; /* #254C5A */
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 30 25% 71%; /* #D9C0AA - Secondary Brand */
+    --secondary-foreground: 207 56% 9%;
     
-    --background: 207 56% 9%; /* #0D181C */
+    --background: 207 56% 9%; /* #0D181C - Primary Dark */
     --foreground: 0 0% 100%; /* #FFFFFF */
     
-    --accent: 33 25% 71%; /* #D9C0AA */
-    --accent-foreground: 207 56% 9%;
+    --accent: 196 43% 22%; /* #254C5A - Teal Brand */
+    --accent-foreground: 210 40% 98%;
+    
+    --muted-brand: 206 16% 66%; /* #A6B8C1 - Muted Sophisticated */
+    --teal: 196 43% 22%; /* #254C5A - Teal Color */
     
     /* Contraste otimizado para público 35-60 anos */
     --muted: 0 0% 95%; /* #F2F2F2 - contraste máximo para 35-60 anos */
@@ -633,5 +636,92 @@
 
 @font-face {
   font-family: 'Wilkysta';
+  src: url('/Wilkysta_1750873610453.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
   font-display: swap;
+}
+
+@font-face {
+  font-family: 'Poppins';
+  font-display: swap;
+}
+
+/* Hero Section Specific Styles */
+.text-hero {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.text-hero-subtitle {
+  font-size: clamp(2rem, 3vw, 4rem);
+  line-height: 1.1;
+}
+
+.text-hero-description {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  line-height: 1.6;
+  max-width: 32rem;
+}
+
+.text-hero-trademark {
+  font-size: clamp(3rem, 4vw, 5rem);
+}
+
+/* Creative Pills */
+.creative-pill {
+  padding: 8px 16px;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-width: 1px;
+}
+
+.creative-pill-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* Background Pattern */
+.hero-pattern {
+  background-image: 
+    radial-gradient(circle at 25% 25%, hsl(var(--secondary)) 0%, transparent 50%),
+    radial-gradient(circle at 75% 75%, hsl(var(--accent)) 0%, transparent 50%);
+  opacity: 0.1;
+}
+
+/* Sequential Animation */
+@keyframes sequential-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-sequential-in {
+  animation: sequential-in 0.3s ease-out forwards;
+}
+
+.animate-sequential-in:nth-child(1) { animation-delay: 0ms; }
+.animate-sequential-in:nth-child(2) { animation-delay: 100ms; }
+.animate-sequential-in:nth-child(3) { animation-delay: 200ms; }
+.animate-sequential-in:nth-child(4) { animation-delay: 300ms; }
+.animate-sequential-in:nth-child(5) { animation-delay: 400ms; }
+
+/* Floating Animation */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
 }
