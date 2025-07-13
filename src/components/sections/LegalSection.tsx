@@ -19,25 +19,25 @@ const LegalSection = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
             {/* Canais de Atendimento */}
             <div className="space-y-4">
-              <h4 className="font-playfair font-bold text-xl gradient-text flex items-center gap-2">
+              <h4 className="font-playfair font-bold text-xl gradient-text flex items-center gap-3">
                 <Phone className="w-5 h-5" strokeWidth={1.5} />
                 Canais de Atendimento
               </h4>
-              <div className="space-y-2 text-sm">
+              <div className="space-y-3 text-sm">
                 <a 
                   href="https://wa.me/552139500901" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 hover:text-green-400 transition-colors"
+                  className="flex items-center gap-3 hover:text-green-400 transition-colors"
                 >
                   <Smartphone className="w-4 h-4 text-green-500" strokeWidth={1.5} />
                   <span>WhatsApp: (21) 3950-0901</span>
                 </a>
-                <p className="flex items-center gap-2">
+                <p className="flex items-center gap-3">
                   <Phone className="w-4 h-4 text-brand-secondary" strokeWidth={1.5} />
                   <span className="text-contrast">(21) 3269-0484</span>
                 </p>
-                <p className="flex items-center gap-2">
+                <p className="flex items-center gap-3">
                   <Mail className="w-4 h-4 text-brand-secondary" strokeWidth={1.5} />
                   <span className="text-contrast">comercial@bembeauty.com.br</span>
                 </p>
@@ -46,12 +46,12 @@ const LegalSection = () => {
 
             {/* Redes Sociais */}
             <div className="space-y-4">
-              <h4 className="font-playfair font-bold text-xl gradient-text flex items-center gap-2">
+              <h4 className="font-playfair font-bold text-xl gradient-text flex items-center gap-3">
                 <Globe className="w-5 h-5" strokeWidth={1.5} />
                 Redes Sociais
               </h4>
-              <div className="space-y-2 text-sm">
-                <p className="flex items-center gap-2">
+              <div className="space-y-3 text-sm">
+                <p className="flex items-center gap-3">
                   <Globe className="w-4 h-4 text-brand-secondary" strokeWidth={1.5} />
                   <span className="text-contrast">www.bembeauty.com.br</span>
                 </p>
@@ -59,7 +59,7 @@ const LegalSection = () => {
                   href="https://www.instagram.com/bembeautyprofessional/" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 hover:text-pink-400 transition-colors"
+                  className="flex items-center gap-3 hover:text-pink-400 transition-colors"
                 >
                   <Instagram className="w-4 h-4 text-pink-500" strokeWidth={1.5} />
                   <span>@bembeautyprofessional</span>
@@ -68,7 +68,7 @@ const LegalSection = () => {
                   href="https://youtu.be/lDKNZIztUMw?si=qJPZwKoXcYssVjK5" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 hover:text-red-400 transition-colors"
+                  className="flex items-center gap-3 hover:text-red-400 transition-colors"
                 >
                   <Video className="w-4 h-4 text-red-500" strokeWidth={1.5} />
                   <span>Bem Beauty Professional</span>
@@ -78,8 +78,8 @@ const LegalSection = () => {
 
             {/* Endereços */}
             <div className="space-y-4">
-              <h4 className="font-playfair font-bold text-xl gradient-text flex items-center gap-2">
-                <MapPin className="w-5 h-5" />
+              <h4 className="font-playfair font-bold text-xl gradient-text flex items-center gap-3">
+                <MapPin className="w-5 h-5" strokeWidth={1.5} />
                 Endereços
               </h4>
               <div className="space-y-3 text-sm">

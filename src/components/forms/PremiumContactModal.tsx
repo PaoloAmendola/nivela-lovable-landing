@@ -2,8 +2,9 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { EnhancedButton } from "@/components/ui/EnhancedButton";
-import { X, Gift, ArrowRight, ArrowLeft, CheckCircle, Sparkles } from "lucide-react";
-import { useContactForm } from "./ContactForm/useContactForm";
+import { X, CheckCircle, Sparkles } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 
 interface PremiumContactModalProps {
   isOpen: boolean;
@@ -20,28 +21,57 @@ const PremiumContactModal = ({ isOpen, onClose }: PremiumContactModalProps) => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const { toast } = useToast();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    setIsSubmitting(false);
-    setIsSuccess(true);
-    
-    // Auto close after success
-    setTimeout(() => {
-      onClose();
-      setIsSuccess(false);
-      setFormData({
-        name: "",
-        phone: "",
-        salon: "",
-        city: ""
+    try {
+      // Salvar dados no Supabase
+      const { error } = await supabase
+        .from('contact_requests')
+        .insert({
+          name: formData.name,
+          phone: formData.phone,
+          salon: formData.salon,
+          city: formData.city
+        });
+
+      if (error) {
+        throw error;
+      }
+
+      setIsSubmitting(false);
+      setIsSuccess(true);
+      
+      toast({
+        title: "Solicitação Enviada!",
+        description: "Nossa equipe entrará em contato em até 24 horas.",
       });
-    }, 3000);
+      
+      // Auto close after success
+      setTimeout(() => {
+        onClose();
+        setIsSuccess(false);
+        setFormData({
+          name: "",
+          phone: "",
+          salon: "",
+          city: ""
+        });
+      }, 3000);
+      
+    } catch (error) {
+      console.error('Erro ao enviar formulário:', error);
+      setIsSubmitting(false);
+      
+      toast({
+        title: "Erro ao Enviar",
+        description: "Tente novamente ou entre em contato conosco.",
+        variant: "destructive",
+      });
+    }
   };
 
   const canProceed = formData.name && formData.phone && formData.salon && formData.city;
@@ -138,7 +168,7 @@ const PremiumContactModal = ({ isOpen, onClose }: PremiumContactModalProps) => {
                     required
                     value={formData.name}
                     onChange={(e) => setFormData({...formData, name: e.target.value})}
-                    className="w-full px-6 py-5 text-lg rounded-xl border border-primary/40 bg-white/90 backdrop-blur-sm focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none transition-colors font-montserrat"
+                    className="w-full px-6 py-5 text-lg rounded-xl border border-primary/40 bg-white/90 backdrop-blur-sm focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none transition-colors font-montserrat text-slate-900"
                     placeholder="Digite seu nome completo"
                   />
                 </div>
@@ -151,7 +181,7 @@ const PremiumContactModal = ({ isOpen, onClose }: PremiumContactModalProps) => {
                     required
                     value={formData.phone}
                     onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                    className="w-full px-6 py-5 text-lg rounded-xl border border-primary/40 bg-white/90 backdrop-blur-sm focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none transition-colors font-montserrat"
+                    className="w-full px-6 py-5 text-lg rounded-xl border border-primary/40 bg-white/90 backdrop-blur-sm focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none transition-colors font-montserrat text-slate-900"
                     placeholder="(11) 99999-9999"
                   />
                 </div>
@@ -166,7 +196,7 @@ const PremiumContactModal = ({ isOpen, onClose }: PremiumContactModalProps) => {
                     required
                     value={formData.salon}
                     onChange={(e) => setFormData({...formData, salon: e.target.value})}
-                    className="w-full px-6 py-5 text-lg rounded-xl border border-primary/40 bg-white/90 backdrop-blur-sm focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none transition-colors font-montserrat"
+                    className="w-full px-6 py-5 text-lg rounded-xl border border-primary/40 bg-white/90 backdrop-blur-sm focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none transition-colors font-montserrat text-slate-900"
                     placeholder="Nome do seu salão de beleza"
                   />
                 </div>
@@ -179,7 +209,7 @@ const PremiumContactModal = ({ isOpen, onClose }: PremiumContactModalProps) => {
                     required
                     value={formData.city}
                     onChange={(e) => setFormData({...formData, city: e.target.value})}
-                    className="w-full px-6 py-5 text-lg rounded-xl border border-primary/40 bg-white/90 backdrop-blur-sm focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none transition-colors font-montserrat"
+                    className="w-full px-6 py-5 text-lg rounded-xl border border-primary/40 bg-white/90 backdrop-blur-sm focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none transition-colors font-montserrat text-slate-900"
                     placeholder="Sua cidade"
                   />
                 </div>
@@ -196,7 +226,7 @@ const PremiumContactModal = ({ isOpen, onClose }: PremiumContactModalProps) => {
                 loadingMessage="Enviando solicitação..."
                 className="w-full max-w-md py-6 text-xl font-bold min-h-[72px] shadow-elegant hover:shadow-glow"
               >
-                🎯 SOLICITAR ACESSO PROFISSIONAL
+                SOLICITAR ACESSO PROFISSIONAL
               </EnhancedButton>
             </div>
           </form>

@@ -12,25 +12,13 @@ interface DistributorSectionProps {
 const DistributorSection = ({ onCTAClick }: DistributorSectionProps) => {
   const { toast } = useToast();
 
-  const handleFormSubmit = async (data: any) => {
-    try {
-      // Aqui você pode integrar com sua API/Supabase
-      await new Promise(resolve => setTimeout(resolve, 1000)); // Simula envio
-      
-      toast({
-        title: "Solicitação Enviada!",
-        description: "Entraremos em contato em até 48h úteis.",
-      });
-
-      // Callback opcional para outras ações
-      onCTAClick();
-    } catch (error) {
-      toast({
-        title: "Erro ao Enviar",
-        description: "Tente novamente ou entre em contato conosco.",
-        variant: "destructive",
-      });
-    }
+  const handleFormSubmit = (data: any) => {
+    // Esta função agora é opcional, pois o DistributorForm
+    // já integra diretamente com Supabase
+    console.log('Dados do distribuidor para analytics:', data);
+    
+    // Callback opcional para outras ações (ex: analytics)
+    onCTAClick();
   };
 
   return (

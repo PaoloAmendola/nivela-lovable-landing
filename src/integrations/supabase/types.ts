@@ -14,7 +14,75 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      contact_requests: {
+        Row: {
+          city: string
+          created_at: string
+          id: string
+          name: string
+          phone: string
+          salon: string
+          updated_at: string
+        }
+        Insert: {
+          city: string
+          created_at?: string
+          id?: string
+          name: string
+          phone: string
+          salon: string
+          updated_at?: string
+        }
+        Update: {
+          city?: string
+          created_at?: string
+          id?: string
+          name?: string
+          phone?: string
+          salon?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      distributor_requests: {
+        Row: {
+          city: string
+          created_at: string
+          email: string
+          experience: string
+          id: string
+          name: string
+          notes: string | null
+          referral: string | null
+          updated_at: string
+          whatsapp: string
+        }
+        Insert: {
+          city: string
+          created_at?: string
+          email: string
+          experience: string
+          id?: string
+          name: string
+          notes?: string | null
+          referral?: string | null
+          updated_at?: string
+          whatsapp: string
+        }
+        Update: {
+          city?: string
+          created_at?: string
+          email?: string
+          experience?: string
+          id?: string
+          name?: string
+          notes?: string | null
+          referral?: string | null
+          updated_at?: string
+          whatsapp?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

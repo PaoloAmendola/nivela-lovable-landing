@@ -16,7 +16,10 @@ import AccessibilityEnhancements from "@/components/accessibility/AccessibilityE
 import OptimizedLazySection from "@/components/ui/OptimizedLazySection";
 import EnhancedMobileCTA from "@/components/ui/EnhancedMobileCTA";
 import PullToRefresh from "@/components/ui/PullToRefresh";
+import SystemHealthCheck from "@/components/ui/SystemHealthCheck";
+import ContrastOptimizer from "@/components/ui/ContrastOptimizer";
 import { usePerformanceOptimization } from "@/hooks/use-performance-optimization";
+import { useLoadingOptimization } from "@/hooks/use-loading-optimization";
 import { useToast } from "@/hooks/use-toast";
 
 const Index: React.FC = () => {
@@ -25,6 +28,7 @@ const Index: React.FC = () => {
   
   // Initialize performance optimizations
   usePerformanceOptimization();
+  const { isOptimized, performanceGrade } = useLoadingOptimization();
 
   const handleRefresh = async () => {
     // Simulate content refresh
@@ -47,6 +51,9 @@ const Index: React.FC = () => {
         
         {/* Accessibility Enhancements */}
         <AccessibilityEnhancements />
+        
+        {/* Contrast Optimizer - WCAG AA Compliance */}
+        <ContrastOptimizer />
         
         {/* Simplified Header with Centered Logo */}
         <SimpleLogo />
@@ -106,6 +113,9 @@ const Index: React.FC = () => {
           isOpen={showForm} 
           onClose={() => setShowForm(false)} 
         />
+
+        {/* System Health Check - Development Mode */}
+        {process.env.NODE_ENV === 'development' && <SystemHealthCheck />}
       </div>
     </PullToRefresh>
   );

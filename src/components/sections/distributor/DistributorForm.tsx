@@ -8,9 +8,11 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useFormValidation } from "@/hooks/use-form-validation";
 import { Loader2, Send } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 
 interface DistributorFormProps {
-  onSubmit: (data: any) => void;
+  onSubmit?: (data: any) => void;
 }
 
 const validationRules = {
@@ -30,6 +32,7 @@ const validationRules = {
 const DistributorForm = ({ onSubmit }: DistributorFormProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [experience, setExperience] = useState("");
+  const { toast } = useToast();
 
   const {
     getFieldProps,
@@ -52,7 +55,14 @@ const DistributorForm = ({ onSubmit }: DistributorFormProps) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!validateAll()) return;
+    if (!validateAll() || !experience) {
+      toast({
+        title: "Formulário incompleto",
+        description: "Por favor, preencha todos os campos obrigatórios.",
+        variant: "destructive",
+      });
+      return;
+    }
     
     setIsSubmitting(true);
     
@@ -63,15 +73,41 @@ const DistributorForm = ({ onSubmit }: DistributorFormProps) => {
         whatsapp: getFieldProps("whatsapp").value,
         city: getFieldProps("city").value,
         experience: experience,
-        referral: getFieldProps("referral").value,
-        notes: getFieldProps("notes").value
+        referral: getFieldProps("referral").value || null,
+        notes: getFieldProps("notes").value || null
       };
       
-      await onSubmit(formData);
+      // Salvar diretamente no Supabase
+      const { error } = await supabase
+        .from('distributor_requests')
+        .insert(formData);
+
+      if (error) {
+        throw error;
+      }
+
+      // Sucesso
+      toast({
+        title: "Solicitação Enviada!",
+        description: "Entraremos em contato em até 48h úteis.",
+      });
+
+      // Callback opcional para outras ações (ex: analytics)
+      if (onSubmit) {
+        onSubmit(formData);
+      }
+
+      // Reset form
       resetForm();
       setExperience("");
+      
     } catch (error) {
       console.error("Erro ao enviar formulário:", error);
+      toast({
+        title: "Erro ao Enviar",
+        description: "Tente novamente ou entre em contato conosco.",
+        variant: "destructive",
+      });
     } finally {
       setIsSubmitting(false);
     }
