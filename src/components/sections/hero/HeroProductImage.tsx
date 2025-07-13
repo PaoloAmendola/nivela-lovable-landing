@@ -17,7 +17,7 @@ const HeroProductImage = ({ shouldReduceAnimations }: HeroProductImageProps) => 
       reducedMotion={shouldReduceAnimations}
       className="relative"
     >
-      <div className="relative max-w-sm mx-auto lg:max-w-none">
+      <div className="relative max-w-sm mx-auto lg:max-w-none flex items-center justify-center">
         {/* Glow effect behind product */}
         <motion.div
           animate={shouldReduceAnimations ? {} : {
@@ -37,7 +37,7 @@ const HeroProductImage = ({ shouldReduceAnimations }: HeroProductImageProps) => 
           initial={{ scale: 0.9 }}
           animate={{ scale: imageLoaded ? 1 : 0.9 }}
           transition={{ duration: 0.5 }}
-          className="relative"
+          className="relative flex items-center justify-center"
         >
           <UnifiedImage
             src="/lovable-uploads/a7abdd1a-341f-47f5-ac11-9963fecf6f84.png"

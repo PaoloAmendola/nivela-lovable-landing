@@ -46,7 +46,7 @@ const WhyChooseNivelaSection = () => {
           {/* Título Centralizado */}
           <motion.div variants={itemVariants} className="text-center mb-8 lg:mb-12">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-playfair font-bold gradient-text">
-              Por que escolher{' '}
+              O que é{' '}
               <span className="gradient-text font-bold">NIVELA®?</span>
             </h2>
           </motion.div>
