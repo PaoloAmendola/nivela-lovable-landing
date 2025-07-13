@@ -24,10 +24,15 @@ const LegalSection = () => {
                 Canais de Atendimento
               </h4>
               <div className="space-y-2 text-sm">
-                <p className="flex items-center gap-2">
+                <a 
+                  href="https://wa.me/552139500901" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 hover:text-green-400 transition-colors"
+                >
                   <Smartphone className="w-4 h-4 text-green-500" strokeWidth={1.5} />
                   <span>WhatsApp: (21) 3950-0901</span>
-                </p>
+                </a>
                 <p className="flex items-center gap-2">
                   <Phone className="w-4 h-4 text-brand-secondary" strokeWidth={1.5} />
                   <span className="text-contrast">(21) 3269-0484</span>
@@ -50,14 +55,24 @@ const LegalSection = () => {
                   <Globe className="w-4 h-4 text-brand-secondary" strokeWidth={1.5} />
                   <span className="text-contrast">www.bembeauty.com.br</span>
                 </p>
-                <p className="flex items-center gap-2">
+                <a 
+                  href="https://www.instagram.com/bembeautyprofessional/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 hover:text-pink-400 transition-colors"
+                >
                   <Instagram className="w-4 h-4 text-pink-500" strokeWidth={1.5} />
                   <span>@bembeautyprofessional</span>
-                </p>
-                <p className="flex items-center gap-2">
+                </a>
+                <a 
+                  href="https://youtu.be/lDKNZIztUMw?si=qJPZwKoXcYssVjK5" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 hover:text-red-400 transition-colors"
+                >
                   <Video className="w-4 h-4 text-red-500" strokeWidth={1.5} />
                   <span>Bem Beauty Professional</span>
-                </p>
+                </a>
               </div>
             </div>
 

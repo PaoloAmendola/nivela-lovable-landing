@@ -13,6 +13,11 @@ const HeroContent = ({ onCTAClick, shouldReduceAnimations }: HeroContentProps) =
     techSection?.scrollIntoView({ behavior: 'smooth' });
   }, []);
 
+  const scrollToDistributor = useCallback(() => {
+    const distributorSection = document.querySelector('[data-section="distributor"]');
+    distributorSection?.scrollIntoView({ behavior: 'smooth' });
+  }, []);
+
   // Memoize static content that doesn't change
   const staticContent = useMemo(() => ({
     mainTitle: "NIVELA",
@@ -82,7 +87,7 @@ const HeroContent = ({ onCTAClick, shouldReduceAnimations }: HeroContentProps) =
             </EnhancedButton>
             
             <EnhancedButton
-              onClick={onCTAClick}
+              onClick={scrollToDistributor}
               variant="outline"
               size="lg"
               className="text-lg font-bold px-10 py-5 min-h-[68px] w-full max-w-sm relative z-20 border-3 border-accent/60 text-accent hover:border-accent bg-transparent hover:bg-accent/15 shadow-[0_8px_30px_-4px_rgba(37,76,90,0.6)] hover:shadow-[0_12px_40px_-4px_rgba(37,76,90,0.8)] backdrop-blur-sm"
