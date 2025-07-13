@@ -1,7 +1,7 @@
 
 import { Card, CardContent } from "@/components/ui/card";
 import { EnhancedButton } from "@/components/ui/EnhancedButton";
-import { Smartphone, Users, Brain, Bot, ChevronRight } from "lucide-react";
+import { Smartphone, Users, Brain, Bot, ChevronRight, Gift } from "lucide-react";
 
 const EcosystemSection = () => {
   const features = [
@@ -52,6 +52,29 @@ const EcosystemSection = () => {
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Faixa de Bônus Exclusivo */}
+        <div className="max-w-4xl mx-auto mb-8 lg:mb-12">
+          <div className="bg-gradient-to-r from-[#D9C0AA]/10 via-background/20 to-[#D9C0AA]/10 backdrop-blur-sm rounded-2xl p-6 md:p-8 border border-[#D9C0AA]/30 relative overflow-hidden">
+            {/* Background glow effect */}
+            <div className="absolute inset-0 bg-gradient-to-r from-[#D9C0AA]/5 to-transparent opacity-50"></div>
+            
+            <div className="relative z-10 flex flex-col md:flex-row items-center justify-center text-center md:text-left gap-4">
+              <div className="flex-shrink-0">
+                <Gift className="w-8 h-8 text-[#D9C0AA] md:w-10 md:h-10" />
+              </div>
+              <div className="flex-1">
+                <h3 className="text-lg md:text-xl lg:text-2xl font-montserrat font-bold text-foreground mb-2">
+                  Bônus Exclusivo para Clientes NIVELA®
+                </h3>
+                <p className="text-base md:text-lg font-montserrat font-medium text-muted leading-relaxed">
+                  Ao adquirir o produto, você ganha acesso completo ao ecossistema digital{' '}
+                  <span className="font-bold text-[#D9C0AA]">BemTECH™</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* Header */}
         <div className="max-w-5xl mx-auto text-center mb-8 lg:mb-12">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-playfair font-bold gradient-text mb-6 lg:mb-8">
