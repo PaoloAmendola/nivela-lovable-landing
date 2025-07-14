@@ -19,10 +19,10 @@ const LegalSection = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12 md:text-left text-left">
             {/* Canais de Atendimento */}
             <div className="space-y-4">
-              <h4 className="font-playfair font-bold text-xl gradient-text-animated flex items-center gap-3">
+              <h3 className="font-playfair font-bold text-xl gradient-text-animated flex items-center gap-3">
                 <Phone className="w-5 h-5" strokeWidth={1.5} />
                 Canais de Atendimento
-              </h4>
+              </h3>
               <div className="space-y-3 ml-8">
                 <a 
                   href="https://wa.me/552139500901" 
@@ -43,10 +43,10 @@ const LegalSection = () => {
 
             {/* Redes Sociais */}
             <div className="space-y-4">
-              <h4 className="font-playfair font-bold text-xl gradient-text-animated flex items-center gap-3">
+              <h3 className="font-playfair font-bold text-xl gradient-text-animated flex items-center gap-3">
                 <Globe className="w-5 h-5" strokeWidth={1.5} />
                 Redes Sociais
-              </h4>
+              </h3>
               <div className="space-y-3 ml-8">
                 <div>
                   <span className="text-contrast font-montserrat leading-relaxed">www.bembeauty.com.br</span>
@@ -72,10 +72,10 @@ const LegalSection = () => {
 
             {/* Endereços */}
             <div className="space-y-4">
-              <h4 className="font-playfair font-bold text-xl gradient-text-animated flex items-center gap-3">
+              <h3 className="font-playfair font-bold text-xl gradient-text-animated flex items-center gap-3">
                 <MapPin className="w-5 h-5" strokeWidth={1.5} />
                 Endereços
-              </h4>
+              </h3>
               <div className="space-y-3 ml-8">
                 <div>
                   <p className="font-semibold text-foreground font-montserrat leading-relaxed">Matriz - RJ</p>

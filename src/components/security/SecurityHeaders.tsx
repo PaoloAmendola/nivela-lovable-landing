@@ -4,10 +4,7 @@ import { logger } from '@/lib/logger';
 
 const SecurityHeaders = () => {
   useEffect(() => {
-    // Aplicar políticas de segurança via JavaScript quando não há acesso ao servidor
-    
-    // Remover a verificação de iframe que causava o erro SecurityError
-    // A verificação de iframe embedding deve ser feita no servidor via X-Frame-Options
+    // Simplified security headers - removed problematic X-Frame-Options
     
     // Adicionar event listeners para segurança apenas em produção
     const handleContextMenu = (e: MouseEvent) => {
@@ -50,28 +47,7 @@ const SecurityHeaders = () => {
       window.addEventListener('beforeunload', handleBeforeUnload);
     }
 
-    // Configurar Content Security Policy via meta tag se não existir
-    // Mas apenas em produção para não interferir no ambiente de desenvolvimento
-    if (process.env.NODE_ENV === 'production') {
-      const existingCSP = document.querySelector('meta[http-equiv="Content-Security-Policy"]');
-      if (!existingCSP) {
-        const cspMeta = document.createElement('meta');
-        cspMeta.httpEquiv = 'Content-Security-Policy';
-        cspMeta.content = [
-          "default-src 'self'",
-          "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://fonts.googleapis.com",
-          "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-          "font-src 'self' https://fonts.gstatic.com",
-          "img-src 'self' data: https: blob:",
-          "media-src 'self' data: blob:",
-          "connect-src 'self' https:",
-          "frame-src 'none'",
-          "object-src 'none'",
-          "base-uri 'self'"
-        ].join('; ');
-        document.head.appendChild(cspMeta);
-      }
-    }
+    // Skip CSP configuration to avoid X-Frame-Options conflicts
 
     // Cleanup
     return () => {

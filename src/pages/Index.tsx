@@ -1,26 +1,34 @@
 
-import React, { useState } from "react";
+import React, { useState, Suspense } from "react";
 import ScrollProgressIndicator from "@/components/ui/ScrollProgressIndicator";
 import HeroSection from "@/components/sections/HeroSection";
 import ManifestoTextSection from "@/components/sections/ManifestoTextSection";
 import ManifestoVideoSection from "@/components/sections/ManifestoVideoSection";
-import TechnologySection from "@/components/sections/TechnologySection";
-import WhyChooseNivelaSection from "@/components/sections/WhyChooseNivelaSection";
-import DistributorSection from "@/components/sections/DistributorSection";
-import EcosystemSection from "@/components/sections/EcosystemSection";
-import FAQSection from "@/components/sections/FAQSection";
-import LegalSection from "@/components/sections/LegalSection";
 import SimpleLogo from "@/components/navigation/SimpleLogo";
-import PremiumContactModal from "@/components/forms/PremiumContactModal";
 import AccessibilityEnhancements from "@/components/accessibility/AccessibilityEnhancements";
 import OptimizedLazySection from "@/components/ui/OptimizedLazySection";
 import EnhancedMobileCTA from "@/components/ui/EnhancedMobileCTA";
 import PullToRefresh from "@/components/ui/PullToRefresh";
-import SystemHealthCheck from "@/components/ui/SystemHealthCheck";
 import ContrastOptimizer from "@/components/ui/ContrastOptimizer";
+import { SectionSkeleton } from "@/components/ui/SkeletonLoader";
+import CriticalCSS from "@/components/ui/CriticalCSS";
+import ResourceHints from "@/components/ui/ResourceHints";
 import { usePerformanceOptimization } from "@/hooks/use-performance-optimization";
 import { useLoadingOptimization } from "@/hooks/use-loading-optimization";
+import { useServiceWorker } from "@/hooks/use-service-worker";
 import { useToast } from "@/hooks/use-toast";
+
+// Lazy imports for better code splitting
+import { 
+  LazyTechnologySection,
+  LazyWhyChooseNivelaSection,
+  LazyDistributorSection,
+  LazyEcosystemSection,
+  LazyFAQSection,
+  LazyLegalSection,
+  LazyPremiumContactModal,
+  LazySystemHealthCheck
+} from "@/components/LazyComponents";
 
 const Index: React.FC = () => {
   const [showForm, setShowForm] = useState(false);
@@ -28,6 +36,7 @@ const Index: React.FC = () => {
   
   // Initialize performance optimizations
   usePerformanceOptimization();
+  useServiceWorker();
   const { isOptimized, performanceGrade } = useLoadingOptimization();
 
   const handleRefresh = async () => {
@@ -47,6 +56,10 @@ const Index: React.FC = () => {
   return (
     <PullToRefresh onRefresh={handleRefresh}>
       <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
+        {/* Performance optimizations */}
+        <CriticalCSS />
+        <ResourceHints />
+        
         <ScrollProgressIndicator />
         
         {/* Accessibility Enhancements */}
@@ -58,10 +71,13 @@ const Index: React.FC = () => {
         {/* Simplified Header with Centered Logo */}
         <SimpleLogo />
         
-        {/* Hero Section */}
-        <section data-section="hero" id="hero">
-          <HeroSection onCTAClick={() => setShowForm(true)} />
-        </section>
+        {/* Hero Section with main heading */}
+        <main>
+          <section data-section="hero" id="hero">
+            <h1 className="sr-only">NIVELA - Tecnologia Avançada em Alisamento Capilar</h1>
+            <HeroSection onCTAClick={() => setShowForm(true)} />
+          </section>
+        </main>
         
         <section data-section="manifesto-text" id="manifesto-text">
           <ManifestoTextSection />
@@ -73,49 +89,67 @@ const Index: React.FC = () => {
         
         <section data-section="why-choose" id="why-choose">
           <OptimizedLazySection skeleton="card" delay={100}>
-            <WhyChooseNivelaSection />
+            <Suspense fallback={<SectionSkeleton />}>
+              <LazyWhyChooseNivelaSection />
+            </Suspense>
           </OptimizedLazySection>
         </section>
         
         <section data-section="technology" id="technology">
           <OptimizedLazySection skeleton="card" delay={150}>
-            <TechnologySection />
+            <Suspense fallback={<SectionSkeleton />}>
+              <LazyTechnologySection />
+            </Suspense>
           </OptimizedLazySection>
         </section>
         
         <section data-section="ecosystem" id="ecosystem">
           <OptimizedLazySection skeleton="card" delay={200}>
-            <EcosystemSection />
+            <Suspense fallback={<SectionSkeleton />}>
+              <LazyEcosystemSection />
+            </Suspense>
           </OptimizedLazySection>
         </section>
         
         <section data-section="distributor" id="distributor">
           <OptimizedLazySection skeleton="card" delay={250}>
-            <DistributorSection onCTAClick={() => setShowForm(true)} />
+            <Suspense fallback={<SectionSkeleton />}>
+              <LazyDistributorSection onCTAClick={() => setShowForm(true)} />
+            </Suspense>
           </OptimizedLazySection>
         </section>
         
         <section data-section="faq" id="faq">
           <OptimizedLazySection skeleton="card" delay={300}>
-            <FAQSection />
+            <Suspense fallback={<SectionSkeleton />}>
+              <LazyFAQSection />
+            </Suspense>
           </OptimizedLazySection>
         </section>
         
         <section data-section="footer" id="footer">
-          <LegalSection />
+          <Suspense fallback={<SectionSkeleton />}>
+            <LazyLegalSection />
+          </Suspense>
         </section>
 
         {/* Enhanced Mobile CTA */}
         <EnhancedMobileCTA onClick={() => setShowForm(true)} />
 
         {/* Premium Contact Modal */}
-        <PremiumContactModal 
-          isOpen={showForm} 
-          onClose={() => setShowForm(false)} 
-        />
+        <Suspense fallback={null}>
+          <LazyPremiumContactModal 
+            isOpen={showForm} 
+            onClose={() => setShowForm(false)} 
+          />
+        </Suspense>
 
         {/* System Health Check - Development Mode */}
-        {process.env.NODE_ENV === 'development' && <SystemHealthCheck />}
+        {process.env.NODE_ENV === 'development' && (
+          <Suspense fallback={null}>
+            <LazySystemHealthCheck />
+          </Suspense>
+        )}
       </div>
     </PullToRefresh>
   );

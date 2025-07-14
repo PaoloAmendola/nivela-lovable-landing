@@ -1,21 +1,22 @@
-const CACHE_NAME = 'nivela-v1.2';
-const STATIC_CACHE = 'nivela-static-v1.2';
-const DYNAMIC_CACHE = 'nivela-dynamic-v1.2';
+const CACHE_NAME = 'nivela-performance-v1.0';
+const STATIC_CACHE = 'nivela-static-performance-v1.0';
+const DYNAMIC_CACHE = 'nivela-dynamic-performance-v1.0';
 
-// Cache crítico para performance
+// Critical assets for performance
 const CRITICAL_ASSETS = [
   '/',
-  '/index.html',
-  '/src/index.css',
-  '/src/main.tsx',
-  '/lovable-uploads/35c523c0-e991-4c45-9e0b-08ebd975b908.png'
+  '/fonts/Wilkysta.woff2',
+  '/fonts/Wilkysta.woff',
+  '/manifest.json'
 ];
 
-// Assets para cache dinâmico
+// Assets for dynamic cache with performance optimization
 const CACHE_PATTERNS = [
-  /\.(js|css|woff2?|png|jpg|jpeg|svg|webp)$/,
-  /\/api\//,
-  /supabase\.co/
+  /\.(js|css|woff2?|png|jpg|jpeg|svg|webp|mp4)$/,
+  /lovable-uploads/,
+  /supabase\.co/,
+  /fonts\.googleapis\.com/,
+  /fonts\.gstatic\.com/
 ];
 
 // Install event - cache crítico
