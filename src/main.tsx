@@ -5,18 +5,7 @@ import App from './App.tsx';
 import './index.css';
 import './styles/fonts.css';
 
-// Register service worker for caching
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js')
-      .then(() => {
-        console.log('Service worker registered successfully');
-      })
-      .catch((error) => {
-        console.warn('Service worker registration failed:', error);
-      });
-  });
-}
+// Service Worker REMOVED for compatibility - causing loading issues on production domain
 
 const rootElement = document.getElementById("root");
 

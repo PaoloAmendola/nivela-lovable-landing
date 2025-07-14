@@ -1,4 +1,4 @@
-import { EnhancedButton } from "@/components/ui/EnhancedButton";
+import { SimpleButton } from "@/components/ui/SimpleButton";
 import { MessageSquare } from "lucide-react";
 import { useCallback, useMemo } from "react";
 
@@ -83,25 +83,25 @@ const HeroContent = ({ onCTAClick, shouldReduceAnimations }: HeroContentProps) =
         {/* CTA Buttons - Enhanced for Maximum Visibility */}
         <div className="animate-sequential-in opacity-0">
           <div className="flex flex-col gap-5 justify-center lg:justify-start items-center lg:items-start">
-            <EnhancedButton
+            <SimpleButton
               onClick={onCTAClick}
-              variant="premium"
+              variant="primary"
               size="lg"
-              className="text-lg font-bold px-10 py-5 min-h-[68px] w-full max-w-sm relative z-20 shadow-[0_12px_40px_-4px_rgba(157,73,22,0.8)] hover:shadow-[0_20px_60px_-4px_rgba(157,73,22,0.9)] bg-gradient-to-r from-[#9D4916] via-[#9D4916] to-[#B8551A] bg-size-200 hover:bg-position-100 border-2 border-[#9D4916]/20 hover:border-[#9D4916]/40"
+              className="text-lg font-bold px-10 py-5 min-h-[68px] w-full max-w-sm relative z-20 shadow-[0_12px_40px_-4px_rgba(157,73,22,0.8)] hover:shadow-[0_20px_60px_-4px_rgba(157,73,22,0.9)]"
             >
-              <MessageSquare className="w-7 h-7" strokeWidth={2} />
+              <MessageSquare className="w-7 h-7 mr-3" strokeWidth={2} />
               QUERO USAR NO MEU SALÃO
-            </EnhancedButton>
+            </SimpleButton>
             
-            <EnhancedButton
+            <SimpleButton
               onClick={scrollToDistributor}
               variant="outline"
               size="lg"
-              className="text-lg font-bold px-10 py-5 min-h-[68px] w-full max-w-sm relative z-20 border-3 border-accent/60 text-accent hover:border-accent bg-transparent hover:bg-accent/15 shadow-[0_8px_30px_-4px_rgba(37,76,90,0.6)] hover:shadow-[0_12px_40px_-4px_rgba(37,76,90,0.8)] backdrop-blur-sm"
+              className="text-lg font-bold px-10 py-5 min-h-[68px] w-full max-w-sm relative z-20 border-2 border-accent/60 text-accent hover:border-accent bg-transparent hover:bg-accent/15 shadow-[0_8px_30px_-4px_rgba(37,76,90,0.6)]"
             >
-              <MessageSquare className="w-7 h-7" strokeWidth={2} />
+              <MessageSquare className="w-7 h-7 mr-3" strokeWidth={2} />
               QUERO DISTRIBUIR
-            </EnhancedButton>
+            </SimpleButton>
           </div>
         </div>
     </div>

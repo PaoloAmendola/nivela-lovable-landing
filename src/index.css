@@ -1,5 +1,5 @@
-/* Import Premium Design System */
-@import './styles/design-system.css';
+/* Simplified CSS - Critical styles only for production compatibility */
+@import './styles/critical-minimal.css';
 
 @tailwind base;
 @tailwind components;
