@@ -1,6 +1,5 @@
 
 import React, { useState, useCallback } from "react";
-import { motion } from "framer-motion";
 import { useScroll } from "@/hooks/use-scroll";
 
 const SimpleLogo: React.FC = () => {
@@ -21,9 +20,7 @@ const SimpleLogo: React.FC = () => {
   };
 
   return (
-    <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
+    <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled 
           ? 'bg-background/95 backdrop-blur-xl border-b border-accent/10 shadow-lg' 
@@ -32,11 +29,9 @@ const SimpleLogo: React.FC = () => {
     >
       <div className="container mx-auto px-4 sm:px-6 py-3 sm:py-4">
         <div className="flex items-center justify-center">
-          <motion.div
-            className="cursor-pointer"
+          <div
+            className="cursor-pointer transition-transform duration-200 hover:scale-105 active:scale-95"
             onClick={scrollToTop}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
           >
             {!imageError ? (
               <div className="relative">
@@ -61,10 +56,10 @@ const SimpleLogo: React.FC = () => {
                 </span>
               </div>
             )}
-          </motion.div>
+          </div>
         </div>
       </div>
-    </motion.nav>
+    </nav>
   );
 };
 
