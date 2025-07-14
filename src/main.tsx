@@ -4,23 +4,16 @@ import { createRoot } from 'react-dom/client';
 import App from './App.tsx';
 import './index.css';
 import './styles/fonts.css';
-import { initializeOptimizations, removeProductionLogs } from './utils/deploy-optimization';
-
-// Remove production logs immediately
-removeProductionLogs();
-
-// Initialize performance optimizations
-initializeOptimizations();
 
 // Register service worker for caching
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/sw.js')
       .then(() => {
-        // Service worker registered successfully
+        console.log('Service worker registered successfully');
       })
-      .catch(() => {
-        // Service worker registration failed
+      .catch((error) => {
+        console.warn('Service worker registration failed:', error);
       });
   });
 }
