@@ -1,6 +1,5 @@
-import { EnhancedButton } from "@/components/ui/EnhancedButton";
+import { Button } from "@/components/ui/button";
 import { MessageSquare } from "lucide-react";
-import { useCallback, useMemo } from "react";
 
 interface HeroContentProps {
   onCTAClick: () => void;
@@ -8,22 +7,12 @@ interface HeroContentProps {
 }
 
 const HeroContent = ({ onCTAClick, shouldReduceAnimations }: HeroContentProps) => {
-  const scrollToTechnology = useCallback(() => {
-    const techSection = document.querySelector('[data-section="technology"]');
-    techSection?.scrollIntoView({ behavior: 'smooth' });
-  }, []);
+  console.log('HeroContent rendering...');
 
-  const scrollToDistributor = useCallback(() => {
-    const distributorSection = document.querySelector('[data-section="distributor"]');
-    distributorSection?.scrollIntoView({ behavior: 'smooth' });
-  }, []);
-
-  // Memoize static content that doesn't change
-  const staticContent = useMemo(() => ({
-    mainTitle: "NIVELA",
-    subtitle: "A evolução da escova progressiva",
-    mainCopy: "Desenvolvido com tecnologia patenteada e ativos da Amazônia. Rendimento até 30% superior."
-  }), []);
+  const scrollToManifesto = () => {
+    const manifestoSection = document.getElementById('manifesto-text');
+    manifestoSection?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   return (
     <div className="max-w-none pt-6 lg:pt-10 lg:pr-8">
@@ -83,25 +72,23 @@ const HeroContent = ({ onCTAClick, shouldReduceAnimations }: HeroContentProps) =
         {/* CTA Buttons */}
         <div>
           <div className="flex flex-col gap-5 justify-center lg:justify-start items-center lg:items-start">
-            <EnhancedButton
+            <Button
               onClick={onCTAClick}
-              variant="premium"
               size="lg"
-              className="text-lg font-bold px-10 py-5 min-h-[68px] w-full max-w-sm bg-primary hover:bg-primary/80 text-white"
+              className="text-lg font-bold px-10 py-5 min-h-[68px] w-full max-w-sm"
             >
               <MessageSquare className="w-7 h-7" strokeWidth={2} />
               QUERO USAR NO MEU SALÃO
-            </EnhancedButton>
+            </Button>
             
-            <EnhancedButton
-              onClick={scrollToDistributor}
+            <Button
+              onClick={scrollToManifesto}
               variant="outline"
               size="lg"
-              className="text-lg font-bold px-10 py-5 min-h-[68px] w-full max-w-sm border-2 border-accent text-accent hover:bg-accent/15"
+              className="text-lg font-bold px-10 py-5 min-h-[68px] w-full max-w-sm"
             >
-              <MessageSquare className="w-7 h-7" strokeWidth={2} />
-              QUERO DISTRIBUIR
-            </EnhancedButton>
+              SAIBA MAIS
+            </Button>
           </div>
         </div>
     </div>

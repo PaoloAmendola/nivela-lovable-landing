@@ -19,21 +19,29 @@ export const useSmartAutoplay = (options: UseSmartAutoplayOptions = {}) => {
 
   // Inicialização segura apenas no cliente
   useEffect(() => {
-    if (typeof window === 'undefined') return;
-    
-    try {
-      const hasPlayed = localStorage.getItem(storageKey);
-      const firstView = !hasPlayed;
+    // Timeout para evitar problemas de hidratação
+    const timer = setTimeout(() => {
+      if (typeof window === 'undefined') {
+        setIsInitialized(true);
+        return;
+      }
       
-      setIsFirstView(firstView);
-      setShouldAutoplay(firstView && defaultAutoplay);
-    } catch (error) {
-      // Fallback silencioso
-      setIsFirstView(true);
-      setShouldAutoplay(defaultAutoplay);
-    } finally {
-      setIsInitialized(true);
-    }
+      try {
+        const hasPlayed = localStorage.getItem(storageKey);
+        const firstView = !hasPlayed;
+        
+        setIsFirstView(firstView);
+        setShouldAutoplay(false); // Desabilitar autoplay por enquanto
+      } catch (error) {
+        // Fallback silencioso
+        setIsFirstView(true);
+        setShouldAutoplay(false);
+      } finally {
+        setIsInitialized(true);
+      }
+    }, 100);
+
+    return () => clearTimeout(timer);
   }, [storageKey, defaultAutoplay]);
 
   const markAsPlayed = () => {
