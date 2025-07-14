@@ -39,10 +39,23 @@ const UnifiedImage = React.memo(({
     onError?.();
   }, [onError]);
 
+  // Generate responsive srcSet for better image delivery
+  const generateSrcSet = useCallback((baseSrc: string): string => {
+    if (!baseSrc || baseSrc.includes('lovable-uploads')) {
+      return baseSrc; // Return original for uploaded images
+    }
+    
+    const sizes = [320, 640, 768, 1024, 1280, 1920];
+    return sizes.map(size => `${baseSrc}?w=${size}&q=${quality} ${size}w`).join(', ');
+  }, [quality]);
+
+  const srcSet = generateSrcSet(src);
+
   return (
     <div className={cn("relative", className)}>
       <img
         src={src}
+        srcSet={srcSet}
         alt={alt}
         width={width}
         height={height}

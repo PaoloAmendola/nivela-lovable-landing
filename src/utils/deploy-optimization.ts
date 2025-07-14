@@ -6,11 +6,13 @@
 // Remove todos os console.log/warn/error em produção
 export const removeProductionLogs = () => {
   if (process.env.NODE_ENV === 'production') {
-    console.log = () => {};
-    console.warn = () => {};
-    console.error = () => {};
-    console.debug = () => {};
-    console.info = () => {};
+    // Silence all console methods in production
+    const noop = () => {};
+    console.log = noop;
+    console.warn = noop;
+    console.error = noop;
+    console.debug = noop;
+    console.info = noop;
   }
 };
 
@@ -103,8 +105,7 @@ export const initializeOptimizations = () => {
         );
         
         if (failed.length > 0) {
-          // Reportar erros de URLs críticas para monitoramento
-          console.warn('Critical URLs validation failed:', failed);
+          // Critical URLs validation failed - can be handled by monitoring system
         }
       });
     }, 5000);

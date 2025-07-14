@@ -19,4 +19,27 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  build: {
+    // Tree shaking and optimization
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'vendor': ['react', 'react-dom'],
+          'ui': ['@radix-ui/react-dialog', '@radix-ui/react-accordion', '@radix-ui/react-toast'],
+          'utils': ['framer-motion', 'lucide-react']
+        }
+      }
+    },
+    // Generate source maps for production debugging
+    sourcemap: true,
+    // Minify with better tree shaking
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: mode === 'production',
+        drop_debugger: mode === 'production',
+        pure_funcs: mode === 'production' ? ['console.log'] : []
+      }
+    }
+  }
 }));

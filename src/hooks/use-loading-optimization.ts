@@ -41,7 +41,7 @@ export const useLoadingOptimization = () => {
         try {
           observer.observe({ entryTypes: ['largest-contentful-paint'] });
         } catch (e) {
-          console.log('LCP measurement not supported');
+          // LCP measurement not supported
         }
       }
 
@@ -60,7 +60,7 @@ export const useLoadingOptimization = () => {
         try {
           clsObserver.observe({ entryTypes: ['layout-shift'] });
         } catch (e) {
-          console.log('CLS measurement not supported');
+          // CLS measurement not supported
         }
       }
 

@@ -32,11 +32,11 @@ export const useAggressiveAutoplay = ({
       const playPromise = video.play();
       if (playPromise !== undefined) {
         await playPromise;
-        console.log(`[AggressiveAutoplay] Success for ${title}`);
+        // Success
         return true;
       }
     } catch (error) {
-      console.warn(`[AggressiveAutoplay] Failed for ${title}:`, error);
+      // Failed to autoplay
     }
     
     return false;

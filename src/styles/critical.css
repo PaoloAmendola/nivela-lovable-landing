@@ -1,0 +1,104 @@
+/* Critical CSS - Above-the-fold styles */
+
+/* Essential variables */
+:root {
+  --primary: 23 75% 35%;
+  --primary-foreground: 210 40% 98%;
+  --background: 207 56% 9%;
+  --foreground: 0 0% 100%;
+  --text-premium: 0 0% 98%;
+  --text-secondary: 0 0% 92%;
+  --section-spacing-mobile: 4rem;
+  --section-spacing-desktop: 6rem;
+  --text-hero: clamp(2.75rem, 8vw, 5rem);
+  --text-hero-subtitle: clamp(1.5rem, 4vw, 2.5rem);
+  --text-hero-description: clamp(1.125rem, 2.5vw, 1.375rem);
+}
+
+/* Base styles */
+* { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  touch-action: manipulation;
+}
+
+body {
+  margin: 0;
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Hero section critical styles */
+.text-hero {
+  font-size: var(--text-hero);
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: hsl(var(--text-premium));
+}
+
+.text-hero-subtitle {
+  font-size: var(--text-hero-subtitle);
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: hsl(var(--text-premium));
+}
+
+.text-hero-description {
+  font-size: var(--text-hero-description);
+  font-weight: 400;
+  line-height: 1.6;
+  color: hsl(var(--text-secondary));
+}
+
+/* Button critical styles */
+.btn-premium {
+  background: linear-gradient(135deg, #9D4916 0%, #B8551A 100%);
+  color: hsl(var(--primary-foreground));
+  font-weight: 600;
+  padding: 1rem 2rem;
+  border-radius: 0.75rem;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+}
+
+.btn-premium:hover {
+  transform: scale(1.05);
+}
+
+/* Layout critical styles */
+.section-spacing {
+  padding-top: var(--section-spacing-desktop);
+  padding-bottom: var(--section-spacing-desktop);
+}
+
+@media (max-width: 768px) {
+  .section-spacing {
+    padding-top: var(--section-spacing-mobile);
+    padding-bottom: var(--section-spacing-mobile);
+  }
+}
+
+/* Loading state */
+.loading-skeleton {
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  background-size: 200px 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200px 0; }
+  100% { background-position: calc(200px + 100%) 0; }
+}
