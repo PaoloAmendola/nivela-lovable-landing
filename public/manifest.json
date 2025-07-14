@@ -2,21 +2,68 @@
 {
   "name": "NIVELA® - Tratamento Capilar Revolucionário",
   "short_name": "NIVELA®",
-  "description": "Tecnologia ASTRO QUAT V3. Sem formol, sem fumaça, 100% performance.",
+  "description": "Tecnologia ASTRO QUAT V3. Sem formol, sem fumaça, 100% performance. Transforme seu cabelo com o tratamento mais avançado do mercado.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0D181C",
   "theme_color": "#C4A776",
   "orientation": "portrait-primary",
-  "categories": ["beauty", "business", "professional"],
+  "categories": ["beauty", "business", "professional", "health", "lifestyle"],
   "lang": "pt-BR",
   "scope": "/",
+  "dir": "ltr",
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
+  "launch_handler": {
+    "client_mode": "focus-existing"
+  },
+  "protocol_handlers": [
+    {
+      "protocol": "web+nivela",
+      "url": "/%s"
+    }
+  ],
   "icons": [
+    {
+      "src": "/lovable-uploads/35c523c0-e991-4c45-9e0b-08ebd975b908.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/lovable-uploads/35c523c0-e991-4c45-9e0b-08ebd975b908.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/lovable-uploads/35c523c0-e991-4c45-9e0b-08ebd975b908.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/lovable-uploads/35c523c0-e991-4c45-9e0b-08ebd975b908.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/lovable-uploads/35c523c0-e991-4c45-9e0b-08ebd975b908.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "any"
+    },
     {
       "src": "/lovable-uploads/35c523c0-e991-4c45-9e0b-08ebd975b908.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
+    },
+    {
+      "src": "/lovable-uploads/35c523c0-e991-4c45-9e0b-08ebd975b908.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "any"
     },
     {
       "src": "/lovable-uploads/35c523c0-e991-4c45-9e0b-08ebd975b908.png",
@@ -30,19 +77,54 @@
       "src": "/lovable-uploads/35c523c0-e991-4c45-9e0b-08ebd975b908.png",
       "sizes": "1280x720",
       "type": "image/png",
-      "form_factor": "wide"
+      "form_factor": "wide",
+      "label": "Página inicial NIVELA® - Tratamento Capilar Premium"
+    },
+    {
+      "src": "/lovable-uploads/35c523c0-e991-4c45-9e0b-08ebd975b908.png",
+      "sizes": "750x1334",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "NIVELA® Mobile - Experiência otimizada"
     }
   ],
   "shortcuts": [
     {
       "name": "Conhecer NIVELA®",
       "short_name": "Conhecer",
-      "description": "Abrir formulário de contato",
+      "description": "Abrir formulário de contato para conhecer o tratamento",
       "url": "/?action=contact",
       "icons": [
         {
           "src": "/lovable-uploads/35c523c0-e991-4c45-9e0b-08ebd975b908.png",
-          "sizes": "96x96"
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Ser Distribuidor",
+      "short_name": "Distribuidor",
+      "description": "Formulário para se tornar distribuidor NIVELA®",
+      "url": "/?action=distributor",
+      "icons": [
+        {
+          "src": "/lovable-uploads/35c523c0-e991-4c45-9e0b-08ebd975b908.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Vídeo Demonstração",
+      "short_name": "Vídeo",
+      "description": "Assistir demonstração do tratamento NIVELA®",
+      "url": "/?action=video",
+      "icons": [
+        {
+          "src": "/lovable-uploads/35c523c0-e991-4c45-9e0b-08ebd975b908.png",
+          "sizes": "96x96",
+          "type": "image/png"
         }
       ]
     }
@@ -51,5 +133,23 @@
   "prefer_related_applications": false,
   "edge_side_panel": {
     "preferred_width": 400
-  }
+  },
+  "file_handlers": [
+    {
+      "action": "/",
+      "accept": {
+        "image/*": [".jpg", ".jpeg", ".png", ".webp"]
+      }
+    }
+  ],
+  "share_target": {
+    "action": "/",
+    "method": "GET",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
+    }
+  },
+  "handle_links": "preferred"
 }
