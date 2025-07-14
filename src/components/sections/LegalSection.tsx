@@ -23,22 +23,19 @@ const LegalSection = () => {
                 <Phone className="w-5 h-5" strokeWidth={1.5} />
                 Canais de Atendimento
               </h4>
-              <div className="space-y-3">
+              <div className="space-y-3 ml-8">
                 <a 
                   href="https://wa.me/552139500901" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="flex items-start gap-3 hover:text-green-400 transition-colors"
+                  className="block hover:text-green-400 transition-colors"
                 >
-                  <Smartphone className="w-4 h-4 text-green-500 flex-shrink-0 mt-0.5 items-start" strokeWidth={1.5} />
                   <span className="text-contrast font-montserrat leading-relaxed">WhatsApp: (21) 3950-0901</span>
                 </a>
-                <div className="flex items-start gap-3">
-                  <Phone className="w-4 h-4 text-brand-secondary flex-shrink-0 mt-0.5 items-start" strokeWidth={1.5} />
+                <div>
                   <span className="text-contrast font-montserrat leading-relaxed">(21) 3269-0484</span>
                 </div>
-                <div className="flex items-start gap-3">
-                  <Mail className="w-4 h-4 text-brand-secondary flex-shrink-0 mt-0.5 items-start" strokeWidth={1.5} />
+                <div>
                   <span className="text-contrast font-montserrat leading-relaxed">comercial@bembeauty.com.br</span>
                 </div>
               </div>
@@ -50,27 +47,24 @@ const LegalSection = () => {
                 <Globe className="w-5 h-5" strokeWidth={1.5} />
                 Redes Sociais
               </h4>
-              <div className="space-y-3">
-                <div className="flex items-start gap-3">
-                  <Globe className="w-4 h-4 text-brand-secondary flex-shrink-0 mt-0.5 items-start" strokeWidth={1.5} />
+              <div className="space-y-3 ml-8">
+                <div>
                   <span className="text-contrast font-montserrat leading-relaxed">www.bembeauty.com.br</span>
                 </div>
                 <a 
                   href="https://www.instagram.com/bembeautyprofessional/" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="flex items-start gap-3 hover:text-pink-400 transition-colors"
+                  className="block hover:text-pink-400 transition-colors"
                 >
-                  <Instagram className="w-4 h-4 text-pink-500 flex-shrink-0 mt-0.5 items-start" strokeWidth={1.5} />
                   <span className="text-contrast font-montserrat leading-relaxed">@bembeautyprofessional</span>
                 </a>
                 <a 
                   href="https://youtu.be/lDKNZIztUMw?si=qJPZwKoXcYssVjK5" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="flex items-start gap-3 hover:text-red-400 transition-colors"
+                  className="block hover:text-red-400 transition-colors"
                 >
-                  <Video className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5 items-start" strokeWidth={1.5} />
                   <span className="text-contrast font-montserrat leading-relaxed">Bem Beauty Professional</span>
                 </a>
               </div>
@@ -82,7 +76,7 @@ const LegalSection = () => {
                 <MapPin className="w-5 h-5" strokeWidth={1.5} />
                 Endereços
               </h4>
-              <div className="space-y-3">
+              <div className="space-y-3 ml-8">
                 <div>
                   <p className="font-semibold text-foreground font-montserrat leading-relaxed">Matriz - RJ</p>
                   <p className="text-contrast font-montserrat leading-relaxed">Av. Cesário de Melo, nº 3006</p>
