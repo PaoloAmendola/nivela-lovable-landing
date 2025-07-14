@@ -12,8 +12,8 @@ import FAQSection from "@/components/sections/FAQSection";
 import StoreSection from "@/components/sections/StoreSection";
 import LegalSection from "@/components/sections/LegalSection";
 import PremiumContactModal from "@/components/forms/PremiumContactModal";
-import EnhancedMobileCTA from "@/components/ui/EnhancedMobileCTA";
-import ScrollProgressIndicator from "@/components/ui/ScrollProgressIndicator";
+import SimpleMobileCTA from "@/components/ui/SimpleMobileCTA";
+import SimpleScrollIndicator from "@/components/ui/SimpleScrollIndicator";
 import StructuredData from "@/components/seo/StructuredData";
 
 const Index: React.FC = () => {
@@ -23,7 +23,7 @@ const Index: React.FC = () => {
     <>
       <StructuredData />
       <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
-        <ScrollProgressIndicator />
+        <SimpleScrollIndicator />
         <SimpleLogo />
       
       <section data-section="hero" id="hero">
@@ -66,7 +66,7 @@ const Index: React.FC = () => {
         <LegalSection />
       </section>
 
-        <EnhancedMobileCTA onClick={() => setShowForm(true)} />
+        <SimpleMobileCTA onClick={() => setShowForm(true)} />
 
         <PremiumContactModal 
           isOpen={showForm} 

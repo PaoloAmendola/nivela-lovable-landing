@@ -1,15 +1,7 @@
-@font-face {
-  font-family: 'Wilkysta';
-  src: url('/fonts/Wilkysta.woff2') format('woff2'),
-       url('/fonts/Wilkysta.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
-/* Aplicar somente para a palavra NIVELA */
+/* Usando apenas Google Fonts para compatibilidade */
 .wilkysta-title {
-  font-family: 'Wilkysta', sans-serif;
+  font-family: 'Playfair Display', serif;
   letter-spacing: 0.05em;
   text-transform: uppercase;
+  font-weight: 700;
 }
