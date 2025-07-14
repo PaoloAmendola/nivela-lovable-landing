@@ -31,7 +31,7 @@ const HeroContent = ({ onCTAClick, shouldReduceAnimations }: HeroContentProps) =
       {/* Título Principal - NIVELA® */}
       <div className="animate-sequential-in opacity-0">
         <h1 className="text-hero text-center lg:text-left mb-4 lg:mb-6">
-          <span className="gradient-text">NIVELA</span>
+          <span className="gradient-text-animated">NIVELA</span>
           <sup className="text-2xl sm:text-3xl lg:text-4xl text-primary/80 font-light">®</sup>
         </h1>
       </div>

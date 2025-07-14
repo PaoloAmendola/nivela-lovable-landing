@@ -437,10 +437,35 @@
     background: linear-gradient(135deg, #9D4916 0%, #D9C0AA 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    -moz-background-clip: text;
+    -moz-text-fill-color: transparent;
     background-clip: text;
     font-weight: 600;
+    /* Otimizações para performance e animações */
+    will-change: transform;
+    backface-visibility: hidden;
+    transform: translateZ(0);
     /* Fallback para browsers sem suporte */
     color: #9D4916;
+  }
+
+  /* Versão otimizada para títulos com animação */
+  .gradient-text-animated {
+    background: linear-gradient(135deg, #9D4916 0%, #D9C0AA 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-background-clip: text;
+    -moz-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 600;
+    /* Otimizações específicas para animações */
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+    transform: translate3d(0, 0, 0);
+    /* Remove cor de texto quando gradient está ativo */
+    color: transparent;
+    /* Fallback apenas para browsers muito antigos */
+    _color: #9D4916;
   }
 
   /* Classes utilitárias para cores da marca */
@@ -804,8 +829,8 @@
   font-display: swap;
 }
 
-/* Hero Section Specific Styles */
-.text-hero {
+/* Hero Section Specific Styles - Responsivo */
+.text-hero-responsive {
   font-size: clamp(2.5rem, 6vw, 4.5rem);
   line-height: 1.1;
   letter-spacing: -0.02em;
