@@ -1,9 +1,9 @@
-import React from "react";
+import * as React from "react";
 import { motion } from "framer-motion";
 import NuvemshopButton from "@/components/ui/NuvemshopButton";
 import { ShoppingBag, Star, CheckCircle } from "lucide-react";
 
-const StoreSection = () => {
+const StoreSection = React.memo(() => {
   return (
     <section className="py-20 bg-background/50 backdrop-blur-sm border-y border-white/10">
       <div className="container mx-auto px-6">
@@ -93,6 +93,8 @@ const StoreSection = () => {
       </div>
     </section>
   );
-};
+});
+
+StoreSection.displayName = 'StoreSection';
 
 export default StoreSection;

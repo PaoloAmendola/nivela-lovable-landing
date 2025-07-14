@@ -1,5 +1,5 @@
 
-import React from "react";
+import * as React from "react";
 
 interface NuvemshopButtonProps {
   productId: string;
@@ -9,7 +9,7 @@ interface NuvemshopButtonProps {
   rel?: string;
 }
 
-const NuvemshopButton = ({ 
+const NuvemshopButton = React.memo(({ 
   productId, 
   children, 
   className = "",
@@ -17,7 +17,7 @@ const NuvemshopButton = ({
   rel = "noopener noreferrer",
   ...props 
 }: NuvemshopButtonProps) => {
-  const handleClick = () => {
+  const handleClick = React.useCallback(() => {
     // Google Analytics event tracking
     if (typeof window !== 'undefined' && (window as any).gtag) {
       (window as any).gtag('event', 'click_loja', {
@@ -28,7 +28,7 @@ const NuvemshopButton = ({
     
     // Redirect to store
     window.location.href = 'https://www.bembeauty.com.br/?utm_source=landing&utm_medium=botao&utm_campaign=checkout_nivela';
-  };
+  }, []);
 
   return (
     <button 
@@ -39,6 +39,8 @@ const NuvemshopButton = ({
       {children}
     </button>
   );
-};
+});
+
+NuvemshopButton.displayName = 'NuvemshopButton';
 
 export default NuvemshopButton;

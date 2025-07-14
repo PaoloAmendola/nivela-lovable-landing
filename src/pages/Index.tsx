@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import * as React from "react";
 import ScrollProgressIndicator from "@/components/ui/ScrollProgressIndicator";
 import HeroSection from "@/components/sections/HeroSection";
 import ManifestoTextSection from "@/components/sections/ManifestoTextSection";
@@ -19,17 +19,11 @@ import EnhancedMobileCTA from "@/components/ui/EnhancedMobileCTA";
 import PullToRefresh from "@/components/ui/PullToRefresh";
 import SystemHealthCheck from "@/components/ui/SystemHealthCheck";
 import ContrastOptimizer from "@/components/ui/ContrastOptimizer";
-// import { usePerformanceOptimization } from "@/hooks/use-performance-optimization";
-// import { useLoadingOptimization } from "@/hooks/use-loading-optimization";
 import { useToast } from "@/hooks/use-toast";
 
-const Index: React.FC = () => {
-  const [showForm, setShowForm] = useState(false);
+const Index = React.memo(() => {
+  const [showForm, setShowForm] = React.useState<boolean>(false);
   const { toast } = useToast();
-  
-  // Initialize performance optimizations - temporarily disabled
-  // usePerformanceOptimization();
-  // const { isOptimized, performanceGrade } = useLoadingOptimization();
 
   const handleRefresh = async () => {
     // Simulate content refresh
@@ -126,6 +120,8 @@ const Index: React.FC = () => {
       </div>
     </PullToRefresh>
   );
-};
+});
+
+Index.displayName = 'Index';
 
 export default Index;
