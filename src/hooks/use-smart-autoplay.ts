@@ -12,45 +12,45 @@ export const useSmartAutoplay = (options: UseSmartAutoplayOptions = {}) => {
     defaultAutoplay = true 
   } = options;
   
-  // Estado inicial seguro
-  const [shouldAutoplay, setShouldAutoplay] = useState(false);
-  const [isFirstView, setIsFirstView] = useState(true);
-  const [isInitialized, setIsInitialized] = useState(false);
-
-  // Inicialização segura apenas no cliente
-  useEffect(() => {
-    // Timeout para evitar problemas de hidratação
-    const timer = setTimeout(() => {
-      if (typeof window === 'undefined') {
-        setIsInitialized(true);
-        return;
-      }
+  // Inicialização síncrona no cliente
+  const getInitialState = () => {
+    if (typeof window === 'undefined') {
+      return { shouldAutoplay: false, isFirstView: true };
+    }
+    
+    try {
+      const hasPlayed = localStorage.getItem(storageKey);
+      const isFirstView = !hasPlayed;
+      // Autoplay inteligente: primeira visualização = autoplay muted
+      const shouldAutoplay = isFirstView && defaultAutoplay;
       
-      try {
-        const hasPlayed = localStorage.getItem(storageKey);
-        const firstView = !hasPlayed;
-        
-        setIsFirstView(firstView);
-        setShouldAutoplay(false); // Desabilitar autoplay por enquanto
-      } catch (error) {
-        // Fallback silencioso
-        setIsFirstView(true);
-        setShouldAutoplay(false);
-      } finally {
-        setIsInitialized(true);
-      }
-    }, 100);
+      return { shouldAutoplay, isFirstView };
+    } catch (error) {
+      return { shouldAutoplay: false, isFirstView: true };
+    }
+  };
 
-    return () => clearTimeout(timer);
-  }, [storageKey, defaultAutoplay]);
+  const [state, setState] = useState(getInitialState);
+  const [isInitialized, setIsInitialized] = useState(typeof window !== 'undefined');
+
+  // Hidratação no cliente
+  useEffect(() => {
+    if (typeof window !== 'undefined' && !isInitialized) {
+      setState(getInitialState());
+      setIsInitialized(true);
+    }
+  }, [storageKey, defaultAutoplay, isInitialized]);
 
   const markAsPlayed = () => {
     if (typeof window === 'undefined') return;
     
     try {
       localStorage.setItem(storageKey, 'true');
-      setIsFirstView(false);
-      setShouldAutoplay(false);
+      setState(prev => ({ 
+        ...prev, 
+        isFirstView: false, 
+        shouldAutoplay: false 
+      }));
     } catch (error) {
       // Silently fail if localStorage is not available
     }
@@ -61,16 +61,18 @@ export const useSmartAutoplay = (options: UseSmartAutoplayOptions = {}) => {
     
     try {
       localStorage.removeItem(storageKey);
-      setIsFirstView(true);
-      setShouldAutoplay(defaultAutoplay);
+      setState({ 
+        isFirstView: true, 
+        shouldAutoplay: defaultAutoplay 
+      });
     } catch (error) {
       // Silently fail
     }
   };
 
   return {
-    shouldAutoplay: isInitialized ? shouldAutoplay : false,
-    isFirstView,
+    shouldAutoplay: isInitialized ? state.shouldAutoplay : false,
+    isFirstView: state.isFirstView,
     markAsPlayed,
     resetPlayState,
     isInitialized

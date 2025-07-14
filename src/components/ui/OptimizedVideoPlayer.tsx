@@ -35,34 +35,13 @@ const OptimizedVideoPlayer = ({
   const [isInView, setIsInView] = useState(false);
   const [hasError, setHasError] = useState(false);
 
-  // Intersection Observer para lazy loading
+  // Carregamento imediato e autoplay simplificado
   useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const [entry] = entries;
-        if (entry.isIntersecting) {
-          setIsInView(true);
-          observer.disconnect();
-        }
-      },
-      { 
-        threshold: 0.25,
-        rootMargin: '100px 0px'
-      }
-    );
-
-    observer.observe(container);
-    return () => observer.disconnect();
-  }, []);
-
-  // Tentativa de autoplay quando em visualização
-  useEffect(() => {
-    if (!isInView || !videoRef.current || hasError) return;
-
+    setIsInView(true);
+    setIsLoaded(true);
+    
     const video = videoRef.current;
+    if (!video || hasError) return;
     
     const attemptAutoplay = async () => {
       try {
@@ -70,21 +49,6 @@ const OptimizedVideoPlayer = ({
         video.muted = true;
         setIsMuted(true);
         
-        // Aguardar se necessário
-        if (video.readyState < 2) {
-          const handleLoaded = () => {
-            video.play().then(() => {
-              setIsPlaying(true);
-              onPlay?.();
-            }).catch(() => {
-              setShowControls(true);
-            });
-          };
-          
-          video.addEventListener('loadeddata', handleLoaded, { once: true });
-          return;
-        }
-
         await video.play();
         setIsPlaying(true);
         onPlay?.();
@@ -93,12 +57,16 @@ const OptimizedVideoPlayer = ({
       }
     };
 
+    // Autoplay inteligente: tentar reproduzir se solicitado
     if (autoplay || smartAutoplay) {
-      attemptAutoplay();
+      // Pequeno delay para garantir que o vídeo está pronto
+      const timer = setTimeout(() => {
+        attemptAutoplay();
+      }, 100);
+      
+      return () => clearTimeout(timer);
     }
-    
-    setIsLoaded(true);
-  }, [isInView, autoplay, smartAutoplay, onPlay, hasError]);
+  }, [autoplay, smartAutoplay, onPlay, hasError]);
 
   const togglePlay = useCallback(async () => {
     const video = videoRef.current;
@@ -144,29 +112,6 @@ const OptimizedVideoPlayer = ({
     return poster;
   }, [poster]);
 
-  if (!isInView) {
-    return (
-      <div 
-        ref={containerRef} 
-        className={`relative bg-muted/20 rounded-xl overflow-hidden ${className}`}
-        style={{ aspectRatio: '16/9' }}
-      >
-        {placeholderSrc && (
-          <img 
-            src={placeholderSrc}
-            alt="Video preview"
-            className="w-full h-full object-cover"
-            loading="lazy"
-          />
-        )}
-        <div className="absolute inset-0 flex items-center justify-center bg-black/30">
-          <div className="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center">
-            <Play className="w-8 h-8 text-white ml-1" />
-          </div>
-        </div>
-      </div>
-    );
-  }
 
   if (hasError) {
     return (
@@ -192,7 +137,7 @@ const OptimizedVideoPlayer = ({
     >
       <video
         ref={videoRef}
-        src={isLoaded ? src : undefined}
+        src={src}
         poster={poster}
         muted={isMuted}
         loop={loop}

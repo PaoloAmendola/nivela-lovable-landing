@@ -9,17 +9,6 @@ import VideoErrorBoundary from './VideoErrorBoundary';
 const ManifestoVideo = () => {
   const { shouldAutoplay, isFirstView, markAsPlayed, isInitialized } = useSmartAutoplay();
 
-  // Não renderizar até estar inicializado para evitar hydration mismatch
-  if (!isInitialized) {
-    return (
-      <motion.div variants={itemVariants} className="max-w-4xl mx-auto mb-12 lg:mb-16">
-        <div className="aspect-video rounded-lg overflow-hidden bg-muted/20 flex items-center justify-center">
-          <div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin" />
-        </div>
-      </motion.div>
-    );
-  }
-
   return (
     <VideoErrorBoundary>
       <motion.div variants={itemVariants} className="max-w-4xl mx-auto mb-12 lg:mb-16">
@@ -35,9 +24,10 @@ const ManifestoVideo = () => {
             <OptimizedVideoPlayer
               src="https://xnexfhgtqlryfkyuvihq.supabase.co/storage/v1/object/public/videos/video-manifesto-oficial-compactado.mp4"
               className="w-full max-w-4xl mx-auto"
-              smartAutoplay={false}
+              smartAutoplay={shouldAutoplay}
+              autoplay={shouldAutoplay}
               muted={true}
-              preload="none"
+              preload="metadata"
               poster="/lovable-uploads/f7afc3f5-36a2-49c4-a947-04e9bc701f3c.png"
               onPlay={markAsPlayed}
             />
