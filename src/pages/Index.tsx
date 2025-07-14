@@ -18,12 +18,21 @@ import OptimizedLazySection from "@/components/ui/OptimizedLazySection";
 import EnhancedMobileCTA from "@/components/ui/EnhancedMobileCTA";
 import PullToRefresh from "@/components/ui/PullToRefresh";
 import SystemHealthCheck from "@/components/ui/SystemHealthCheck";
+import { LoadingState } from "@/components/ui/LoadingStates";
 import ContrastOptimizer from "@/components/ui/ContrastOptimizer";
+import StructuredData from "@/components/seo/StructuredData";
 import { useToast } from "@/hooks/use-toast";
 
 const Index: React.FC = () => {
   const [showForm, setShowForm] = React.useState<boolean>(false);
+  const [isLoading, setIsLoading] = React.useState<boolean>(true);
   const { toast } = useToast();
+
+  React.useEffect(() => {
+    // Simulate initial loading
+    const timer = setTimeout(() => setIsLoading(false), 1500);
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleRefresh = async () => {
     // Simulate content refresh
@@ -41,8 +50,13 @@ const Index: React.FC = () => {
     });
   };
 
+  if (isLoading) {
+    return <LoadingState type="pulse" message="Carregando experiência..." fullScreen />;
+  }
+
   return (
     <PullToRefresh onRefresh={handleRefresh}>
+      <StructuredData />
       <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
         <ScrollProgressIndicator />
         
