@@ -36,13 +36,14 @@ const OptimizedImageSystem = React.memo(({
   const [isLoaded, setIsLoaded] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [currentSrc, setCurrentSrc] = useState<string>('');
-  const imgRef = useRef<HTMLImageElement>(null);
-
+  
   // Intersection observer para lazy loading
-  const { isIntersecting } = useIntersectionObserver(imgRef, {
+  const { ref: observerRef, isIntersecting } = useIntersectionObserver({
     threshold: 0.1,
     freezeOnceVisible: true
   });
+  
+  const imgRef = useRef<HTMLImageElement>(null);
 
   const shouldLoad = priority || !lazy || isIntersecting;
 
@@ -99,7 +100,7 @@ const OptimizedImageSystem = React.memo(({
   }, [onError]);
 
   return (
-    <div className={cn("relative overflow-hidden", className)}>
+    <div ref={observerRef} className={cn("relative overflow-hidden", className)}>
       {/* Placeholder blur */}
       {placeholder === 'blur' && !isLoaded && (
         <div className="absolute inset-0 bg-gradient-to-br from-muted/20 to-muted/40">
