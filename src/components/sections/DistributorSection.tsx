@@ -17,8 +17,8 @@ const DistributorSection = ({ onCTAClick }: DistributorSectionProps) => {
     // já integra diretamente com Supabase
     console.log('Dados do distribuidor para analytics:', data);
     
-    // Callback opcional para outras ações (ex: analytics)
-    onCTAClick();
+    // Removido onCTAClick() para manter formulários independentes
+    // onCTAClick();
   };
 
   return (
