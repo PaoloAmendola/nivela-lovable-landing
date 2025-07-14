@@ -17,16 +17,27 @@ const NuvemshopButton = ({
   rel = "noopener noreferrer",
   ...props 
 }: NuvemshopButtonProps) => {
+  const handleClick = () => {
+    // Google Analytics event tracking
+    if (typeof window !== 'undefined' && (window as any).gtag) {
+      (window as any).gtag('event', 'click_loja', {
+        event_category: 'navegacao',
+        event_label: 'Botão para a loja Nuvemshop'
+      });
+    }
+    
+    // Redirect to store
+    window.location.href = 'https://www.bembeauty.com.br/?utm_source=landing&utm_medium=botao&utm_campaign=checkout_nivela';
+  };
+
   return (
-    <a 
-      href={`https://sualoja.nuvemshop.com.br/cart?add=${productId}`} 
-      target={target}
-      rel={rel}
+    <button 
+      onClick={handleClick}
       className={className}
       {...props}
     >
       {children}
-    </a>
+    </button>
   );
 };
 

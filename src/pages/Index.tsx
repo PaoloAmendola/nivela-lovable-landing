@@ -9,6 +9,7 @@ import WhyChooseNivelaSection from "@/components/sections/WhyChooseNivelaSection
 import DistributorSection from "@/components/sections/DistributorSection";
 import EcosystemSection from "@/components/sections/EcosystemSection";
 import FAQSection from "@/components/sections/FAQSection";
+import StoreSection from "@/components/sections/StoreSection";
 import LegalSection from "@/components/sections/LegalSection";
 import SimpleLogo from "@/components/navigation/SimpleLogo";
 import PremiumContactModal from "@/components/forms/PremiumContactModal";
@@ -98,6 +99,12 @@ const Index: React.FC = () => {
         <section data-section="faq" id="faq">
           <OptimizedLazySection skeleton="card" delay={300}>
             <FAQSection />
+          </OptimizedLazySection>
+        </section>
+        
+        <section data-section="store" id="store">
+          <OptimizedLazySection skeleton="card" delay={350}>
+            <StoreSection />
           </OptimizedLazySection>
         </section>
         
