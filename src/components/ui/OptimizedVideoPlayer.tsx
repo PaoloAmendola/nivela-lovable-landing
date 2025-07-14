@@ -76,31 +76,57 @@ const OptimizedVideoPlayer = ({
 
   // Auto-play attempt when in view
   useEffect(() => {
-    if (!isInView || !videoRef.current || isLoaded) return;
+    if (!isInView || !videoRef.current) return;
 
     const video = videoRef.current;
+    
+    console.log('[OptimizedVideoPlayer] Video in view, setup:', { 
+      autoplay, 
+      smartAutoplay, 
+      isInView,
+      isLoaded 
+    });
     
     const attemptAutoplay = async () => {
       try {
         video.muted = true;
         setIsMuted(true);
+        
+        // Wait for video to be ready if needed
+        if (video.readyState < 2) {
+          console.log('[OptimizedVideoPlayer] Video not ready, waiting for loadeddata...');
+          video.addEventListener('loadeddata', () => {
+            console.log('[OptimizedVideoPlayer] Video loaded, attempting autoplay');
+            video.play().then(() => {
+              setIsPlaying(true);
+              onPlay?.();
+              console.log('[OptimizedVideoPlayer] Autoplay successful');
+            }).catch(error => {
+              console.warn('[OptimizedVideoPlayer] Autoplay blocked:', error);
+              setShowControls(true);
+            });
+          }, { once: true });
+          setIsLoaded(true);
+          return;
+        }
+
         await video.play();
         setIsPlaying(true);
-        setIsLoaded(true);
-        onPlay?.(); // Callback para marcar como reproduzido
+        onPlay?.();
+        console.log('[OptimizedVideoPlayer] Autoplay successful');
       } catch (error) {
-        // Autoplay blocked - show play button
+        console.warn('[OptimizedVideoPlayer] Autoplay blocked:', error);
         setShowControls(true);
-        setIsLoaded(true);
       }
     };
 
     if (autoplay || smartAutoplay) {
+      console.log('[OptimizedVideoPlayer] Attempting autoplay...');
       attemptAutoplay();
-    } else {
-      setIsLoaded(true);
     }
-  }, [isInView, autoplay, smartAutoplay, isLoaded, onPlay]);
+    
+    setIsLoaded(true);
+  }, [isInView, autoplay, smartAutoplay, onPlay]);
 
   const togglePlay = useCallback(async () => {
     const video = videoRef.current;
@@ -110,10 +136,12 @@ const OptimizedVideoPlayer = ({
       if (isPlaying) {
         await video.pause();
         setIsPlaying(false);
+        console.log('[OptimizedVideoPlayer] Video paused manually');
       } else {
         await video.play();
         setIsPlaying(true);
-        onPlay?.(); // Callback para marcar como reproduzido em play manual
+        onPlay?.();
+        console.log('[OptimizedVideoPlayer] Video played manually');
       }
     } catch (error) {
       console.warn('Video play/pause failed:', error);
