@@ -53,6 +53,15 @@
   @apply focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary/30 focus-visible:ring-offset-2 focus-visible:ring-offset-background;
 }
 
+/* Hero Background Pattern */
+.hero-pattern {
+  background-image: 
+    radial-gradient(circle at 25% 25%, rgba(157, 73, 22, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 75% 75%, rgba(37, 76, 90, 0.1) 0%, transparent 50%);
+  background-size: 100px 100px, 150px 150px;
+  background-position: 0 0, 50px 50px;
+}
+
 /* Interactive Elements */
 .interactive-premium {
   @apply transition-all duration-300 ease-out;

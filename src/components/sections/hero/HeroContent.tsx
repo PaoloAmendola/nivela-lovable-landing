@@ -29,7 +29,7 @@ const HeroContent = ({ onCTAClick, shouldReduceAnimations }: HeroContentProps) =
     <div className="max-w-none pt-6 lg:pt-10 lg:pr-8">
 
       {/* Título Principal - NIVELA® */}
-      <div className="animate-sequential-in opacity-0">
+      <div className="animate-sequential-in">
         <h1 className="text-hero text-center lg:text-left mb-4 lg:mb-6">
           <span className="wilkysta-title gradient-text-animated">NIVELA</span>
           <sup className="text-2xl sm:text-3xl lg:text-4xl text-primary/80 font-light">®</sup>
@@ -37,14 +37,14 @@ const HeroContent = ({ onCTAClick, shouldReduceAnimations }: HeroContentProps) =
       </div>
 
       {/* Subtítulo */}
-      <div className="animate-sequential-in opacity-0">
+      <div className="animate-sequential-in">
         <h2 className="text-hero-subtitle text-center lg:text-left mb-4">
           A evolução da<br />escova progressiva
         </h2>
       </div>
 
       {/* Descrição */}
-      <div className="animate-sequential-in opacity-0">
+      <div className="animate-sequential-in">
         <p className="text-hero-description text-center lg:text-left mb-6 lg:mb-8">
           Desenvolvido com tecnologia patenteada e ativos da Amazônia.
         </p>
@@ -58,7 +58,7 @@ const HeroContent = ({ onCTAClick, shouldReduceAnimations }: HeroContentProps) =
       </div>
 
       {/* Creative Pills */}
-      <div className="animate-sequential-in opacity-0">
+      <div className="animate-sequential-in">
         <div className="flex flex-col sm:flex-row justify-center lg:justify-start items-center gap-3 sm:gap-4 mb-8 lg:mb-10 flex-wrap">
           {/* Badge 1 - Accent Color */}
           <div className="creative-pill bg-gradient-to-r from-[#9D4916]/20 to-[#9D4916]/10 border-[#9D4916]/30">
@@ -81,7 +81,7 @@ const HeroContent = ({ onCTAClick, shouldReduceAnimations }: HeroContentProps) =
       </div>
 
         {/* CTA Buttons - Enhanced for Maximum Visibility */}
-        <div className="animate-sequential-in opacity-0">
+        <div className="animate-sequential-in">
           <div className="flex flex-col gap-5 justify-center lg:justify-start items-center lg:items-start">
             <EnhancedButton
               onClick={onCTAClick}
