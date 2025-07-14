@@ -77,10 +77,10 @@ const EcosystemSection = () => {
 
         {/* Header */}
         <div className="max-w-5xl mx-auto text-center mb-8 lg:mb-12">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-playfair font-bold gradient-text mb-6 lg:mb-8">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-playfair font-bold gradient-text-animated mb-6 lg:mb-8">
             BemTECH™
           </h2>
-          <h3 className="text-xl md:text-2xl lg:text-3xl font-playfair font-semibold gradient-text mb-4">
+          <h3 className="text-xl md:text-2xl lg:text-3xl font-playfair font-semibold gradient-text-animated mb-4">
             O primeiro ecossistema digital do setor de Beleza
           </h3>
           <p className="text-base md:text-lg font-montserrat text-muted leading-relaxed max-w-4xl mx-auto">

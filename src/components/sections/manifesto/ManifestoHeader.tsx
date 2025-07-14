@@ -11,7 +11,7 @@ const ManifestoHeader = () => {
           <div className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-2">
             Você não é apenas mais um profissional.
           </div>
-          <div className="text-3xl md:text-4xl lg:text-5xl font-bold gradient-text">
+          <div className="text-3xl md:text-4xl lg:text-5xl font-bold gradient-text-animated">
             Você é a referência que define tendências.
           </div>
         </h2>

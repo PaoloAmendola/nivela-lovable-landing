@@ -18,7 +18,7 @@ const ProfessionalExclusivity = () => {
             />
           </div>
           
-          <h3 className="text-2xl md:text-3xl font-playfair font-bold mb-6 gradient-text">
+          <h3 className="text-2xl md:text-3xl font-playfair font-bold mb-6 gradient-text-animated">
             ASTRO QUAT V3® é Inovação com Propósito
           </h3>
           

@@ -66,7 +66,7 @@ const TechnologySection = () => {
             <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-accent/5 to-secondary/5 rounded-3xl"></div>
             <div className="relative bg-background/40 backdrop-blur-sm border border-accent/20 rounded-3xl p-6 lg:p-8">
               <div className="text-center max-w-4xl mx-auto">
-                <h3 className="text-2xl lg:text-3xl font-playfair font-bold gradient-text mb-4">
+                <h3 className="text-2xl lg:text-3xl font-playfair font-bold gradient-text-animated mb-4">
                   A Sinergia perfeita entre Ciência e Natureza
                 </h3>
                 

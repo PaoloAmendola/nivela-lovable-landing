@@ -12,7 +12,7 @@ const TechnologyHeader = () => {
           Inovação Patenteada
         </Badge>
       </div>
-      <h2 className="text-3xl md:text-4xl lg:text-5xl font-playfair font-bold gradient-text mb-6 lg:mb-8">
+      <h2 className="text-3xl md:text-4xl lg:text-5xl font-playfair font-bold gradient-text-animated mb-6 lg:mb-8">
         ASTRO QUAT V3®
       </h2>
       

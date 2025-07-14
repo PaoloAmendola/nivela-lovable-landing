@@ -31,7 +31,7 @@ const AmazonianActives = () => {
     <div className="space-y-6">
       {/* Header for Amazonian Actives */}
       <div className="text-center">
-        <h3 className="text-2xl lg:text-3xl font-playfair font-bold gradient-text mb-3">
+        <h3 className="text-2xl lg:text-3xl font-playfair font-bold gradient-text-animated mb-3">
           Ativos Amazônicos
         </h3>
         <p className="text-muted font-montserrat text-sm lg:text-base">

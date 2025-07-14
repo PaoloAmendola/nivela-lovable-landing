@@ -15,7 +15,7 @@ const WhyChooseSection = () => {
     >
       {/* Título Centralizado - Desktop */}
       <div className="text-center mb-12 lg:mb-16">
-        <h2 className="font-playfair text-4xl md:text-5xl font-bold gradient-text">
+        <h2 className="font-playfair text-4xl md:text-5xl font-bold gradient-text-animated">
           Por que escolher{' '}
           <span className="text-gradient-primary font-bold">NIVELA®?</span>
         </h2>
