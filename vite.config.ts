@@ -20,34 +20,13 @@ export default defineConfig(({ mode }) => ({
     },
   },
   build: {
-    // Optimized bundle splitting
+    // Tree shaking and optimization
     rollupOptions: {
       output: {
-        manualChunks: (id) => {
-          if (id.includes('node_modules')) {
-            if (id.includes('react') || id.includes('react-dom')) {
-              return 'react-vendor';
-            }
-            if (id.includes('@radix-ui')) {
-              return 'radix-ui';
-            }
-            if (id.includes('framer-motion')) {
-              return 'framer-motion';
-            }
-            if (id.includes('lucide-react')) {
-              return 'lucide';
-            }
-            if (id.includes('@supabase')) {
-              return 'supabase';
-            }
-            return 'vendor';
-          }
-          if (id.includes('src/components/ui')) {
-            return 'ui-components';
-          }
-          if (id.includes('src/components/sections')) {
-            return 'sections';
-          }
+        manualChunks: {
+          'vendor': ['react', 'react-dom'],
+          'ui': ['@radix-ui/react-dialog', '@radix-ui/react-accordion', '@radix-ui/react-toast'],
+          'utils': ['framer-motion', 'lucide-react']
         }
       }
     },

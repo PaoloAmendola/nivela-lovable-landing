@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
-import { SimpleButton } from "@/components/ui/SimpleButton";
+import { EnhancedButton } from "@/components/ui/EnhancedButton";
 import { X, CheckCircle, Sparkles } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
@@ -216,16 +216,17 @@ const PremiumContactModal = ({ isOpen, onClose }: PremiumContactModalProps) => {
 
             {/* Submit Button */}
             <div className="flex justify-center pt-6">
-              <SimpleButton 
+              <EnhancedButton 
                 type="submit"
-                variant="primary"
+                variant="premium"
                 disabled={!canProceed || isSubmitting}
                 loading={isSubmitting}
-                className="w-full py-4 sm:py-5 text-lg sm:text-xl font-bold min-h-[60px] sm:min-h-[72px] shadow-lg"
+                loadingMessage="Enviando solicitação..."
+                className="w-full py-4 sm:py-5 text-lg sm:text-xl font-bold min-h-[60px] sm:min-h-[72px] shadow-elegant hover:shadow-glow"
               >
                 <span className="hidden sm:inline">SOLICITAR ACESSO PROFISSIONAL</span>
                 <span className="sm:hidden">SOLICITAR ACESSO</span>
-              </SimpleButton>
+              </EnhancedButton>
             </div>
           </form>
         </div>

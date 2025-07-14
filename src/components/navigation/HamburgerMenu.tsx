@@ -1,25 +1,27 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
-// Haptic feedback removed for compatibility
+import { useHapticFeedback } from "@/hooks/use-haptic-feedback";
 import { useSmoothScroll } from "@/hooks/use-smooth-scroll";
-import { SimpleButton } from "@/components/ui/SimpleButton";
+import { EnhancedButton } from "@/components/ui/EnhancedButton";
 
 interface HamburgerMenuProps {
   onCTAClick: () => void;
 }
 
 const HamburgerMenu = ({ onCTAClick }: HamburgerMenuProps) => {
-  // Haptic feedback functionality removed for compatibility
+  const { hapticClick, hapticSelect } = useHapticFeedback();
   const { scrollToElement } = useSmoothScroll();
   const [isOpen, setIsOpen] = useState(false);
 
   const handleNavClick = (elementId: string) => {
+    hapticSelect();
     scrollToElement(elementId, { offset: 80, duration: 1000, easing: 'ease-in-out' });
     setIsOpen(false);
   };
 
   const toggleMenu = () => {
+    hapticClick();
     setIsOpen(!isOpen);
   };
 
@@ -148,16 +150,16 @@ const HamburgerMenu = ({ onCTAClick }: HamburgerMenuProps) => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.6 }}
                 >
-                  <SimpleButton
+                  <EnhancedButton
                     onClick={() => {
                       onCTAClick();
                       setIsOpen(false);
                     }}
-                    variant="primary"
-                    className="w-full py-4 text-lg shadow-lg"
+                    variant="premium"
+                    className="w-full py-4 text-lg shadow-elegant hover:shadow-glow"
                   >
                     Acesso Exclusivo
-                  </SimpleButton>
+                  </EnhancedButton>
                 </motion.div>
               </div>
             </motion.div>

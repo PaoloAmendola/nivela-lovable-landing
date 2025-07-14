@@ -1,67 +1,52 @@
-import React from 'react';
-import { AlertTriangle, RefreshCw } from 'lucide-react';
 
-interface ErrorBoundaryState {
+import React, { Component, ReactNode } from 'react';
+import { AlertTriangle, RefreshCw } from 'lucide-react';
+import { logger } from '@/lib/logger';
+
+interface Props {
+  children: ReactNode;
+  fallback?: ReactNode;
+}
+
+interface State {
   hasError: boolean;
   error?: Error;
 }
 
-interface ErrorBoundaryProps {
-  children: React.ReactNode;
-  fallback?: React.ComponentType<{ error?: Error; reset: () => void }>;
-}
-
-class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundaryState> {
-  constructor(props: ErrorBoundaryProps) {
+class ErrorBoundary extends Component<Props, State> {
+  constructor(props: Props) {
     super(props);
     this.state = { hasError: false };
   }
 
-  static getDerivedStateFromError(error: Error): ErrorBoundaryState {
+  static getDerivedStateFromError(error: Error): State {
     return { hasError: true, error };
   }
 
-  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
-    console.error('Error caught by boundary:', error, errorInfo);
-    
-    // Send to analytics if available
-    if (typeof window !== 'undefined' && typeof window.gtag !== 'undefined') {
-      window.gtag('event', 'exception', {
-        description: error.message,
-        fatal: false,
-      });
-    }
+  componentDidCatch(error: Error, errorInfo: any) {
+    logger.error('ErrorBoundary caught an error:', error, errorInfo);
   }
-
-  reset = () => {
-    this.setState({ hasError: false, error: undefined });
-  };
 
   render() {
     if (this.state.hasError) {
       if (this.props.fallback) {
-        const FallbackComponent = this.props.fallback;
-        return <FallbackComponent error={this.state.error} reset={this.reset} />;
+        return this.props.fallback;
       }
 
       return (
-        <div className="min-h-screen flex items-center justify-center bg-background">
-          <div className="text-center p-8 max-w-md mx-auto">
-            <AlertTriangle className="h-16 w-16 text-destructive mx-auto mb-4" />
-            <h2 className="text-2xl font-semibold text-foreground mb-2">
-              Algo deu errado
-            </h2>
-            <p className="text-muted-foreground mb-6">
-              Ocorreu um erro inesperado. Tente recarregar a página.
-            </p>
-            <button
-              onClick={this.reset}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors"
-            >
-              <RefreshCw className="h-4 w-4" />
-              Tentar novamente
-            </button>
-          </div>
+        <div className="flex flex-col items-center justify-center min-h-[200px] p-8 text-center">
+          <AlertTriangle className="w-12 h-12 text-muted mb-4" />
+          <h3 className="text-lg font-semibold mb-2">Algo deu errado</h3>
+          <p className="text-muted text-sm mb-4">
+            Um erro inesperado ocorreu neste componente.
+          </p>
+          <button
+            onClick={() => window.location.reload()}
+            className="flex items-center gap-2 px-4 py-2 bg-accent text-accent-foreground rounded-lg hover:bg-accent/90 transition-colors"
+          >
+            <RefreshCw className="w-4 h-4" />
+            Recarregar página
+          </button>
         </div>
       );
     }

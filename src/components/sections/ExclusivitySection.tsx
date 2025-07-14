@@ -1,5 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { SimpleButton } from "@/components/ui/SimpleButton";
+import { EnhancedButton } from "@/components/ui/EnhancedButton";
 import { Badge, TrendingUp, Target, ShieldCheck, Crown, Smartphone, Clock } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -114,15 +114,15 @@ const ExclusivitySection = ({ onCTAClick }: ExclusivitySectionProps) => {
               </p>
 
               <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                <SimpleButton
-                  variant="primary"
+                <EnhancedButton
+                  variant="premium"
                   size="lg"
                   onClick={onCTAClick}
                   className="py-3 px-6 text-lg font-semibold"
                 >
                   <Target className="w-5 h-5 mr-2" strokeWidth={1.5} />
                   Solicitar Informações
-                </SimpleButton>
+                </EnhancedButton>
                 
                 <a
                   href="https://wa.me/5511999999999?text=Olá! Tenho interesse em ser distribuidor NIVELA® e gostaria de saber mais sobre as condições de parceria"

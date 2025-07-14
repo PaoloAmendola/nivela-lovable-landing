@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { SimpleButton } from "@/components/ui/SimpleButton";
+import { EnhancedButton } from "@/components/ui/EnhancedButton";
 import { useScroll } from "@/hooks/use-scroll";
 import NavLogo from "./NavLogo";
 import DesktopNavigation from "./DesktopNavigation";
@@ -87,14 +87,14 @@ const Navbar = ({ onCTAClick }: NavbarProps) => {
 
             {/* Desktop CTA */}
             <div className="hidden lg:block">
-              <SimpleButton
+              <EnhancedButton
                 onClick={onCTAClick}
-                variant="primary"
+                variant="premium"
                 size="sm"
                 className="px-6 py-2"
               >
                 Quero conhecer
-              </SimpleButton>
+              </EnhancedButton>
             </div>
 
             {/* Mobile Menu Button */}

@@ -1,5 +1,5 @@
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { SimpleButton } from "@/components/ui/SimpleButton";
+import { EnhancedButton } from "@/components/ui/EnhancedButton";
 import SmartLoading from "@/components/ui/SmartLoading";
 import FormProgress from "@/components/ui/FormProgress";
 import { motion, AnimatePresence } from "framer-motion";
@@ -70,7 +70,7 @@ const ContactForm = ({ isOpen, onClose }: ContactFormProps) => {
           {/* Navigation Buttons */}
           <div className={`flex ${step === 1 ? 'justify-end' : 'justify-between'} items-center pt-4`}>
             {step > 1 && (
-              <SimpleButton 
+              <EnhancedButton 
                 type="button"
                 variant="outline" 
                 onClick={handlePrevStep}
@@ -79,7 +79,7 @@ const ContactForm = ({ isOpen, onClose }: ContactFormProps) => {
               >
                 <ArrowLeft className="w-4 h-4 mr-2" />
                 Voltar
-              </SimpleButton>
+              </EnhancedButton>
             )}
             
             <div className="flex items-center gap-4">
@@ -94,24 +94,24 @@ const ContactForm = ({ isOpen, onClose }: ContactFormProps) => {
               />
               
               {step < 2 ? (
-                <SimpleButton 
+                <EnhancedButton 
                   type="button"
                   onClick={handleNextStep}
-                  variant="primary"
+                  variant="default"
                   disabled={submitState === 'loading'}
                 >
                   Continuar
                   <ArrowRight className="w-4 h-4 ml-2" />
-                </SimpleButton>
+                </EnhancedButton>
               ) : (
-                <SimpleButton 
+                <EnhancedButton 
                   type="submit"
-                  variant="primary"
+                  variant="default"
                   disabled={submitState === 'loading' || submitState === 'success'}
                   loading={submitState === 'loading'}
                 >
                   {submitState === 'success' ? '✅ Enviado!' : '🎯 Solicitar Acesso Profissional'}
-                </SimpleButton>
+                </EnhancedButton>
               )}
             </div>
           </div>

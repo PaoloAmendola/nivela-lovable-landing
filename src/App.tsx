@@ -1,16 +1,15 @@
 
 import React from 'react';
 import { Toaster } from "@/components/ui/toaster";
-import ErrorBoundary from "@/components/ui/ErrorBoundary";
-import StaticIndex from "./pages/StaticIndex";
+import Index from "./pages/Index";
 
-function App() {
+const App: React.FC = () => {
   return (
-    <ErrorBoundary>
-      <StaticIndex />
+    <>
+      <Index />
       <Toaster />
-    </ErrorBoundary>
+    </>
   );
-}
+};
 
 export default App;

@@ -60,14 +60,26 @@
     <!-- PREMIUM TYPOGRAPHY SYSTEM - OTIMIZADO com font-display: swap -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
     
-    <!-- Preload only existing assets -->
-    <link rel="preload" href="/lovable-uploads/35c523c0-e991-4c45-9e0b-08ebd975b908.png" as="image" fetchpriority="high" />
+    <!-- Critical Hero Image Preload -->
+    <link rel="preload" href="/lovable-uploads/a7abdd1a-341f-47f5-ac11-9963fecf6f84.png" as="image" fetchpriority="high" />
+    <link rel="preload" href="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=1920&h=1080&fit=crop&crop=center&auto=format&q=80&fm=webp" as="image" fetchpriority="high" />
+    
+    <!-- Preload fonts -->
+    <link rel="preload" href="/fonts/Wilkysta.woff2" as="font" type="font/woff2" crossorigin>
     
     <!-- Theme -->
     <meta name="theme-color" content="#0D181C" />
     <meta name="color-scheme" content="dark" />
     
-    <!-- GTM Removed for debugging -->
+    <!-- Google Tag Manager -->
+    <script>
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id=GTM-KZW3RTWD'+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-KZW3RTWD');
+    </script>
+    <!-- End Google Tag Manager -->
 
     <!-- Critical CSS inline -->
     <style>
@@ -75,14 +87,35 @@
     </style>
   </head>
   <body>
-    <!-- GTM noscript removed for debugging -->
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KZW3RTWD"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
     
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
     
-    <!-- Security scripts removed for debugging -->
+    <!-- Security: Disable some features for production -->
     <script>
-      // Only keep essential PWA functionality
+      // Disable right-click and F12 in production
+      if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+        document.addEventListener('contextmenu', e => e.preventDefault());
+        document.addEventListener('keydown', e => {
+          if (e.key === 'F12' || 
+              (e.ctrlKey && e.shiftKey && e.key === 'I') ||
+              (e.ctrlKey && e.shiftKey && e.key === 'C') ||
+              (e.ctrlKey && e.key === 'U')) {
+            e.preventDefault();
+          }
+        });
+      }
+      
+      // PWA Install prompt tracking
+      window.addEventListener('beforeinstallprompt', (e) => {
+        window.deferredPrompt = e;
+      });
+      
+      // Track PWA usage
       if (window.matchMedia('(display-mode: standalone)').matches) {
         document.documentElement.classList.add('pwa-mode');
       }

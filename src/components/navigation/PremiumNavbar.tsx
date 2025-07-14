@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { SimpleButton } from "@/components/ui/SimpleButton";
+import { EnhancedButton } from "@/components/ui/EnhancedButton";
 import { useScroll } from "@/hooks/use-scroll";
 import HamburgerMenu from "./HamburgerMenu";
 
@@ -114,14 +114,14 @@ const PremiumNavbar = ({ onCTAClick }: PremiumNavbarProps) => {
 
             {/* Desktop CTA */}
             <div className="hidden lg:block">
-              <SimpleButton
+              <EnhancedButton
                 onClick={onCTAClick}
-                variant="primary"
+                variant="premium"
                 size="sm"
-                className="px-6 py-2 shadow-lg"
+                className="px-6 py-2 shadow-elegant hover:shadow-glow"
               >
                 Acesso Profissional
-              </SimpleButton>
+              </EnhancedButton>
             </div>
 
             {/* Enhanced Mobile Menu */}

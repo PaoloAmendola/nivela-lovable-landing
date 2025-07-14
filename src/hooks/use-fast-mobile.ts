@@ -14,13 +14,15 @@ export const useFastMobile = (): FastMobileOptimizations => {
   });
 
   useEffect(() => {
-    // Simplified mobile detection - no experimental APIs
     const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+    const connection = (navigator as any)?.connection;
+    const isSlowConnection = connection?.effectiveType === 'slow-2g' || connection?.effectiveType === '2g';
+    const isLowMemory = (navigator as any)?.deviceMemory < 4;
     
     setOptimizations({
       isMobile,
-      shouldReduceAnimations: false, // Disabled to prevent issues
-      shouldUseLowQuality: false,    // Disabled to prevent issues
+      shouldReduceAnimations: isSlowConnection || isLowMemory,
+      shouldUseLowQuality: isSlowConnection || isLowMemory,
     });
   }, []);
 

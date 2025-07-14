@@ -1,7 +1,7 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
-import { SimpleButton } from "@/components/ui/SimpleButton";
+import { EnhancedButton } from "@/components/ui/EnhancedButton";
 import { useState } from "react";
 
 interface NavItem {
@@ -97,16 +97,16 @@ const MobileMenu = ({
 
               {/* Mobile CTA */}
               <div className="p-6 border-t border-accent/20">
-                <SimpleButton
+                <EnhancedButton
                   onClick={() => {
                     onCTAClick();
                     onClose();
                   }}
-                  variant="primary"
+                  variant="premium"
                   className="w-full py-4 text-lg"
                 >
                   Quero conhecer o NIVELA®
-                </SimpleButton>
+                </EnhancedButton>
               </div>
             </div>
           </motion.div>
