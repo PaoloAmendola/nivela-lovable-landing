@@ -45,9 +45,16 @@ const HeroContent = ({ onCTAClick, shouldReduceAnimations }: HeroContentProps) =
 
       {/* Descrição */}
       <div className="animate-sequential-in opacity-0">
-        <p className="text-hero-description text-center lg:text-left mb-8 lg:mb-10">
-          Desenvolvido com tecnologia patenteada e ativos da Amazônia. Rendimento até 30% superior.
+        <p className="text-hero-description text-center lg:text-left mb-6 lg:mb-8">
+          Desenvolvido com tecnologia patenteada e ativos da Amazônia.
         </p>
+        
+        {/* Destaque do Rendimento */}
+        <div className="text-center lg:text-left mb-8 lg:mb-10">
+          <span className="inline-block text-2xl lg:text-3xl font-playfair font-bold gradient-text-animated bg-gradient-to-r from-[#9D4916] via-[#D9C0AA] to-[#254C5A] bg-clip-text text-transparent">
+            30% + rendimento
+          </span>
+        </div>
       </div>
 
       {/* Creative Pills */}
