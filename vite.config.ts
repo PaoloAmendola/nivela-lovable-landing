@@ -20,54 +20,17 @@ export default defineConfig(({ mode }) => ({
     },
   },
   build: {
-    // Performance optimizations
-    minify: 'terser',
-    terserOptions: {
-      compress: {
-        drop_console: mode === 'production',
-        drop_debugger: mode === 'production',
-        pure_funcs: mode === 'production' ? ['console.log', 'console.warn'] : [],
-      },
-    },
+    minify: 'esbuild', // Use esbuild instead of terser
     rollupOptions: {
       output: {
         manualChunks: {
-          // Vendor chunks for better caching
           vendor: ['react', 'react-dom'],
           ui: ['@radix-ui/react-accordion', '@radix-ui/react-dialog'],
           motion: ['framer-motion'],
-          forms: ['react-hook-form', '@hookform/resolvers', 'zod'],
         },
       },
     },
-    // Asset optimizations
-    assetsDir: 'assets',
-    assetsInlineLimit: 4096, // 4KB
-    cssCodeSplit: true,
-    sourcemap: mode !== 'production',
-    reportCompressedSize: false, // Faster builds
-    chunkSizeWarningLimit: 1000, // 1MB warning limit
-  },
-  // CSS optimization
-  css: {
-    devSourcemap: mode === 'development',
-    preprocessorOptions: {
-      css: {
-        charset: false,
-      },
-    },
-  },
-  // Dependencies optimization
-  optimizeDeps: {
-    include: [
-      'react',
-      'react-dom',
-      'react-router-dom',
-      'framer-motion',
-      '@radix-ui/react-accordion',
-      '@radix-ui/react-dialog',
-      'lucide-react'
-    ],
-    exclude: ['@vite/client', '@vite/env'],
+    sourcemap: false,
+    chunkSizeWarningLimit: 1000,
   },
 }));
