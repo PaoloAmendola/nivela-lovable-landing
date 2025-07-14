@@ -19,18 +19,4 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
-  build: {
-    minify: 'esbuild', // Use esbuild instead of terser
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          vendor: ['react', 'react-dom'],
-          ui: ['@radix-ui/react-accordion', '@radix-ui/react-dialog'],
-          motion: ['framer-motion'],
-        },
-      },
-    },
-    sourcemap: false,
-    chunkSizeWarningLimit: 1000,
-  },
 }));
