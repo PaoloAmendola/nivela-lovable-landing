@@ -4,6 +4,7 @@ import { Crown } from "lucide-react";
 import DistributorBenefits from "./distributor/DistributorBenefits";
 import DistributorForm from "./distributor/DistributorForm";
 import { useToast } from "@/hooks/use-toast";
+import { logger } from "@/lib/logger";
 
 interface DistributorSectionProps {
   onCTAClick: () => void;
@@ -15,7 +16,7 @@ const DistributorSection = ({ onCTAClick }: DistributorSectionProps) => {
   const handleFormSubmit = (data: any) => {
     // Esta função agora é opcional, pois o DistributorForm
     // já integra diretamente com Supabase
-    console.log('Dados do distribuidor para analytics:', data);
+    logger.info('Dados do distribuidor para analytics:', data);
     
     // Removido onCTAClick() para manter formulários independentes
     // onCTAClick();

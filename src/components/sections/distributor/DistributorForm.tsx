@@ -10,6 +10,7 @@ import { useFormValidation } from "@/hooks/use-form-validation";
 import { Loader2, Send } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { logger } from "@/lib/logger";
 
 interface DistributorFormProps {
   onSubmit?: (data: any) => void;
@@ -54,7 +55,7 @@ const DistributorForm = ({ onSubmit }: DistributorFormProps) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    console.log("Form submission attempt:", {
+    logger.debug("Form submission attempt:", {
       isValid,
       fields: Object.keys(validationRules).map(key => ({
         key,
@@ -65,7 +66,7 @@ const DistributorForm = ({ onSubmit }: DistributorFormProps) => {
     });
     
     if (!validateAll()) {
-      console.log("Validation failed");
+      logger.debug("Validation failed");
       toast({
         title: "Formulário incompleto",
         description: "Por favor, preencha todos os campos obrigatórios.",
@@ -87,7 +88,7 @@ const DistributorForm = ({ onSubmit }: DistributorFormProps) => {
         notes: getFieldProps("notes").value || null
       };
       
-      console.log("Sending form data:", formData);
+      logger.debug("Sending form data:", formData);
       
       // Salvar diretamente no Supabase
       const { error } = await supabase
@@ -95,11 +96,11 @@ const DistributorForm = ({ onSubmit }: DistributorFormProps) => {
         .insert(formData);
 
       if (error) {
-        console.error("Supabase error:", error);
+        logger.error("Supabase error:", error);
         throw error;
       }
 
-      console.log("Form submitted successfully");
+      logger.info("Form submitted successfully");
 
       // Sucesso
       toast({
@@ -116,7 +117,7 @@ const DistributorForm = ({ onSubmit }: DistributorFormProps) => {
       resetForm();
       
     } catch (error) {
-      console.error("Erro ao enviar formulário:", error);
+      logger.error("Erro ao enviar formulário:", error);
       const errorMessage = error instanceof Error ? error.message : "Erro desconhecido";
       toast({
         title: "Erro ao Enviar",

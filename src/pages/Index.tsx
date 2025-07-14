@@ -18,17 +18,17 @@ import EnhancedMobileCTA from "@/components/ui/EnhancedMobileCTA";
 import PullToRefresh from "@/components/ui/PullToRefresh";
 import SystemHealthCheck from "@/components/ui/SystemHealthCheck";
 import ContrastOptimizer from "@/components/ui/ContrastOptimizer";
-import { usePerformanceOptimization } from "@/hooks/use-performance-optimization";
-import { useLoadingOptimization } from "@/hooks/use-loading-optimization";
+// import { usePerformanceOptimization } from "@/hooks/use-performance-optimization";
+// import { useLoadingOptimization } from "@/hooks/use-loading-optimization";
 import { useToast } from "@/hooks/use-toast";
 
 const Index: React.FC = () => {
   const [showForm, setShowForm] = useState(false);
   const { toast } = useToast();
   
-  // Initialize performance optimizations
-  usePerformanceOptimization();
-  const { isOptimized, performanceGrade } = useLoadingOptimization();
+  // Initialize performance optimizations - temporarily disabled
+  // usePerformanceOptimization();
+  // const { isOptimized, performanceGrade } = useLoadingOptimization();
 
   const handleRefresh = async () => {
     // Simulate content refresh
