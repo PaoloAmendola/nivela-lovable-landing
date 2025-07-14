@@ -47,7 +47,7 @@ const WhyChooseNivelaSection = () => {
           <motion.div variants={itemVariants} className="text-center mb-8 lg:mb-12">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-playfair font-bold gradient-text-animated">
               O que é{' '}
-              <span className="gradient-text-animated font-bold">NIVELA®?</span>
+              <span className="wilkysta-title gradient-text-animated font-bold">NIVELA®?</span>
             </h2>
           </motion.div>
 

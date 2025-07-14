@@ -41,7 +41,7 @@ const ManifestoTextSection = () => {
         >
           Acreditamos que <strong>profissionais extraordinários</strong> merecem ferramentas à altura de sua expertise.
           {' '}
-          <span className="text-[#D9C0AA] font-semibold">NIVELA®</span> representa uma nova era em <span className="italic">retexturização capilar</span>,
+          <span className="wilkysta-title text-[#D9C0AA] font-semibold">NIVELA®</span> representa uma nova era em <span className="italic">retexturização capilar</span>,
           onde <span className="font-medium">tecnologia</span>, <span className="font-medium">performance</span> e <span className="font-medium">sofisticação</span> se encontram em perfeita harmonia.
         </motion.p>
 

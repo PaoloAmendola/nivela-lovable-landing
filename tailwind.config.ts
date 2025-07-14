@@ -20,9 +20,10 @@ export default {
 		},
 		extend: {
 			fontFamily: {
-				// Premium Typography System - 2 Fonts Only
+				// Premium Typography System - 3 Fonts
 				'playfair': ['Playfair Display', 'serif'], // Headlines & Premium Elements
 				'montserrat': ['Montserrat', 'sans-serif'], // Body & UI Elements
+				'wilkysta': ['Wilkysta', 'sans-serif'], // Brand Name Only
 			},
 			colors: {
 				border: 'hsl(var(--border))',
