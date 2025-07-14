@@ -1,5 +1,6 @@
+
 import React, { useRef, useState, useEffect, useCallback, useMemo } from 'react';
-import { Play, Pause, Volume2, VolumeX, Settings } from 'lucide-react';
+import { Play, Pause, Volume2, VolumeX } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 interface OptimizedVideoPlayerProps {
@@ -32,26 +33,9 @@ const OptimizedVideoPlayer = ({
   const [isMuted, setIsMuted] = useState(muted);
   const [showControls, setShowControls] = useState(false);
   const [isInView, setIsInView] = useState(false);
-  const [quality, setQuality] = useState<'low' | 'medium' | 'high'>('medium');
+  const [hasError, setHasError] = useState(false);
 
-  // Connection-based quality selection
-  const optimizedSrc = useMemo(() => {
-    const connection = (navigator as any).connection;
-    let selectedQuality = quality;
-    
-    if (connection) {
-      if (connection.effectiveType === '4g' && !connection.saveData) {
-        selectedQuality = 'high';
-      } else if (connection.effectiveType === '3g' || connection.saveData) {
-        selectedQuality = 'low';
-      }
-    }
-    
-    // For demo, using same source but could implement quality variants
-    return src;
-  }, [src, quality]);
-
-  // Intersection Observer for lazy loading
+  // Intersection Observer para lazy loading
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
@@ -74,79 +58,65 @@ const OptimizedVideoPlayer = ({
     return () => observer.disconnect();
   }, []);
 
-  // Auto-play attempt when in view
+  // Tentativa de autoplay quando em visualização
   useEffect(() => {
-    if (!isInView || !videoRef.current) return;
+    if (!isInView || !videoRef.current || hasError) return;
 
     const video = videoRef.current;
     
-    console.log('[OptimizedVideoPlayer] Video in view, setup:', { 
-      autoplay, 
-      smartAutoplay, 
-      isInView,
-      isLoaded 
-    });
-    
     const attemptAutoplay = async () => {
       try {
+        // Garantir que está mutado para autoplay
         video.muted = true;
         setIsMuted(true);
         
-        // Wait for video to be ready if needed
+        // Aguardar se necessário
         if (video.readyState < 2) {
-          console.log('[OptimizedVideoPlayer] Video not ready, waiting for loadeddata...');
-          video.addEventListener('loadeddata', () => {
-            console.log('[OptimizedVideoPlayer] Video loaded, attempting autoplay');
+          const handleLoaded = () => {
             video.play().then(() => {
               setIsPlaying(true);
               onPlay?.();
-              console.log('[OptimizedVideoPlayer] Autoplay successful');
-            }).catch(error => {
-              console.warn('[OptimizedVideoPlayer] Autoplay blocked:', error);
+            }).catch(() => {
               setShowControls(true);
             });
-          }, { once: true });
-          setIsLoaded(true);
+          };
+          
+          video.addEventListener('loadeddata', handleLoaded, { once: true });
           return;
         }
 
         await video.play();
         setIsPlaying(true);
         onPlay?.();
-        console.log('[OptimizedVideoPlayer] Autoplay successful');
       } catch (error) {
-        console.warn('[OptimizedVideoPlayer] Autoplay blocked:', error);
         setShowControls(true);
       }
     };
 
     if (autoplay || smartAutoplay) {
-      console.log('[OptimizedVideoPlayer] Attempting autoplay...');
       attemptAutoplay();
     }
     
     setIsLoaded(true);
-  }, [isInView, autoplay, smartAutoplay, onPlay]);
+  }, [isInView, autoplay, smartAutoplay, onPlay, hasError]);
 
   const togglePlay = useCallback(async () => {
     const video = videoRef.current;
-    if (!video) return;
+    if (!video || hasError) return;
 
     try {
       if (isPlaying) {
         await video.pause();
         setIsPlaying(false);
-        console.log('[OptimizedVideoPlayer] Video paused manually');
       } else {
         await video.play();
         setIsPlaying(true);
         onPlay?.();
-        console.log('[OptimizedVideoPlayer] Video played manually');
       }
     } catch (error) {
-      console.warn('Video play/pause failed:', error);
+      setHasError(true);
     }
-  }, [isPlaying, onPlay]);
+  }, [isPlaying, onPlay, hasError]);
 
   const toggleMute = useCallback(() => {
     const video = videoRef.current;
@@ -160,16 +130,18 @@ const OptimizedVideoPlayer = ({
     setIsPlaying(false);
     if (loop && videoRef.current) {
       videoRef.current.currentTime = 0;
-      videoRef.current.play().catch(() => {});
     }
   }, [loop]);
 
-  // Low-res placeholder
+  const handleError = useCallback(() => {
+    setHasError(true);
+    setIsLoaded(true);
+  }, []);
+
+  // Placeholder de baixa resolução
   const placeholderSrc = useMemo(() => {
     if (!poster) return undefined;
-    return poster.includes('unsplash') 
-      ? poster.replace('&q=80', '&q=30').replace('w=1920', 'w=640')
-      : poster;
+    return poster;
   }, [poster]);
 
   if (!isInView) {
@@ -183,7 +155,7 @@ const OptimizedVideoPlayer = ({
           <img 
             src={placeholderSrc}
             alt="Video preview"
-            className="w-full h-full object-cover blur-sm"
+            className="w-full h-full object-cover"
             loading="lazy"
           />
         )}
@@ -191,6 +163,21 @@ const OptimizedVideoPlayer = ({
           <div className="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center">
             <Play className="w-8 h-8 text-white ml-1" />
           </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (hasError) {
+    return (
+      <div 
+        ref={containerRef}
+        className={`relative bg-muted/20 rounded-xl overflow-hidden flex items-center justify-center ${className}`}
+        style={{ aspectRatio: '16/9' }}
+      >
+        <div className="text-center text-muted-foreground">
+          <Play className="w-12 h-12 mx-auto mb-2 opacity-50" />
+          <p className="text-sm">Erro ao carregar vídeo</p>
         </div>
       </div>
     );
@@ -205,26 +192,27 @@ const OptimizedVideoPlayer = ({
     >
       <video
         ref={videoRef}
-        src={isLoaded ? optimizedSrc : undefined}
+        src={isLoaded ? src : undefined}
         poster={poster}
         muted={isMuted}
         loop={loop}
         playsInline
         preload={preload}
         onEnded={handleVideoEnd}
+        onError={handleError}
         className="w-full rounded-xl"
         crossOrigin="anonymous"
       />
 
       {/* Loading overlay */}
-      {!isLoaded && (
+      {!isLoaded && !hasError && (
         <div className="absolute inset-0 bg-muted/20 flex items-center justify-center">
           <div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin" />
         </div>
       )}
 
       {/* Controls overlay */}
-      {(showControls || !isPlaying) && isLoaded && (
+      {(showControls || !isPlaying) && isLoaded && !hasError && (
         <div className="absolute inset-0 bg-black/20 flex items-center justify-center transition-opacity">
           <div className="flex items-center gap-4">
             <Button
@@ -247,11 +235,6 @@ const OptimizedVideoPlayer = ({
           </div>
         </div>
       )}
-
-      {/* Quality indicator */}
-      <div className="absolute top-4 right-4 bg-black/50 text-white text-xs px-2 py-1 rounded backdrop-blur-sm">
-        {quality.toUpperCase()}
-      </div>
     </div>
   );
 };

@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 
 interface UseSmartAutoplayOptions {
@@ -11,58 +12,59 @@ export const useSmartAutoplay = (options: UseSmartAutoplayOptions = {}) => {
     defaultAutoplay = true 
   } = options;
   
-  // Inicializar com estado correto desde o início
-  const getInitialState = () => {
+  // Estado inicial seguro
+  const [shouldAutoplay, setShouldAutoplay] = useState(false);
+  const [isFirstView, setIsFirstView] = useState(true);
+  const [isInitialized, setIsInitialized] = useState(false);
+
+  // Inicialização segura apenas no cliente
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    
     try {
       const hasPlayed = localStorage.getItem(storageKey);
       const firstView = !hasPlayed;
-      console.log('[SmartAutoplay] Initial state:', { hasPlayed, firstView, storageKey });
-      return {
-        shouldAutoplay: firstView && defaultAutoplay,
-        isFirstView: firstView
-      };
+      
+      setIsFirstView(firstView);
+      setShouldAutoplay(firstView && defaultAutoplay);
     } catch (error) {
-      console.log('[SmartAutoplay] localStorage error, using fallback');
-      return {
-        shouldAutoplay: defaultAutoplay,
-        isFirstView: true
-      };
+      // Fallback silencioso
+      setIsFirstView(true);
+      setShouldAutoplay(defaultAutoplay);
+    } finally {
+      setIsInitialized(true);
     }
-  };
-
-  const initialState = getInitialState();
-  const [shouldAutoplay, setShouldAutoplay] = useState(initialState.shouldAutoplay);
-  const [isFirstView, setIsFirstView] = useState(initialState.isFirstView);
-
-  useEffect(() => {
-    console.log('[SmartAutoplay] State updated:', { shouldAutoplay, isFirstView });
-  }, [shouldAutoplay, isFirstView]);
+  }, [storageKey, defaultAutoplay]);
 
   const markAsPlayed = () => {
+    if (typeof window === 'undefined') return;
+    
     try {
-      console.log('[SmartAutoplay] Marking video as played');
       localStorage.setItem(storageKey, 'true');
       setIsFirstView(false);
       setShouldAutoplay(false);
     } catch (error) {
-      console.warn('Failed to save video play state:', error);
+      // Silently fail if localStorage is not available
     }
   };
 
   const resetPlayState = () => {
+    if (typeof window === 'undefined') return;
+    
     try {
       localStorage.removeItem(storageKey);
       setIsFirstView(true);
       setShouldAutoplay(defaultAutoplay);
     } catch (error) {
-      console.warn('Failed to reset video play state:', error);
+      // Silently fail
     }
   };
 
   return {
-    shouldAutoplay,
+    shouldAutoplay: isInitialized ? shouldAutoplay : false,
     isFirstView,
     markAsPlayed,
-    resetPlayState
+    resetPlayState,
+    isInitialized
   };
 };
