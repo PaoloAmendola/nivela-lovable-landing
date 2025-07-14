@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -20,10 +19,10 @@ export default {
 		},
 		extend: {
 			fontFamily: {
-				// Premium Typography System - 3 Fonts
+				// Premium Typography System - 2 Fonts Only
 				'playfair': ['Playfair Display', 'serif'], // Headlines & Premium Elements
 				'montserrat': ['Montserrat', 'sans-serif'], // Body & UI Elements
-				'wilkysta': ['Wilkysta', 'sans-serif'], // Brand Name Only
+				// Note: wilkysta-title class in CSS redirects to Playfair Display
 			},
 			colors: {
 				border: 'hsl(var(--border))',

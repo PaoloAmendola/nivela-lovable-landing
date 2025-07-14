@@ -1,6 +1,25 @@
-/* Usando apenas Google Fonts para compatibilidade */
+
+/* 
+ * NIVELA® Font System
+ * Usando apenas Google Fonts para máxima compatibilidade e performance
+ * 
+ * A classe .wilkysta-title redireciona para Playfair Display
+ * que oferece a mesma elegância premium desejada para o brand
+ */
+
 .wilkysta-title {
   font-family: 'Playfair Display', serif;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+/* 
+ * Backup: caso alguém tente usar font-wilkysta diretamente,
+ * redirecionamos para Playfair Display também
+ */
+.font-wilkysta {
+  font-family: 'Playfair Display', serif !important;
   letter-spacing: 0.05em;
   text-transform: uppercase;
   font-weight: 700;
