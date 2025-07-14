@@ -19,7 +19,7 @@ const LegalSection = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
             {/* Canais de Atendimento */}
             <div className="space-y-4">
-              <h4 className="font-playfair font-bold text-xl gradient-text flex items-center gap-3">
+              <h4 className="font-playfair font-bold text-xl gradient-text-animated flex items-center gap-3">
                 <Phone className="w-5 h-5" strokeWidth={1.5} />
                 Canais de Atendimento
               </h4>
@@ -46,7 +46,7 @@ const LegalSection = () => {
 
             {/* Redes Sociais */}
             <div className="space-y-4">
-              <h4 className="font-playfair font-bold text-xl gradient-text flex items-center gap-3">
+              <h4 className="font-playfair font-bold text-xl gradient-text-animated flex items-center gap-3">
                 <Globe className="w-5 h-5" strokeWidth={1.5} />
                 Redes Sociais
               </h4>
@@ -78,7 +78,7 @@ const LegalSection = () => {
 
             {/* Endereços */}
             <div className="space-y-4">
-              <h4 className="font-playfair font-bold text-xl gradient-text flex items-center gap-3">
+              <h4 className="font-playfair font-bold text-xl gradient-text-animated flex items-center gap-3">
                 <MapPin className="w-5 h-5" strokeWidth={1.5} />
                 Endereços
               </h4>
