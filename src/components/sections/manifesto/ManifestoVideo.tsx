@@ -35,9 +35,9 @@ const ManifestoVideo = () => {
             <OptimizedVideoPlayer
               src="https://xnexfhgtqlryfkyuvihq.supabase.co/storage/v1/object/public/videos/video-manifesto-oficial-compactado.mp4"
               className="w-full max-w-4xl mx-auto"
-              smartAutoplay={shouldAutoplay}
+              smartAutoplay={false}
               muted={true}
-              preload={shouldAutoplay ? "metadata" : "none"}
+              preload="none"
               poster="/lovable-uploads/f7afc3f5-36a2-49c4-a947-04e9bc701f3c.png"
               onPlay={markAsPlayed}
             />
