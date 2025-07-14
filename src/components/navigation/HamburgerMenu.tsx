@@ -109,7 +109,7 @@ const HamburgerMenu = ({ onCTAClick }: HamburgerMenuProps) => {
                     transition={{ delay: 0.2 }}
                     className="text-xl font-playfair font-bold gradient-text"
                   >
-                    <span className="font-wilkysta">NIVELA</span><sup className="text-sm">®</sup>
+                    <span className="wilkysta-title">NIVELA</span><sup className="text-sm">®</sup>
                   </motion.span>
                   <motion.button
                     onClick={() => setIsOpen(false)}
