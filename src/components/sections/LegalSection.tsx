@@ -28,14 +28,17 @@ const LegalSection = () => {
                   href="https://wa.me/552139500901" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="block hover:text-green-400 transition-colors"
+                  className="flex items-center gap-2 hover:text-green-400 transition-colors"
                 >
+                  <Smartphone className="w-4 h-4" strokeWidth={1.5} />
                   <span className="text-contrast font-montserrat leading-relaxed">WhatsApp: (21) 3950-0901</span>
                 </a>
-                <div>
+                <div className="flex items-center gap-2">
+                  <Phone className="w-4 h-4" strokeWidth={1.5} />
                   <span className="text-contrast font-montserrat leading-relaxed">(21) 3269-0484</span>
                 </div>
-                <div>
+                <div className="flex items-center gap-2">
+                  <Mail className="w-4 h-4" strokeWidth={1.5} />
                   <span className="text-contrast font-montserrat leading-relaxed">comercial@bembeauty.com.br</span>
                 </div>
               </div>
@@ -48,23 +51,26 @@ const LegalSection = () => {
                 Redes Sociais
               </h4>
               <div className="space-y-3 ml-8">
-                <div>
+                <div className="flex items-center gap-2">
+                  <Globe className="w-4 h-4" strokeWidth={1.5} />
                   <span className="text-contrast font-montserrat leading-relaxed">www.bembeauty.com.br</span>
                 </div>
                 <a 
                   href="https://www.instagram.com/bembeautyprofessional/" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="block hover:text-pink-400 transition-colors"
+                  className="flex items-center gap-2 hover:text-pink-400 transition-colors"
                 >
+                  <Instagram className="w-4 h-4" strokeWidth={1.5} />
                   <span className="text-contrast font-montserrat leading-relaxed">@bembeautyprofessional</span>
                 </a>
                 <a 
                   href="https://youtu.be/lDKNZIztUMw?si=qJPZwKoXcYssVjK5" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="block hover:text-red-400 transition-colors"
+                  className="flex items-center gap-2 hover:text-red-400 transition-colors"
                 >
+                  <Video className="w-4 h-4" strokeWidth={1.5} />
                   <span className="text-contrast font-montserrat leading-relaxed">Bem Beauty Professional</span>
                 </a>
               </div>
