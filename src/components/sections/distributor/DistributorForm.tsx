@@ -23,7 +23,7 @@ const validationRules = {
   },
   whatsapp: { 
     required: true, 
-    pattern: /^\(\d{2}\)\s\d{4,5}-\d{4}$/
+    pattern: /^\(\d{2}\)\s?\d{4,5}-?\d{4}$/
   },
   city: { required: true, minLength: 2 },
   experience: { required: true }
@@ -31,7 +31,6 @@ const validationRules = {
 
 const DistributorForm = ({ onSubmit }: DistributorFormProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [experience, setExperience] = useState("");
   const { toast } = useToast();
 
   const {
@@ -55,7 +54,18 @@ const DistributorForm = ({ onSubmit }: DistributorFormProps) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!validateAll() || !experience) {
+    console.log("Form submission attempt:", {
+      isValid,
+      fields: Object.keys(validationRules).map(key => ({
+        key,
+        value: getFieldProps(key).value,
+        error: getFieldProps(key).error,
+        required: validationRules[key as keyof typeof validationRules]?.required
+      }))
+    });
+    
+    if (!validateAll()) {
+      console.log("Validation failed");
       toast({
         title: "Formulário incompleto",
         description: "Por favor, preencha todos os campos obrigatórios.",
@@ -72,10 +82,12 @@ const DistributorForm = ({ onSubmit }: DistributorFormProps) => {
         email: getFieldProps("email").value,
         whatsapp: getFieldProps("whatsapp").value,
         city: getFieldProps("city").value,
-        experience: experience,
+        experience: getFieldProps("experience").value,
         referral: getFieldProps("referral").value || null,
         notes: getFieldProps("notes").value || null
       };
+      
+      console.log("Sending form data:", formData);
       
       // Salvar diretamente no Supabase
       const { error } = await supabase
@@ -83,8 +95,11 @@ const DistributorForm = ({ onSubmit }: DistributorFormProps) => {
         .insert(formData);
 
       if (error) {
+        console.error("Supabase error:", error);
         throw error;
       }
+
+      console.log("Form submitted successfully");
 
       // Sucesso
       toast({
@@ -99,13 +114,13 @@ const DistributorForm = ({ onSubmit }: DistributorFormProps) => {
 
       // Reset form
       resetForm();
-      setExperience("");
       
     } catch (error) {
       console.error("Erro ao enviar formulário:", error);
+      const errorMessage = error instanceof Error ? error.message : "Erro desconhecido";
       toast({
         title: "Erro ao Enviar",
-        description: "Tente novamente ou entre em contato conosco.",
+        description: `Erro: ${errorMessage}. Tente novamente.`,
         variant: "destructive",
       });
     } finally {
@@ -209,7 +224,10 @@ const DistributorForm = ({ onSubmit }: DistributorFormProps) => {
               <Label className="text-contrast font-medium">
                 Experiência no Setor *
               </Label>
-              <Select value={experience} onValueChange={setExperience}>
+              <Select 
+                value={getFieldProps("experience").value} 
+                onValueChange={(value) => getFieldProps("experience").onChange({ target: { value } } as any)}
+              >
                 <SelectTrigger className="mt-1">
                   <SelectValue placeholder="Selecione sua experiência" />
                 </SelectTrigger>
@@ -220,6 +238,11 @@ const DistributorForm = ({ onSubmit }: DistributorFormProps) => {
                   <SelectItem value="5+">Mais de 5 anos</SelectItem>
                 </SelectContent>
               </Select>
+              {getFieldProps("experience").error && (
+                <p className="text-sm text-destructive mt-1">
+                  {getFieldProps("experience").error}
+                </p>
+              )}
             </div>
 
             <div>
@@ -250,7 +273,7 @@ const DistributorForm = ({ onSubmit }: DistributorFormProps) => {
 
             <Button
               type="submit"
-              disabled={!isValid || isSubmitting || !experience}
+              disabled={!isValid || isSubmitting}
               className="w-full mt-6"
               size="lg"
             >

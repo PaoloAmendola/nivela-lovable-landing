@@ -153,7 +153,15 @@ export const useFormValidation = (
     return acc;
   }, {} as Record<string, string | null>);
 
-  const isValid = Object.values(fields).every(field => !field.error);
+  const isValid = Object.values(fields).every(field => !field.error) && 
+    Object.keys(validationRules).every(key => {
+      const field = fields[key];
+      const rules = validationRules[key];
+      if (rules?.required && (!field?.value || !field.value.trim())) {
+        return false;
+      }
+      return true;
+    });
 
   return {
     fields,
