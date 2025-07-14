@@ -1,5 +1,5 @@
 
-import * as React from "react";
+import React from "react";
 import ScrollProgressIndicator from "@/components/ui/ScrollProgressIndicator";
 import HeroSection from "@/components/sections/HeroSection";
 import ManifestoTextSection from "@/components/sections/ManifestoTextSection";
@@ -21,7 +21,7 @@ import SystemHealthCheck from "@/components/ui/SystemHealthCheck";
 import ContrastOptimizer from "@/components/ui/ContrastOptimizer";
 import { useToast } from "@/hooks/use-toast";
 
-const Index = React.memo(() => {
+const Index: React.FC = () => {
   const [showForm, setShowForm] = React.useState<boolean>(false);
   const { toast } = useToast();
 
@@ -29,8 +29,10 @@ const Index = React.memo(() => {
     // Simulate content refresh
     await new Promise(resolve => setTimeout(resolve, 1000));
     
-    // Reset scroll position
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Reset scroll position with safety check
+    if (typeof window !== 'undefined') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
     
     // Show success feedback
     toast({
@@ -120,8 +122,6 @@ const Index = React.memo(() => {
       </div>
     </PullToRefresh>
   );
-});
-
-Index.displayName = 'Index';
+};
 
 export default Index;

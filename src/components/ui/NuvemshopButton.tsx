@@ -1,5 +1,5 @@
 
-import * as React from "react";
+import React from "react";
 
 interface NuvemshopButtonProps {
   productId: string;
@@ -9,26 +9,28 @@ interface NuvemshopButtonProps {
   rel?: string;
 }
 
-const NuvemshopButton = React.memo(({ 
+const NuvemshopButton: React.FC<NuvemshopButtonProps> = ({ 
   productId, 
   children, 
   className = "",
   target = "_blank",
   rel = "noopener noreferrer",
   ...props 
-}: NuvemshopButtonProps) => {
-  const handleClick = React.useCallback(() => {
+}) => {
+  const handleClick = () => {
     // Google Analytics event tracking
-    if (typeof window !== 'undefined' && (window as any).gtag) {
-      (window as any).gtag('event', 'click_loja', {
+    if (typeof window !== 'undefined' && typeof window.gtag !== 'undefined') {
+      window.gtag('event', 'click_loja', {
         event_category: 'navegacao',
         event_label: 'Botão para a loja Nuvemshop'
       });
     }
     
-    // Redirect to store
-    window.location.href = 'https://www.bembeauty.com.br/?utm_source=landing&utm_medium=botao&utm_campaign=checkout_nivela';
-  }, []);
+    // Redirect to store with safety check
+    if (typeof window !== 'undefined') {
+      window.location.href = 'https://www.bembeauty.com.br/?utm_source=landing&utm_medium=botao&utm_campaign=checkout_nivela';
+    }
+  };
 
   return (
     <button 
@@ -39,8 +41,6 @@ const NuvemshopButton = React.memo(({
       {children}
     </button>
   );
-});
-
-NuvemshopButton.displayName = 'NuvemshopButton';
+};
 
 export default NuvemshopButton;
