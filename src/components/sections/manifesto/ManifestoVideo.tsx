@@ -2,19 +2,31 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import OptimizedVideoPlayer from '@/components/ui/OptimizedVideoPlayer';
+import { useSmartAutoplay } from '@/hooks/use-smart-autoplay';
 import { itemVariants } from './manifesto-animations';
 
 const ManifestoVideo = () => {
+  const { shouldAutoplay, isFirstView, markAsPlayed } = useSmartAutoplay();
+
   return (
     <motion.div variants={itemVariants} className="max-w-4xl mx-auto mb-12 lg:mb-16">
       <div className="relative">
+        {/* Indicador de primeira visualização */}
+        {isFirstView && (
+          <div className="absolute top-4 left-4 z-10 bg-accent/90 text-white text-xs px-3 py-1 rounded-full backdrop-blur-sm">
+            ▶ Reprodução automática
+          </div>
+        )}
+        
         <div className="aspect-video rounded-lg overflow-hidden">
           <OptimizedVideoPlayer
             src="https://xnexfhgtqlryfkyuvihq.supabase.co/storage/v1/object/public/videos/video-manifesto-oficial-compactado.mp4"
             className="w-full max-w-4xl mx-auto"
-            autoplay={false}
-            preload="none"
+            smartAutoplay={shouldAutoplay}
+            muted={true}
+            preload={shouldAutoplay ? "metadata" : "none"}
             poster="/lovable-uploads/f7afc3f5-36a2-49c4-a947-04e9bc701f3c.png"
+            onPlay={markAsPlayed}
           />
         </div>
         

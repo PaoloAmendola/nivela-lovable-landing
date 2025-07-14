@@ -7,9 +7,11 @@ interface OptimizedVideoPlayerProps {
   poster?: string;
   className?: string;
   autoplay?: boolean;
+  smartAutoplay?: boolean;
   muted?: boolean;
   loop?: boolean;
   preload?: 'none' | 'metadata' | 'auto';
+  onPlay?: () => void;
 }
 
 const OptimizedVideoPlayer = ({ 
@@ -17,9 +19,11 @@ const OptimizedVideoPlayer = ({
   poster, 
   className = '',
   autoplay = false,
+  smartAutoplay = false,
   muted = true,
   loop = true,
-  preload = 'none'
+  preload = 'none',
+  onPlay
 }: OptimizedVideoPlayerProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -83,6 +87,7 @@ const OptimizedVideoPlayer = ({
         await video.play();
         setIsPlaying(true);
         setIsLoaded(true);
+        onPlay?.(); // Callback para marcar como reproduzido
       } catch (error) {
         // Autoplay blocked - show play button
         setShowControls(true);
@@ -90,12 +95,12 @@ const OptimizedVideoPlayer = ({
       }
     };
 
-    if (autoplay) {
+    if (autoplay || smartAutoplay) {
       attemptAutoplay();
     } else {
       setIsLoaded(true);
     }
-  }, [isInView, autoplay, isLoaded]);
+  }, [isInView, autoplay, smartAutoplay, isLoaded, onPlay]);
 
   const togglePlay = useCallback(async () => {
     const video = videoRef.current;
@@ -108,11 +113,12 @@ const OptimizedVideoPlayer = ({
       } else {
         await video.play();
         setIsPlaying(true);
+        onPlay?.(); // Callback para marcar como reproduzido em play manual
       }
     } catch (error) {
       console.warn('Video play/pause failed:', error);
     }
-  }, [isPlaying]);
+  }, [isPlaying, onPlay]);
 
   const toggleMute = useCallback(() => {
     const video = videoRef.current;
