@@ -21,7 +21,7 @@ const HeroContent = ({ onCTAClick, shouldReduceAnimations }: HeroContentProps) =
   // Memoize static content that doesn't change
   const staticContent = useMemo(() => ({
     mainTitle: "NIVELA",
-    subtitle: "A evolução da escova progressiva profissional",
+    subtitle: "A evolução da escova progressiva",
     mainCopy: "Desenvolvido com tecnologia patenteada e ativos da Amazônia. Rendimento até 30% superior."
   }), []);
 
@@ -39,7 +39,7 @@ const HeroContent = ({ onCTAClick, shouldReduceAnimations }: HeroContentProps) =
       {/* Subtítulo */}
       <div className="animate-sequential-in opacity-0">
         <h2 className="text-hero-subtitle text-center lg:text-left mb-4">
-          A evolução da escova progressiva profissional
+          A evolução da<br />escova progressiva
         </h2>
       </div>
 

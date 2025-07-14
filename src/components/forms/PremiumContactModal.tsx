@@ -78,12 +78,12 @@ const PremiumContactModal = ({ isOpen, onClose }: PremiumContactModalProps) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="bg-gradient-to-br from-background via-background/95 to-primary/5 border border-primary/20 backdrop-blur-xl sm:max-w-2xl p-0 overflow-hidden">
+      <DialogContent className="bg-gradient-to-br from-background via-background/95 to-primary/5 border border-primary/20 backdrop-blur-xl w-[95vw] max-w-2xl mx-auto p-0 overflow-hidden max-h-[90vh] overflow-y-auto">
         {/* Glassmorphism overlay */}
         <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-primary/5 pointer-events-none" />
         
         {/* Content */}
-        <div className="relative z-10 p-8">
+        <div className="relative z-10 p-4 sm:p-6 lg:p-8">
           {/* Header */}
           <div className="text-center mb-8">
             <motion.div
@@ -158,9 +158,9 @@ const PremiumContactModal = ({ isOpen, onClose }: PremiumContactModalProps) => {
           {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-8">
             <div className="space-y-8">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="grid grid-cols-1 gap-6">
                 <div>
-                  <label className="block text-base font-semibold font-montserrat text-readable mb-3">
+                  <label className="block text-sm sm:text-base font-semibold font-montserrat text-readable mb-2">
                     Nome Completo *
                   </label>
                   <input
@@ -168,12 +168,12 @@ const PremiumContactModal = ({ isOpen, onClose }: PremiumContactModalProps) => {
                     required
                     value={formData.name}
                     onChange={(e) => setFormData({...formData, name: e.target.value})}
-                    className="w-full px-6 py-5 text-lg rounded-xl border border-primary/40 bg-white/90 backdrop-blur-sm focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none transition-colors font-montserrat text-slate-900"
+                    className="w-full px-4 py-3 sm:px-6 sm:py-4 text-base sm:text-lg rounded-xl border border-primary/40 bg-white/90 backdrop-blur-sm focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none transition-colors font-montserrat text-slate-900"
                     placeholder="Digite seu nome completo"
                   />
                 </div>
                 <div>
-                  <label className="block text-base font-semibold font-montserrat text-readable mb-3">
+                  <label className="block text-sm sm:text-base font-semibold font-montserrat text-readable mb-2">
                     WhatsApp *
                   </label>
                   <input
@@ -181,14 +181,12 @@ const PremiumContactModal = ({ isOpen, onClose }: PremiumContactModalProps) => {
                     required
                     value={formData.phone}
                     onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                    className="w-full px-6 py-5 text-lg rounded-xl border border-primary/40 bg-white/90 backdrop-blur-sm focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none transition-colors font-montserrat text-slate-900"
+                    className="w-full px-4 py-3 sm:px-6 sm:py-4 text-base sm:text-lg rounded-xl border border-primary/40 bg-white/90 backdrop-blur-sm focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none transition-colors font-montserrat text-slate-900"
                     placeholder="(11) 99999-9999"
                   />
                 </div>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div>
-                  <label className="block text-base font-semibold font-montserrat text-readable mb-3">
+                  <label className="block text-sm sm:text-base font-semibold font-montserrat text-readable mb-2">
                     Nome do Salão *
                   </label>
                   <input
@@ -196,12 +194,12 @@ const PremiumContactModal = ({ isOpen, onClose }: PremiumContactModalProps) => {
                     required
                     value={formData.salon}
                     onChange={(e) => setFormData({...formData, salon: e.target.value})}
-                    className="w-full px-6 py-5 text-lg rounded-xl border border-primary/40 bg-white/90 backdrop-blur-sm focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none transition-colors font-montserrat text-slate-900"
+                    className="w-full px-4 py-3 sm:px-6 sm:py-4 text-base sm:text-lg rounded-xl border border-primary/40 bg-white/90 backdrop-blur-sm focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none transition-colors font-montserrat text-slate-900"
                     placeholder="Nome do seu salão de beleza"
                   />
                 </div>
                 <div>
-                  <label className="block text-base font-semibold font-montserrat text-readable mb-3">
+                  <label className="block text-sm sm:text-base font-semibold font-montserrat text-readable mb-2">
                     Cidade *
                   </label>
                   <input
@@ -209,7 +207,7 @@ const PremiumContactModal = ({ isOpen, onClose }: PremiumContactModalProps) => {
                     required
                     value={formData.city}
                     onChange={(e) => setFormData({...formData, city: e.target.value})}
-                    className="w-full px-6 py-5 text-lg rounded-xl border border-primary/40 bg-white/90 backdrop-blur-sm focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none transition-colors font-montserrat text-slate-900"
+                    className="w-full px-4 py-3 sm:px-6 sm:py-4 text-base sm:text-lg rounded-xl border border-primary/40 bg-white/90 backdrop-blur-sm focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none transition-colors font-montserrat text-slate-900"
                     placeholder="Sua cidade"
                   />
                 </div>
@@ -217,16 +215,17 @@ const PremiumContactModal = ({ isOpen, onClose }: PremiumContactModalProps) => {
             </div>
 
             {/* Submit Button */}
-            <div className="flex justify-center pt-8">
+            <div className="flex justify-center pt-6">
               <EnhancedButton 
                 type="submit"
                 variant="premium"
                 disabled={!canProceed || isSubmitting}
                 loading={isSubmitting}
                 loadingMessage="Enviando solicitação..."
-                className="w-full max-w-md py-6 text-xl font-bold min-h-[72px] shadow-elegant hover:shadow-glow"
+                className="w-full py-4 sm:py-5 text-lg sm:text-xl font-bold min-h-[60px] sm:min-h-[72px] shadow-elegant hover:shadow-glow"
               >
-                SOLICITAR ACESSO PROFISSIONAL
+                <span className="hidden sm:inline">SOLICITAR ACESSO PROFISSIONAL</span>
+                <span className="sm:hidden">SOLICITAR ACESSO</span>
               </EnhancedButton>
             </div>
           </form>
