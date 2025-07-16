@@ -1,5 +1,5 @@
 
-import { StrictMode } from 'react';
+import React, { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App.tsx';
 import './index.css';
@@ -25,16 +25,37 @@ if ('serviceWorker' in navigator) {
   });
 }
 
-const rootElement = document.getElementById("root");
+// Ensure React is properly loaded before initialization
+function initializeApp() {
+  const rootElement = document.getElementById("root");
 
-if (!rootElement) {
-  throw new Error('Root element not found');
+  if (!rootElement) {
+    throw new Error('Root element not found');
+  }
+
+  // Create React root with error handling
+  try {
+    const root = createRoot(rootElement);
+    
+    root.render(
+      React.createElement(StrictMode, null,
+        React.createElement(App)
+      )
+    );
+  } catch (error) {
+    console.error('Failed to initialize React app:', error);
+    // Fallback: try without StrictMode
+    setTimeout(() => {
+      const root = createRoot(rootElement);
+      root.render(React.createElement(App));
+    }, 100);
+  }
 }
 
-const root = createRoot(rootElement);
-
-root.render(
-  <StrictMode>
-    <App />
-  </StrictMode>
-);
+// Wait for DOM and external scripts to be ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initializeApp);
+} else {
+  // DOM is already ready, but wait a bit for GTM to finish
+  setTimeout(initializeApp, 50);
+}
