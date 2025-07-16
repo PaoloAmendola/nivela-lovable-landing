@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { motion } from 'framer-motion';
 import ConsolidatedImage from '@/components/ui/ConsolidatedImage';
@@ -52,7 +53,7 @@ const WhyChooseNivelaSection = () => {
           </motion.div>
 
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-            {/* Imagem do Produto */}
+            {/* Imagem do Produto com fundo removido */}
             <motion.div variants={itemVariants} className="relative mt-8">
               <ConsolidatedImage
                 src="https://xnexfhgtqlryfkyuvihq.supabase.co/storage/v1/object/public/imagens/frasco-nivela.png"
@@ -60,6 +61,7 @@ const WhyChooseNivelaSection = () => {
                 width={400}
                 height={400}
                 priority={true}
+                removeBackground={true}
                 className="w-full h-auto max-w-sm mx-auto lg:max-w-md"
                 onLoad={() => {}}
                 onError={() => {}}
@@ -106,7 +108,7 @@ const WhyChooseNivelaSection = () => {
                   </motion.div>
                 ))}
               </div>
-            </motion.div>
+            </div>
           </div>
         </motion.div>
       </div>

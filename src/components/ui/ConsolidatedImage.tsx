@@ -5,6 +5,7 @@ import { usePerformance } from '@/hooks/use-performance';
 import { useMobileOptimizations } from '@/hooks/use-mobile-optimizations';
 import { cn } from '@/lib/utils';
 import { AlertTriangle } from 'lucide-react';
+import BackgroundRemovalImage from './BackgroundRemovalImage';
 
 interface ConsolidatedImageProps {
   src: string;
@@ -15,6 +16,7 @@ interface ConsolidatedImageProps {
   priority?: boolean;
   quality?: number;
   sizes?: string;
+  removeBackground?: boolean;
   onLoad?: () => void;
   onError?: () => void;
 }
@@ -28,6 +30,7 @@ const ConsolidatedImage = React.memo(({
   priority = false,
   quality = 75,
   sizes = '100vw',
+  removeBackground = false,
   onLoad,
   onError
 }: ConsolidatedImageProps) => {
@@ -91,6 +94,26 @@ const ConsolidatedImage = React.memo(({
     imgRef.current = element;
     observerRef.current = element;
   }, [observerRef]);
+
+  // If background removal is requested, use the specialized component
+  if (removeBackground && currentSrc) {
+    return (
+      <div className={cn("relative overflow-hidden glass-subtle", className)}>
+        <BackgroundRemovalImage
+          src={currentSrc}
+          alt={alt}
+          width={width}
+          height={height}
+          priority={priority}
+          quality={optimizedQuality}
+          sizes={sizes}
+          onLoad={handleLoad}
+          onError={handleError}
+          className="w-full h-full"
+        />
+      </div>
+    );
+  }
 
   return (
     <div className={cn("relative overflow-hidden glass-subtle", className)}>
