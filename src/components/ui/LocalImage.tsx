@@ -66,7 +66,7 @@ const LocalImage = React.memo(({
         )}
         style={{
           aspectRatio: width && height ? `${width}/${height}` : undefined,
-          maxHeight: '400px', // Prevent the image from becoming too large
+          maxHeight: '600px', // Increased from 400px to match the larger dimensions
           filter: isLoaded ? 'none' : 'blur(2px)'
         }}
       />

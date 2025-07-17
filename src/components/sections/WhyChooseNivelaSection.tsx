@@ -53,13 +53,13 @@ const WhyChooseNivelaSection = () => {
           </motion.div>
 
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-            {/* Imagem do Produto - Nova imagem correta */}
+            {/* Imagem do Produto - Usando imagem existente com tamanho otimizado */}
             <motion.div variants={itemVariants} className="relative mt-8">
               <LocalImage
-                src="/lovable-uploads/6328217e-6d0b-4eed-960d-d470686bf6db.png"
-                alt="NIVELA® 1kg - Retexturizador Hidro Nutritivo sendo apresentado"
-                width={400}
-                height={400}
+                src="/lovable-uploads/fb01bf6c-423a-4a80-9a4a-5a4ccf948269.png"
+                alt="NIVELA® - Retexturizador Hidro Nutritivo"
+                width={600}
+                height={600}
                 priority={true}
                 className="w-full h-auto max-w-sm mx-auto lg:max-w-md"
                 onLoad={() => console.log('Imagem NIVELA carregada com sucesso')}
