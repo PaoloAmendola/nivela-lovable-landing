@@ -53,11 +53,11 @@ const WhyChooseNivelaSection = () => {
           </motion.div>
 
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-            {/* Imagem do Produto otimizada */}
+            {/* Imagem do Produto - Nova imagem correta */}
             <motion.div variants={itemVariants} className="relative mt-8">
               <LocalImage
-                src="/lovable-uploads/35c523c0-e991-4c45-9e0b-08ebd975b908.png"
-                alt="NIVELA® - Retexturizador Hidro Nutritivo"
+                src="/lovable-uploads/6328217e-6d0b-4eed-960d-d470686bf6db.png"
+                alt="NIVELA® 1kg - Retexturizador Hidro Nutritivo sendo apresentado"
                 width={400}
                 height={400}
                 priority={true}
