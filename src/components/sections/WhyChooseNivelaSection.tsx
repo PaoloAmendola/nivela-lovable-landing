@@ -55,13 +55,12 @@ const WhyChooseNivelaSection = () => {
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             {/* Imagem do Produto com fundo removido */}
             <motion.div variants={itemVariants} className="relative mt-8">
-              <ConsolidatedImage
-                src="https://xnexfhgtqlryfkyuvihq.supabase.co/storage/v1/object/public/imagens/frasco-nivela.png"
+            <ConsolidatedImage
+                src="/lovable-uploads/341cb974-33bd-4a38-8caa-87e587533034.png"
                 alt="NIVELA® - Retexturizador Hidro Nutritivo"
                 width={400}
                 height={400}
                 priority={true}
-                removeBackground={true}
                 className="w-full h-auto max-w-sm mx-auto lg:max-w-md"
                 onLoad={() => {}}
                 onError={() => {}}
