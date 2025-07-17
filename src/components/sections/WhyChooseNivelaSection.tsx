@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import ConsolidatedImage from '@/components/ui/ConsolidatedImage';
+import LocalImage from '@/components/ui/LocalImage';
 import { whyChooseFeatures } from './manifesto/manifesto-data';
 
 const containerVariants = {
@@ -53,17 +53,17 @@ const WhyChooseNivelaSection = () => {
           </motion.div>
 
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-            {/* Imagem do Produto com fundo removido */}
+            {/* Imagem do Produto otimizada */}
             <motion.div variants={itemVariants} className="relative mt-8">
-            <ConsolidatedImage
-                src="/lovable-uploads/341cb974-33bd-4a38-8caa-87e587533034.png"
+              <LocalImage
+                src="/lovable-uploads/35c523c0-e991-4c45-9e0b-08ebd975b908.png"
                 alt="NIVELA® - Retexturizador Hidro Nutritivo"
                 width={400}
                 height={400}
                 priority={true}
                 className="w-full h-auto max-w-sm mx-auto lg:max-w-md"
-                onLoad={() => {}}
-                onError={() => {}}
+                onLoad={() => console.log('Imagem NIVELA carregada com sucesso')}
+                onError={() => console.error('Erro ao carregar imagem NIVELA')}
               />
             </motion.div>
 
