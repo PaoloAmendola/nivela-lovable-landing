@@ -13,13 +13,13 @@ const TechnicalBenefits = () => {
     },
     {
       title: "Tratamento + Nivelamento",
-      description: "Nutre e nivela simultaneamente com aminoácidos e bioativos hidratantes.",
+      description: "Alinha, nutre e hidrata simultaneamente com aminoácidos e bioativos hidratantes.",
       icon: Shield,
       gradient: "from-accent/10 to-secondary/10"
     },
     {
-      title: "Conforto Profissional",
-      description: "Aplicação sem cheiro forte, fumaça ou ardência.",
+      title: "Compatibilidade",
+      description: "Compatível com todos os tipos de cabelo",
       icon: Leaf,
       gradient: "from-secondary/10 to-primary/10"
     }
