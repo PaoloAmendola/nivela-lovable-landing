@@ -1,17 +1,18 @@
+
 export const whyChooseFeatures = [
   {
     number: "01",
-    title: "SEGURANÇA",
-    description: "100% livre de formol e derivados"
+    title: "SEM FORMOL, SEM FUMAÇA",
+    description: "Seguro para profissionais e clientes."
   },
   {
     number: "02",
-    title: "VERSATILIDADE",
-    description: "Do liso extremo ao controle suave do volume."
+    title: "ALINHA, NUTRE E HIDRATA",
+    description: "Combinação de ativos da Amazônia + Astro Quat V3."
   },
   {
     number: "03",
-    title: "RENTABILIDADE",
-    description: "Até 30% mais rendimento que cremes comuns."
+    title: "TEXTURA EM GEL",
+    description: "Até 30% mais rendimento que as versões em creme."
   }
 ];
