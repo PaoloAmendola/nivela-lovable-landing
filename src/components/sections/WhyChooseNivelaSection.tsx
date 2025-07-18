@@ -53,11 +53,11 @@ const WhyChooseNivelaSection = () => {
           </motion.div>
 
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-            {/* Imagem do Produto - Usando imagem existente com tamanho otimizado */}
+            {/* Imagem do Produto - Nova imagem 600x600 com fundo transparente */}
             <motion.div variants={itemVariants} className="relative mt-8">
               <LocalImage
-                src="/lovable-uploads/fb01bf6c-423a-4a80-9a4a-5a4ccf948269.png"
-                alt="NIVELA® - Retexturizador Hidro Nutritivo"
+                src="/lovable-uploads/565d963e-f8ba-4691-8141-4aa2d5300580.png"
+                alt="NIVELA® 1kg - Retexturizador Hidro Nutritivo BEM BEAUTY PROFESSIONAL"
                 width={600}
                 height={600}
                 priority={true}
