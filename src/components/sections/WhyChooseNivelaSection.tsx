@@ -56,7 +56,7 @@ const WhyChooseNivelaSection = () => {
             {/* Imagem do Produto - Nova imagem 600x600 com fundo transparente */}
             <motion.div variants={itemVariants} className="relative mt-8">
               <LocalImage
-                src="/lovable-uploads/565d963e-f8ba-4691-8141-4aa2d5300580.png"
+                src="/lovable-uploads/f6082ed7-48d8-474a-b65c-62d74f60fe42.png"
                 alt="NIVELA® 1kg - Retexturizador Hidro Nutritivo BEM BEAUTY PROFESSIONAL"
                 width={600}
                 height={600}
