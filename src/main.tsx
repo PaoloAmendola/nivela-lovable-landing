@@ -33,29 +33,68 @@ function initializeApp() {
     throw new Error('Root element not found');
   }
 
-  // Create React root with error handling
+  // Verify React is fully available
+  if (!React || !React.useState || !React.createElement) {
+    console.warn('React not fully loaded, retrying...');
+    setTimeout(initializeApp, 100);
+    return;
+  }
+
+  // Create React root with enhanced error handling
   try {
     const root = createRoot(rootElement);
     
+    // Use JSX instead of createElement for better compatibility
     root.render(
-      React.createElement(StrictMode, null,
-        React.createElement(App)
-      )
+      <StrictMode>
+        <App />
+      </StrictMode>
     );
   } catch (error) {
     console.error('Failed to initialize React app:', error);
-    // Fallback: try without StrictMode
+    // Fallback: try without StrictMode after a delay
     setTimeout(() => {
-      const root = createRoot(rootElement);
-      root.render(React.createElement(App));
-    }, 100);
+      try {
+        const root = createRoot(rootElement);
+        root.render(<App />);
+      } catch (fallbackError) {
+        console.error('Fallback initialization also failed:', fallbackError);
+        // Last resort: show error message
+        rootElement.innerHTML = '<div style="padding: 20px; text-align: center;">Loading error. Please refresh the page.</div>';
+      }
+    }, 200);
   }
+}
+
+// Enhanced initialization with multiple safety checks
+function safeInitialize() {
+  // Wait longer for external scripts to complete
+  let attempts = 0;
+  const maxAttempts = 10;
+  
+  function tryInit() {
+    attempts++;
+    
+    // Check if React and ReactDOM are available
+    if (React && createRoot && attempts < maxAttempts) {
+      initializeApp();
+    } else if (attempts >= maxAttempts) {
+      console.error('Max initialization attempts reached');
+      // Force initialization anyway
+      initializeApp();
+    } else {
+      // Retry with longer delay
+      setTimeout(tryInit, 100);
+    }
+  }
+  
+  tryInit();
 }
 
 // Wait for DOM and external scripts to be ready
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initializeApp);
+  document.addEventListener('DOMContentLoaded', safeInitialize);
 } else {
-  // DOM is already ready, but wait a bit for GTM to finish
-  setTimeout(initializeApp, 50);
+  // DOM is already ready, but wait for scripts to finish
+  setTimeout(safeInitialize, 150);
 }
