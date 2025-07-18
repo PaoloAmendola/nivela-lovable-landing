@@ -1,23 +1,23 @@
 
 import { Card, CardContent } from "@/components/ui/card";
 import { EnhancedButton } from "@/components/ui/EnhancedButton";
-import { Smartphone, Users, Brain, Bot, ChevronRight, Gift } from "lucide-react";
+import { Smartphone, Users, Brain, ChevronRight, Gift } from "lucide-react";
 
 const EcosystemSection = () => {
   const features = [
     {
       title: "BemHUB™",
       subtitle: "Portal do Distribuidor",
-      description: "Painel completo: pedidos, financeiro e base de clientes. Campanhas e materiais prontos para ativar salões. Treinamento sob demanda exclusivo.",
-      benefit: "Distribuidores: autonomia, organização e autoridade na palma da mão.",
+      description: "Controle completo de pedidos, clientes, financeiro e campanhas, com materiais prontos e treinamentos sob demanda.",
+      benefit: "Autonomia, organização e escala no seu ritmo.",
       icon: <Smartphone className="w-8 h-8" />,
       color: "text-blue-500",
       bgColor: "bg-blue-500/10"
     },
     {
       title: "BemEDUCA™",
-      subtitle: "Formação Consultiva de Alta Performance",
-      description: "Módulos curtos focados no que realmente funciona. Scripts de venda e quebra de objeções. Conteúdo sempre atualizado com resultados reais.",
+      subtitle: "Treinamento técnico e comercial interativo",
+      description: "Capacitação completa com módulos sobre o NIVELA®, técnicas de aplicação, vendas, marketing e atendimento. Com quizzes, certificados personalizados e IA de suporte, tudo no celular.",
       benefit: "Equipes mais seguras e clientes mais fiéis.",
       icon: <Brain className="w-8 h-8" />,
       color: "text-purple-500",
@@ -26,20 +26,11 @@ const EcosystemSection = () => {
     {
       title: "BemPRO™",
       subtitle: "Consultor Digital do Cabeleireiro Moderno",
-      description: "Guia técnico interativo. Ficha de anamnese digital com fotos e histórico dos clientes, biblioteca técnica com artigos, tricologia e tendências, scripts de venda consultiva",
-      benefit: "Atendimento premium, segurança técnica e fidelização na rotina do salão.",
+      description: "Com IA especializada, protocolos por tipo de cabelo, ficha de anamnese com fotos, biblioteca técnica e scripts consultivos, o BemPRO te conecta à Bem Beauty com suporte completo no salão ou em movimento.",
+      benefit: "Conhecimento, técnica e confiança sempre ao seu lado.",
       icon: <Users className="w-8 h-8" />,
       color: "text-green-500",
       bgColor: "bg-green-500/10"
-    },
-    {
-      title: "BemBOT™",
-      subtitle: "Agente IA que trabalha por você",
-      description: "Resposta técnica instantânea via WhatsApp, Hub ou Academy. Envio automático de vídeos, PDFs e argumentos. Aprendizado contínuo que se adapta à sua rotina.",
-      benefit: "Menos dúvidas, decisões mais rápidas, tempo para focar no que importa.",
-      icon: <Bot className="w-8 h-8" />,
-      color: "text-accent",
-      bgColor: "bg-accent/10"
     }
   ];
 
@@ -88,8 +79,8 @@ const EcosystemSection = () => {
           </p>
         </div>
 
-        {/* Features Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+        {/* Features Grid - Updated to show 3 columns on desktop */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
           {features.map((feature, index) => (
             <Card 
               key={index} 
