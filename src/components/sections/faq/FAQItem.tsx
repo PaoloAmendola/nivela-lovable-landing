@@ -1,67 +1,57 @@
 
-import { Card, CardContent } from "@/components/ui/card";
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { useState } from "react";
 import { ChevronDown } from "lucide-react";
-import { motion } from "framer-motion";
+import AnimatedWrapper from "@/components/ui/AnimatedWrapper";
 
 interface FAQItemProps {
   question: string;
   answer: string;
-  isOpen: boolean;
-  onToggle: () => void;
   index: number;
+  shouldReduceAnimations: boolean;
 }
 
-const FAQItem = ({ 
-  question, 
-  answer, 
-  isOpen, 
-  onToggle, 
-  index
-}: FAQItemProps) => {
+const FAQItem = ({ question, answer, index, shouldReduceAnimations }: FAQItemProps) => {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ 
-        delay: index * 0.05,
-        duration: 0.4
-      }}
-      viewport={{ once: true }}
+    <AnimatedWrapper
+      variant="slideUp"
+      delay={index * 0.1}
+      reducedMotion={shouldReduceAnimations}
     >
-      <Card className="border-border/50 bg-background/50 backdrop-blur-sm hover:border-brand-primary/30 transition-all duration-300">
-        <Collapsible open={isOpen} onOpenChange={onToggle}>
-          <CollapsibleTrigger className="w-full">
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between gap-4">
-                <div className="text-left flex-1">
-                  <h3 className="font-semibold text-lg text-contrast leading-snug">
-                    {question}
-                  </h3>
-                </div>
-                <motion.div 
-                  className="flex-shrink-0 text-brand-primary"
-                  animate={{ rotate: isOpen ? 180 : 0 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <ChevronDown className="w-5 h-5" />
-                </motion.div>
-              </div>
-            </CardContent>
-          </CollapsibleTrigger>
-          
-          <CollapsibleContent>
-            <CardContent className="pt-0 px-6 pb-6">
-              <div className="border-t border-border/30 pt-4">
-                <p className="text-brand-secondary leading-relaxed text-base lg:text-lg">
-                  {answer}
-                </p>
-              </div>
-            </CardContent>
-          </CollapsibleContent>
-        </Collapsible>
-      </Card>
-    </motion.div>
+      <div className="faq-item glass-subtle rounded-xl overflow-hidden">
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="w-full p-6 text-left flex items-center justify-between hover:bg-accent/5 transition-colors duration-200 min-h-[44px] interactive-element"
+          aria-expanded={isOpen}
+          aria-controls={`faq-answer-${index}`}
+        >
+          <h3 className="font-playfair font-semibold text-lg lg:text-xl text-foreground pr-4">
+            {question}
+          </h3>
+          <ChevronDown 
+            className={`w-5 h-5 text-accent transition-transform duration-300 flex-shrink-0 ${
+              isOpen ? 'rotate-180' : ''
+            }`}
+            strokeWidth={2}
+          />
+        </button>
+        
+        <div
+          id={`faq-answer-${index}`}
+          className={`overflow-hidden transition-all duration-300 ease-out ${
+            isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+          }`}
+        >
+          <div className="px-6 pb-6">
+            <div className="w-full h-px bg-accent/20 mb-4"></div>
+            <p className="text-base lg:text-lg text-muted-foreground font-montserrat leading-relaxed">
+              {answer}
+            </p>
+          </div>
+        </div>
+      </div>
+    </AnimatedWrapper>
   );
 };
 

@@ -62,7 +62,7 @@ const UnifiedImage = React.memo(({
         sizes={sizes}
         loading={priority ? 'eager' : 'lazy'}
         decoding="async"
-        fetchPriority={priority ? 'high' : 'auto'}
+        fetchpriority={priority ? 'high' : 'auto'}
         onLoad={handleLoad}
         onError={handleError}
         className="w-full h-full object-cover"
@@ -71,10 +71,10 @@ const UnifiedImage = React.memo(({
         }}
       />
 
-      {/* Minimal error state */}
+      {/* Enhanced error state with better accessibility */}
       {hasError && (
-        <div className="absolute inset-0 bg-muted/20 flex items-center justify-center">
-          <AlertTriangle className="w-6 h-6 text-muted-foreground opacity-50" />
+        <div className="absolute inset-0 bg-muted/20 flex items-center justify-center" role="img" aria-label="Falha ao carregar imagem">
+          <AlertTriangle className="w-6 h-6 text-muted-foreground opacity-50" aria-hidden="true" />
         </div>
       )}
     </div>

@@ -125,7 +125,7 @@ const LazyImage = ({
         sizes={isMobile ? `${Math.min(windowSize.width, 768)}px` : sizes}
         loading={priority ? 'eager' : 'lazy'}
         decoding="async"
-        fetchPriority={priority ? 'high' : 'low'}
+        fetchpriority={priority ? 'high' : 'low'}
         onLoad={handleLoad}
         onError={handleError}
         className={`
@@ -143,12 +143,12 @@ const LazyImage = ({
         <div className="absolute inset-0 bg-muted/10 animate-pulse" />
       )}
 
-      {/* Simplified error state */}
+      {/* Enhanced error state with accessibility */}
       {hasError && (
-        <div className="absolute inset-0 bg-muted/20 flex items-center justify-center">
-          <div className="text-center text-muted-foreground text-xs">
-            <AlertTriangle className="w-4 h-4 mx-auto mb-1 opacity-50" />
-            <p>Failed to load</p>
+        <div className="absolute inset-0 bg-muted/20 flex items-center justify-center" role="img" aria-label="Falha ao carregar imagem">
+          <div className="text-center text-muted-foreground text-sm">
+            <AlertTriangle className="w-4 h-4 mx-auto mb-1 opacity-50" aria-hidden="true" />
+            <p>Imagem indisponível</p>
           </div>
         </div>
       )}

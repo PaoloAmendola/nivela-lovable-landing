@@ -1,71 +1,65 @@
 
-import { Card, CardContent } from "@/components/ui/card";
-import StyledIcon from "@/components/ui/StyledIcon";
-import { Beaker, CheckCircle, Zap, Leaf, Shield, DollarSign, Settings } from "lucide-react";
+import AnimatedWrapper from "@/components/ui/AnimatedWrapper";
+import { Sparkles, Zap, Shield, Heart } from "lucide-react";
 
-const TechnicalBenefits = () => {
-  const technicalBenefits = [
+interface TechnicalBenefitsProps {
+  shouldReduceAnimations: boolean;
+}
+
+const TechnicalBenefits = ({ shouldReduceAnimations }: TechnicalBenefitsProps) => {
+  const benefits = [
     {
-      title: "Reestruturação Molecular",
-      description: "Atua na estrutura interna do fio, reorganizando as fibras capilares em escala nanométrica.",
+      icon: Sparkles,
+      title: "Hidratação Profunda",
+      description: "Ação intensiva que penetra nas camadas mais profundas do cabelo, restaurando a umidade natural e devolvendo a vida aos fios.",
+      color: "text-blue-500"
+    },
+    {
       icon: Zap,
-      gradient: "from-primary/10 to-accent/10"
+      title: "Reparação Instantânea",
+      description: "Tecnologia de ponta que reconstrói a estrutura capilar danificada, proporcionando resultados visíveis desde a primeira aplicação.",
+      color: "text-yellow-500"
     },
     {
-      title: "Tratamento + Nivelamento",
-      description: "Alinha, nutre e hidrata simultaneamente com aminoácidos e bioativos hidratantes.",
       icon: Shield,
-      gradient: "from-accent/10 to-secondary/10"
+      title: "Proteção Duradoura",
+      description: "Cria uma barreira protetora que mantém os benefícios por mais tempo, protegendo contra agressões externas e químicas.",
+      color: "text-green-500"
     },
     {
-      title: "Compatibilidade",
-      description: "Compatível com todos os tipos de cabelo",
-      icon: Leaf,
-      gradient: "from-secondary/10 to-primary/10"
+      icon: Heart,
+      title: "Nutrição Completa",
+      description: "Fórmula enriquecida com nutrientes essenciais que alimentam o cabelo de dentro para fora, garantindo saúde e vitalidade.",
+      color: "text-red-500"
     }
   ];
 
-
   return (
-    <div className="space-y-6">
-      {/* Header for Benefits Section */}
-      <div className="text-center">
-        <h3 className="text-2xl lg:text-3xl font-playfair font-bold gradient-text-animated mb-3">
-          Benefícios Técnicos
-        </h3>
-        <p className="text-muted font-montserrat text-base lg:text-lg">
-          Inovação científica para resultados superiores
-        </p>
-      </div>
-
-      {/* Technical Benefits Cards - Vertical Stack for Column Layout */}
-      <div className="space-y-4">
-        {technicalBenefits.map((benefit, index) => (
-          <Card key={index} className="group bg-background/30 backdrop-blur-sm border border-accent/20 overflow-hidden hover:border-accent/40 hover:bg-background/40 transition-all duration-300">
-            <CardContent className="p-4 lg:p-5">
-              <div className="flex items-start gap-4">
-                <div className={`p-3 rounded-xl bg-gradient-to-br ${benefit.gradient} group-hover:scale-110 transition-transform duration-300`}>
-                  <StyledIcon 
-                    icon={benefit.icon} 
-                    variant="minimal" 
-                    size="sm"
-                    color="accent"
-                  />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <h4 className="text-base lg:text-lg font-montserrat font-semibold text-foreground mb-2 group-hover:text-accent transition-colors">
-                    {benefit.title}
-                  </h4>
-                  <p className="text-sm lg:text-base font-montserrat text-muted leading-relaxed">
-                    {benefit.description}
-                  </p>
-                </div>
+    <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
+      {benefits.map((benefit, index) => (
+        <AnimatedWrapper
+          key={benefit.title}
+          variant="fadeIn"
+          delay={index * 0.2}
+          reducedMotion={shouldReduceAnimations}
+        >
+          <div className="glass-subtle rounded-xl p-6 lg:p-8 hover-lift group interactive-element">
+            <div className="flex items-start gap-4">
+              <div className={`${benefit.color} p-3 rounded-lg bg-white/10 group-hover:scale-110 transition-transform duration-300`}>
+                <benefit.icon className="w-6 h-6" strokeWidth={1.5} />
               </div>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
-
+              <div className="flex-1">
+                <h4 className="font-playfair font-semibold text-xl mb-3 text-foreground">
+                  {benefit.title}
+                </h4>
+                <p className="text-base lg:text-lg leading-relaxed text-muted-foreground font-montserrat">
+                  {benefit.description}
+                </p>
+              </div>
+            </div>
+          </div>
+        </AnimatedWrapper>
+      ))}
     </div>
   );
 };

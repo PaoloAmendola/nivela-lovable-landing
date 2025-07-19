@@ -70,12 +70,12 @@ const OptimizedResponsiveImage = ({
         </div>
       )}
 
-      {/* Error fallback */}
+      {/* Enhanced error fallback with accessibility */}
       {hasError && (
-        <div className="absolute inset-0 bg-muted/20 flex items-center justify-center">
+        <div className="absolute inset-0 bg-muted/20 flex items-center justify-center" role="img" aria-label="Imagem indisponível">
           <div className="text-center text-muted-foreground p-4">
-            <div className="w-8 h-8 mx-auto mb-2 bg-muted rounded"></div>
-            <p className="text-xs">Imagem indisponível</p>
+            <div className="w-8 h-8 mx-auto mb-2 bg-muted rounded" aria-hidden="true"></div>
+            <p className="text-sm">Imagem indisponível</p>
           </div>
         </div>
       )}
@@ -90,7 +90,7 @@ const OptimizedResponsiveImage = ({
         sizes={sizes}
         loading={priority ? 'eager' : 'lazy'}
         decoding="async"
-        fetchPriority={priority ? 'high' : 'auto'}
+        fetchpriority={priority ? 'high' : 'auto'}
         onLoad={handleLoad}
         onError={handleError}
         className={cn(

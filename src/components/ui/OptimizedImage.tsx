@@ -123,6 +123,7 @@ const OptimizedImage = ({
         sizes={sizes}
         loading={priority ? 'eager' : 'lazy'}
         decoding="async"
+        fetchpriority={priority ? 'high' : 'low'}
         onLoad={handleLoad}
         onError={handleError}
         className={`
@@ -143,31 +144,23 @@ const OptimizedImage = ({
         </div>
       )}
 
-      {/* Error state with retry */}
+      {/* Enhanced error state with accessibility and retry */}
       {hasError && (
-        <div className="absolute inset-0 bg-muted/20 flex flex-col items-center justify-center text-center">
+        <div className="absolute inset-0 bg-muted/20 flex flex-col items-center justify-center text-center" role="img" aria-label="Falha ao carregar imagem">
           <div className="text-muted text-sm">
-            <AlertTriangle className="w-8 h-8 mx-auto mb-2 opacity-50" />
-            <p className="mb-2">Failed to load image</p>
+            <AlertTriangle className="w-8 h-8 mx-auto mb-2 opacity-50" aria-hidden="true" />
+            <p className="mb-2">Falha ao carregar imagem</p>
             <button 
               onClick={() => {
                 setHasError(false);
                 setIsLoading(true);
                 setCurrentSrc(src);
               }}
-              className="text-xs text-primary hover:underline"
+              className="text-xs text-primary hover:underline interactive-element min-h-[44px] px-4"
+              aria-label="Tentar carregar novamente"
             >
-              Retry
+              Tentar novamente
             </button>
-          </div>
-        </div>
-      )}
-
-      {/* Performance indicator */}
-      {!isLoading && !hasError && (
-        <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
-          <div className="bg-background/80 backdrop-blur-sm rounded px-2 py-1 text-xs text-foreground">
-            📸 Optimized
           </div>
         </div>
       )}
