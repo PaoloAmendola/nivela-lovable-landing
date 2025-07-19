@@ -33,7 +33,7 @@ const TechnicalBenefits = () => {
         <h3 className="text-2xl lg:text-3xl font-playfair font-bold gradient-text-animated mb-3">
           Benefícios Técnicos
         </h3>
-        <p className="text-muted font-montserrat text-base lg:text-lg">
+        <p className="text-muted-foreground font-montserrat text-base lg:text-lg">
           Inovação científica para resultados superiores
         </p>
       </div>
@@ -56,7 +56,7 @@ const TechnicalBenefits = () => {
                   <h4 className="text-base lg:text-lg font-montserrat font-semibold text-foreground mb-2 group-hover:text-accent transition-colors">
                     {benefit.title}
                   </h4>
-                  <p className="text-sm lg:text-base font-montserrat text-muted leading-relaxed">
+                  <p className="text-base lg:text-lg font-montserrat text-muted-foreground leading-relaxed">
                     {benefit.description}
                   </p>
                 </div>

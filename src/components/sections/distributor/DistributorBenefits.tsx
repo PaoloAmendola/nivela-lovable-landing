@@ -36,10 +36,10 @@ const DistributorBenefits = () => {
       className="space-y-6"
     >
       <div className="mb-8">
-        <h3 className="text-2xl font-bold text-contrast mb-4">
+        <h3 className="text-2xl font-bold text-foreground mb-4">
           Por que escolher a NIVELA®?
         </h3>
-        <p className="text-brand-secondary text-base lg:text-lg">
+        <p className="text-muted-foreground text-base lg:text-lg">
           Junte-se a uma rede de distribuidores que transformam negócios com produtos de qualidade superior.
         </p>
       </div>
@@ -54,16 +54,16 @@ const DistributorBenefits = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="flex items-start gap-4 p-4 rounded-lg bg-background/30 backdrop-blur-sm border border-border/30 hover:border-brand-primary/30 transition-colors duration-300 group"
+              className="flex items-start gap-4 p-4 rounded-lg bg-background/30 backdrop-blur-sm border border-border/30 hover:border-primary/30 transition-colors duration-300 group"
             >
-              <div className="p-2 rounded-lg bg-brand-primary/10 group-hover:bg-brand-primary/20 transition-colors duration-300 flex-shrink-0">
-                <Icon className="w-5 h-5 text-brand-primary" />
+              <div className="p-2 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors duration-300 flex-shrink-0">
+                <Icon className="w-5 h-5 text-primary" />
               </div>
               <div className="flex-1">
-                <h4 className="font-semibold text-contrast mb-1 text-base lg:text-lg">
+                <h4 className="font-semibold text-foreground mb-1 text-base lg:text-lg">
                   {benefit.title}
                 </h4>
-                <p className="text-sm lg:text-base text-brand-secondary leading-relaxed">
+                <p className="text-base lg:text-lg text-muted-foreground leading-relaxed">
                   {benefit.description}
                 </p>
               </div>

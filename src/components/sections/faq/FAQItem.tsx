@@ -29,18 +29,18 @@ const FAQItem = ({
       }}
       viewport={{ once: true }}
     >
-      <Card className="border-border/50 bg-background/50 backdrop-blur-sm hover:border-brand-primary/30 transition-all duration-300">
+      <Card className="border-border/50 bg-background/50 backdrop-blur-sm hover:border-primary/30 transition-all duration-300">
         <Collapsible open={isOpen} onOpenChange={onToggle}>
           <CollapsibleTrigger className="w-full">
             <CardContent className="p-6">
               <div className="flex items-center justify-between gap-4">
                 <div className="text-left flex-1">
-                  <h3 className="font-semibold text-lg text-contrast leading-snug">
+                  <h3 className="font-semibold text-lg text-foreground leading-snug">
                     {question}
                   </h3>
                 </div>
                 <motion.div 
-                  className="flex-shrink-0 text-brand-primary"
+                  className="flex-shrink-0 text-primary"
                   animate={{ rotate: isOpen ? 180 : 0 }}
                   transition={{ duration: 0.3 }}
                 >
@@ -53,7 +53,7 @@ const FAQItem = ({
           <CollapsibleContent>
             <CardContent className="pt-0 px-6 pb-6">
               <div className="border-t border-border/30 pt-4">
-                <p className="text-brand-secondary leading-relaxed text-base lg:text-lg">
+                <p className="text-muted-foreground leading-relaxed text-base lg:text-lg">
                   {answer}
                 </p>
               </div>
