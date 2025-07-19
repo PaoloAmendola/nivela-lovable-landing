@@ -25,6 +25,16 @@ if ('serviceWorker' in navigator) {
   });
 }
 
+// Test component to verify React hooks are working
+function TestComponent() {
+  try {
+    const [test] = React.useState(true);
+    return test;
+  } catch (error) {
+    return false;
+  }
+}
+
 // Ensure React is properly loaded before initialization
 function initializeApp() {
   const rootElement = document.getElementById("root");
@@ -33,9 +43,23 @@ function initializeApp() {
     throw new Error('Root element not found');
   }
 
-  // Verify React is fully available
-  if (!React || !React.useState || !React.createElement) {
+  // Verify React and ReactDOM are fully available
+  if (!React || !React.useState || !React.createElement || !createRoot) {
     console.warn('React not fully loaded, retrying...');
+    setTimeout(initializeApp, 100);
+    return;
+  }
+
+  // Test if React hooks are actually working
+  try {
+    const testResult = TestComponent();
+    if (testResult === false) {
+      console.warn('React hooks not working properly, retrying...');
+      setTimeout(initializeApp, 100);
+      return;
+    }
+  } catch (error) {
+    console.warn('React hooks test failed, retrying...', error);
     setTimeout(initializeApp, 100);
     return;
   }
@@ -44,7 +68,7 @@ function initializeApp() {
   try {
     const root = createRoot(rootElement);
     
-    // Use JSX instead of createElement for better compatibility
+    // Use JSX for better compatibility
     root.render(
       <StrictMode>
         <App />
@@ -62,7 +86,7 @@ function initializeApp() {
         // Last resort: show error message
         rootElement.innerHTML = '<div style="padding: 20px; text-align: center;">Loading error. Please refresh the page.</div>';
       }
-    }, 200);
+    }, 300);
   }
 }
 
@@ -70,7 +94,7 @@ function initializeApp() {
 function safeInitialize() {
   // Wait longer for external scripts to complete
   let attempts = 0;
-  const maxAttempts = 10;
+  const maxAttempts = 15;
   
   function tryInit() {
     attempts++;
@@ -83,8 +107,9 @@ function safeInitialize() {
       // Force initialization anyway
       initializeApp();
     } else {
-      // Retry with longer delay
-      setTimeout(tryInit, 100);
+      // Retry with exponential backoff
+      const delay = Math.min(100 * attempts, 500);
+      setTimeout(tryInit, delay);
     }
   }
   
@@ -93,8 +118,11 @@ function safeInitialize() {
 
 // Wait for DOM and external scripts to be ready
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', safeInitialize);
+  document.addEventListener('DOMContentLoaded', () => {
+    // Add extra delay for external scripts
+    setTimeout(safeInitialize, 200);
+  });
 } else {
-  // DOM is already ready, but wait for scripts to finish
-  setTimeout(safeInitialize, 150);
+  // DOM is already ready, but wait longer for scripts to finish
+  setTimeout(safeInitialize, 300);
 }
