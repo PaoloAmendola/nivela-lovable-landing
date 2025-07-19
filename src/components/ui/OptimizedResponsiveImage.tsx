@@ -70,12 +70,12 @@ const OptimizedResponsiveImage = ({
         </div>
       )}
 
-      {/* Enhanced error fallback with accessibility */}
+      {/* Error fallback */}
       {hasError && (
-        <div className="absolute inset-0 bg-muted/20 flex items-center justify-center" role="img" aria-label="Imagem indisponível">
+        <div className="absolute inset-0 bg-muted/20 flex items-center justify-center">
           <div className="text-center text-muted-foreground p-4">
-            <div className="w-8 h-8 mx-auto mb-2 bg-muted rounded" aria-hidden="true"></div>
-            <p className="text-sm">Imagem indisponível</p>
+            <div className="w-8 h-8 mx-auto mb-2 bg-muted rounded"></div>
+            <p className="text-xs">Imagem indisponível</p>
           </div>
         </div>
       )}

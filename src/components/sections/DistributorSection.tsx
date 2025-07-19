@@ -51,7 +51,7 @@ const DistributorSection = ({ onCTAClick }: DistributorSectionProps) => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
           
           {/* Benefícios */}
-          <DistributorBenefits shouldReduceAnimations={false} />
+          <DistributorBenefits />
           
           {/* Formulário */}
           <DistributorForm onSubmit={handleFormSubmit} />

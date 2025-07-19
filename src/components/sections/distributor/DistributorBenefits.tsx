@@ -1,127 +1,77 @@
 
-import AnimatedWrapper from "@/components/ui/AnimatedWrapper";
-import { EnhancedButton } from "@/components/ui/EnhancedButton";
-import { 
-  TrendingUp, 
-  Users, 
-  Award, 
-  Headphones, 
-  Package, 
-  Target,
-  Zap,
-  Shield
-} from "lucide-react";
+import { motion } from "framer-motion";
+import { Card, CardContent } from "@/components/ui/card";
+import { TrendingUp, Shield, Target, Crown } from "lucide-react";
 
-interface DistributorBenefitsProps {
-  shouldReduceAnimations: boolean;
-}
+const benefits = [
+  {
+    icon: TrendingUp,
+    title: "Alto Retorno",
+    description: "Margem diferenciada com produto premium"
+  },
+  {
+    icon: Shield,
+    title: "Suporte Completo", 
+    description: "Treinamento e apoio técnico especializado"
+  },
+  {
+    icon: Target,
+    title: "Território Exclusivo",
+    description: "Possibilidade de exclusividade regional"
+  },
+  {
+    icon: Crown,
+    title: "Marketing Premium",
+    description: "Kit completo de materiais profissionais"
+  }
+];
 
-const DistributorBenefits = ({ shouldReduceAnimations }: DistributorBenefitsProps) => {
-  const benefits = [
-    {
-      icon: TrendingUp,
-      title: "Alto Potencial de Lucro",
-      description: "Margem de lucro competitiva com produto de alta demanda no mercado profissional de beleza.",
-      color: "text-green-500"
-    },
-    {
-      icon: Users,
-      title: "Suporte Exclusivo",
-      description: "Equipe dedicada para apoiar seu crescimento com treinamentos e materiais de marketing.",
-      color: "text-blue-500"
-    },
-    {
-      icon: Award,
-      title: "Marca Consolidada",
-      description: "Produto com reconhecimento nacional e alta aceitação entre profissionais.",
-      color: "text-yellow-500"
-    },
-    {
-      icon: Headphones,
-      title: "Atendimento Personalizado",
-      description: "Consultoria técnica e comercial para maximizar suas vendas e satisfação dos clientes.",
-      color: "text-purple-500"
-    },
-    {
-      icon: Package,
-      title: "Logística Otimizada",
-      description: "Sistema de distribuição eficiente com entregas rápidas e seguras em todo o país.",
-      color: "text-orange-500"
-    },
-    {
-      icon: Target,
-      title: "Território Protegido",
-      description: "Exclusividade territorial garantindo proteção de sua área de atuação.",
-      color: "text-red-500"
-    },
-    {
-      icon: Zap,
-      title: "Lançamentos Prioritários",
-      description: "Acesso antecipado a novos produtos e tendências do mercado de beleza.",
-      color: "text-cyan-500"
-    },
-    {
-      icon: Shield,
-      title: "Garantia Total",
-      description: "Política de troca e garantia que protege seu investimento e confiança dos clientes.",
-      color: "text-teal-500"
-    }
-  ];
-
+const DistributorBenefits = () => {
   return (
-    <div className="space-y-12">
-      <AnimatedWrapper variant="fadeIn" delay={0.2} reducedMotion={shouldReduceAnimations}>
-        <div className="text-center mb-12">
-          <h3 className="text-section-subtitle font-playfair mb-4 gradient-text-animated">
-            Vantagens Exclusivas para Distribuidores
-          </h3>
-          <p className="text-base lg:text-lg text-muted-foreground font-montserrat max-w-3xl mx-auto leading-relaxed">
-            Junte-se à nossa rede de parceiros e descubra por que somos a escolha número 1 
-            de distribuidores em todo o Brasil.
-          </p>
-        </div>
-      </AnimatedWrapper>
-
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {benefits.map((benefit, index) => (
-          <AnimatedWrapper
-            key={benefit.title}
-            variant="slideUp"
-            delay={0.4 + index * 0.1}
-            reducedMotion={shouldReduceAnimations}
-          >
-            <div className="glass-subtle rounded-xl p-6 hover-lift group text-center interactive-element min-h-[280px] flex flex-col">
-              <div className={`${benefit.color} mx-auto w-16 h-16 rounded-full bg-white/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
-                <benefit.icon className="w-8 h-8" strokeWidth={1.5} />
-              </div>
-              <h4 className="font-playfair font-semibold text-lg mb-3 text-foreground">
-                {benefit.title}
-              </h4>
-              <p className="text-base lg:text-lg text-muted-foreground font-montserrat leading-relaxed flex-1">
-                {benefit.description}
-              </p>
-            </div>
-          </AnimatedWrapper>
-        ))}
+    <motion.div
+      initial={{ opacity: 0, x: -20 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.6 }}
+      viewport={{ once: true }}
+      className="space-y-6"
+    >
+      <div className="mb-8">
+        <h3 className="text-2xl font-bold text-contrast mb-4">
+          Por que escolher a NIVELA®?
+        </h3>
+        <p className="text-brand-secondary text-base lg:text-lg">
+          Junte-se a uma rede de distribuidores que transformam negócios com produtos de qualidade superior.
+        </p>
       </div>
 
-      <AnimatedWrapper variant="fadeIn" delay={1.2} reducedMotion={shouldReduceAnimations}>
-        <div className="text-center mt-12">
-          <EnhancedButton
-            variant="premium"
-            size="lg"
-            className="btn-premium hover-glow"
-            onClick={() => {
-              const element = document.getElementById('distributor-form');
-              element?.scrollIntoView({ behavior: 'smooth' });
-            }}
-            aria-label="Solicitar informações sobre distribuição"
-          >
-            Quero Ser Distribuidor
-          </EnhancedButton>
-        </div>
-      </AnimatedWrapper>
-    </div>
+      <div className="space-y-4">
+        {benefits.map((benefit, index) => {
+          const Icon = benefit.icon;
+          return (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: index * 0.1 }}
+              viewport={{ once: true }}
+              className="flex items-start gap-4 p-4 rounded-lg bg-background/30 backdrop-blur-sm border border-border/30 hover:border-brand-primary/30 transition-colors duration-300 group"
+            >
+              <div className="p-2 rounded-lg bg-brand-primary/10 group-hover:bg-brand-primary/20 transition-colors duration-300 flex-shrink-0">
+                <Icon className="w-5 h-5 text-brand-primary" />
+              </div>
+              <div className="flex-1">
+                <h4 className="font-semibold text-contrast mb-1 text-base lg:text-lg">
+                  {benefit.title}
+                </h4>
+                <p className="text-sm lg:text-base text-brand-secondary leading-relaxed">
+                  {benefit.description}
+                </p>
+              </div>
+            </motion.div>
+          );
+        })}
+      </div>
+    </motion.div>
   );
 };
 

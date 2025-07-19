@@ -143,12 +143,12 @@ const LazyImage = ({
         <div className="absolute inset-0 bg-muted/10 animate-pulse" />
       )}
 
-      {/* Enhanced error state with accessibility */}
+      {/* Simplified error state */}
       {hasError && (
-        <div className="absolute inset-0 bg-muted/20 flex items-center justify-center" role="img" aria-label="Falha ao carregar imagem">
-          <div className="text-center text-muted-foreground text-sm">
-            <AlertTriangle className="w-4 h-4 mx-auto mb-1 opacity-50" aria-hidden="true" />
-            <p>Imagem indisponível</p>
+        <div className="absolute inset-0 bg-muted/20 flex items-center justify-center">
+          <div className="text-center text-muted-foreground text-xs">
+            <AlertTriangle className="w-4 h-4 mx-auto mb-1 opacity-50" />
+            <p>Failed to load</p>
           </div>
         </div>
       )}

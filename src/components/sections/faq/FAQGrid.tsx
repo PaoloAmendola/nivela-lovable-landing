@@ -70,8 +70,9 @@ const FAQGrid = ({ faqData }: FAQGridProps) => {
                 key={`${faq.question}-${originalIndex}`}
                 question={faq.question}
                 answer={faq.answer}
+                isOpen={openItems.includes(originalIndex)}
+                onToggle={() => toggleItem(originalIndex)}
                 index={index}
-                shouldReduceAnimations={false}
               />
             );
           })}

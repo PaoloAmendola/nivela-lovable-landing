@@ -71,10 +71,10 @@ const UnifiedImage = React.memo(({
         }}
       />
 
-      {/* Enhanced error state with better accessibility */}
+      {/* Minimal error state */}
       {hasError && (
-        <div className="absolute inset-0 bg-muted/20 flex items-center justify-center" role="img" aria-label="Falha ao carregar imagem">
-          <AlertTriangle className="w-6 h-6 text-muted-foreground opacity-50" aria-hidden="true" />
+        <div className="absolute inset-0 bg-muted/20 flex items-center justify-center">
+          <AlertTriangle className="w-6 h-6 text-muted-foreground opacity-50" />
         </div>
       )}
     </div>
