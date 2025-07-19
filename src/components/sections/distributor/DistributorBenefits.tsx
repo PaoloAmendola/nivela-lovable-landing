@@ -1,6 +1,6 @@
 
 import AnimatedWrapper from "@/components/ui/AnimatedWrapper";
-import EnhancedButton from "@/components/ui/EnhancedButton";
+import { EnhancedButton } from "@/components/ui/EnhancedButton";
 import { 
   TrendingUp, 
   Users, 
@@ -108,7 +108,7 @@ const DistributorBenefits = ({ shouldReduceAnimations }: DistributorBenefitsProp
       <AnimatedWrapper variant="fadeIn" delay={1.2} reducedMotion={shouldReduceAnimations}>
         <div className="text-center mt-12">
           <EnhancedButton
-            variant="primary"
+            variant="premium"
             size="lg"
             className="btn-premium hover-glow"
             onClick={() => {

@@ -25,7 +25,7 @@ const TechnologySection = () => {
         <div className="max-w-7xl mx-auto">
           
           {/* Header Section */}
-          <TechnologyHeader shouldReduceAnimations={shouldReduceAnimations} />
+          <TechnologyHeader />
           
           {/* Technical Benefits */}
           <AnimatedWrapper variant="fadeIn" delay={0.4} reducedMotion={shouldReduceAnimations}>
@@ -44,7 +44,7 @@ const TechnologySection = () => {
           {/* Professional Exclusivity */}
           <AnimatedWrapper variant="fadeIn" delay={0.8} reducedMotion={shouldReduceAnimations}>
             <div className="mb-12">
-              <ProfessionalExclusivity shouldReduceAnimations={shouldReduceAnimations} />
+              <ProfessionalExclusivity />
             </div>
           </AnimatedWrapper>
 
