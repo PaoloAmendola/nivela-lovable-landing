@@ -53,7 +53,7 @@ const FAQItem = ({
           <CollapsibleContent>
             <CardContent className="pt-0 px-6 pb-6">
               <div className="border-t border-border/30 pt-4">
-                <p className="text-brand-secondary leading-relaxed">
+                <p className="text-brand-secondary leading-relaxed text-base lg:text-lg">
                   {answer}
                 </p>
               </div>

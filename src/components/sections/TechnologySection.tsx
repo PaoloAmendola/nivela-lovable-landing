@@ -70,7 +70,7 @@ const TechnologySection = () => {
                   A Sinergia perfeita entre Ciência e Natureza
                 </h3>
                 
-                <p className="text-contrast font-montserrat leading-relaxed">
+                <p className="text-contrast font-montserrat leading-relaxed text-base lg:text-lg">
                   Nossa tecnologia ASTRO QUAT V3® potencializa os benefícios únicos dos ativos amazônicos, 
                   criando uma fórmula que une o melhor da ciência molecular com a sabedoria da natureza brasileira.
                 </p>

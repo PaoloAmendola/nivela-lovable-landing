@@ -34,7 +34,7 @@ const AmazonianActives = () => {
         <h3 className="text-2xl lg:text-3xl font-playfair font-bold gradient-text-animated mb-3">
           Ativos Amazônicos
         </h3>
-        <p className="text-muted font-montserrat text-sm lg:text-base">
+        <p className="text-muted font-montserrat text-base lg:text-lg">
           O poder da biodiversidade brasileira
         </p>
       </div>
@@ -52,7 +52,7 @@ const AmazonianActives = () => {
               <h4 className="text-lg lg:text-xl font-playfair font-bold text-foreground mb-2 group-hover:text-accent transition-colors">
                 {active.name}
               </h4>
-              <p className="text-xs lg:text-sm font-montserrat text-muted leading-relaxed">
+              <p className="text-sm lg:text-base font-montserrat text-muted leading-relaxed">
                 {active.description}
               </p>
             </div>

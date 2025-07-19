@@ -1,3 +1,4 @@
+
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { TrendingUp, Shield, Target, Crown } from "lucide-react";
@@ -38,7 +39,7 @@ const DistributorBenefits = () => {
         <h3 className="text-2xl font-bold text-contrast mb-4">
           Por que escolher a NIVELA®?
         </h3>
-        <p className="text-brand-secondary">
+        <p className="text-brand-secondary text-base lg:text-lg">
           Junte-se a uma rede de distribuidores que transformam negócios com produtos de qualidade superior.
         </p>
       </div>
@@ -59,10 +60,10 @@ const DistributorBenefits = () => {
                 <Icon className="w-5 h-5 text-brand-primary" />
               </div>
               <div className="flex-1">
-                <h4 className="font-semibold text-contrast mb-1">
+                <h4 className="font-semibold text-contrast mb-1 text-base lg:text-lg">
                   {benefit.title}
                 </h4>
-                <p className="text-sm text-brand-secondary leading-relaxed">
+                <p className="text-sm lg:text-base text-brand-secondary leading-relaxed">
                   {benefit.description}
                 </p>
               </div>

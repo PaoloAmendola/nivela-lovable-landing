@@ -31,15 +31,15 @@ const LegalSection = () => {
                   className="flex items-center justify-center md:justify-start gap-2 hover:text-green-400 transition-colors"
                 >
                   <Smartphone className="w-4 h-4 text-green-500" strokeWidth={1.5} />
-                  <span className="text-contrast font-montserrat leading-relaxed">WhatsApp: (21) 3950-0901</span>
+                  <span className="text-contrast font-montserrat leading-relaxed text-base lg:text-lg">WhatsApp: (21) 3950-0901</span>
                 </a>
                 <div className="flex items-center justify-center md:justify-start gap-2">
                   <Phone className="w-4 h-4 text-blue-500" strokeWidth={1.5} />
-                  <span className="text-contrast font-montserrat leading-relaxed">(21) 3269-0484</span>
+                  <span className="text-contrast font-montserrat leading-relaxed text-base lg:text-lg">(21) 3269-0484</span>
                 </div>
                 <div className="flex items-center justify-center md:justify-start gap-2">
                   <Mail className="w-4 h-4 text-red-500" strokeWidth={1.5} />
-                  <span className="text-contrast font-montserrat leading-relaxed">comercial@bembeauty.com.br</span>
+                  <span className="text-contrast font-montserrat leading-relaxed text-base lg:text-lg">comercial@bembeauty.com.br</span>
                 </div>
               </div>
             </div>
@@ -47,13 +47,13 @@ const LegalSection = () => {
             {/* Redes Sociais */}
             <div className="space-y-4">
               <h4 className="font-playfair font-bold text-xl gradient-text-animated flex items-center justify-center md:justify-start gap-3">
-                <Globe className="w-5 h-5" strokeWidth={1.5} />
+                <Globe className="w-5 h-5 text-blue-500" strokeWidth={1.5} />
                 Redes Sociais
               </h4>
               <div className="space-y-3 md:ml-8">
                 <div className="flex items-center justify-center md:justify-start gap-2">
-                  <Globe className="w-4 h-4" strokeWidth={1.5} />
-                  <span className="text-contrast font-montserrat leading-relaxed">www.bembeauty.com.br</span>
+                  <Globe className="w-4 h-4 text-blue-500" strokeWidth={1.5} />
+                  <span className="text-contrast font-montserrat leading-relaxed text-base lg:text-lg">www.bembeauty.com.br</span>
                 </div>
                 <a 
                   href="https://www.instagram.com/bembeautyprofessional/" 
@@ -61,8 +61,8 @@ const LegalSection = () => {
                   rel="noopener noreferrer"
                   className="flex items-center justify-center md:justify-start gap-2 hover:text-pink-400 transition-colors"
                 >
-                  <Instagram className="w-4 h-4" strokeWidth={1.5} />
-                  <span className="text-contrast font-montserrat leading-relaxed">@bembeautyprofessional</span>
+                  <Instagram className="w-4 h-4 text-pink-500" strokeWidth={1.5} />
+                  <span className="text-contrast font-montserrat leading-relaxed text-base lg:text-lg">@bembeautyprofessional</span>
                 </a>
                 <a 
                   href="https://youtu.be/lDKNZIztUMw?si=qJPZwKoXcYssVjK5" 
@@ -70,8 +70,8 @@ const LegalSection = () => {
                   rel="noopener noreferrer"
                   className="flex items-center justify-center md:justify-start gap-2 hover:text-red-400 transition-colors"
                 >
-                  <Video className="w-4 h-4" strokeWidth={1.5} />
-                  <span className="text-contrast font-montserrat leading-relaxed">Bem Beauty Professional</span>
+                  <Video className="w-4 h-4 text-red-500" strokeWidth={1.5} />
+                  <span className="text-contrast font-montserrat leading-relaxed text-base lg:text-lg">Bem Beauty Professional</span>
                 </a>
               </div>
             </div>
@@ -84,14 +84,14 @@ const LegalSection = () => {
               </h4>
               <div className="space-y-4 md:ml-8">
                 <div className="text-center md:text-left">
-                  <p className="font-semibold text-foreground font-montserrat leading-relaxed">Matriz - RJ</p>
-                  <p className="text-contrast font-montserrat leading-relaxed">Av. Cesário de Melo, nº 3006</p>
-                  <p className="text-contrast font-montserrat leading-relaxed">Campo Grande - Rio de Janeiro - RJ</p>
+                  <p className="font-semibold text-foreground font-montserrat leading-relaxed text-base lg:text-lg">Matriz - RJ</p>
+                  <p className="text-contrast font-montserrat leading-relaxed text-base lg:text-lg">Av. Cesário de Melo, nº 3006</p>
+                  <p className="text-contrast font-montserrat leading-relaxed text-base lg:text-lg">Campo Grande - Rio de Janeiro - RJ</p>
                 </div>
                 <div className="text-center md:text-left">
-                  <p className="font-semibold text-foreground font-montserrat leading-relaxed">Centro Logístico - ES</p>
-                  <p className="text-contrast font-montserrat leading-relaxed">Rod. Gov. Mário Covas, Galpão 04</p>
-                  <p className="text-contrast font-montserrat leading-relaxed">Guarapari - ES</p>
+                  <p className="font-semibold text-foreground font-montserrat leading-relaxed text-base lg:text-lg">Centro Logístico - ES</p>
+                  <p className="text-contrast font-montserrat leading-relaxed text-base lg:text-lg">Rod. Gov. Mário Covas, Galpão 04</p>
+                  <p className="text-contrast font-montserrat leading-relaxed text-base lg:text-lg">Guarapari - ES</p>
                 </div>
               </div>
             </div>
@@ -102,7 +102,7 @@ const LegalSection = () => {
           <Separator className="bg-accent/20 mb-8" />
           
           <div className="text-contrast space-y-4">
-            <p className="text-center font-montserrat leading-relaxed text-base md:text-lg">
+            <p className="text-center font-montserrat leading-relaxed text-base lg:text-lg">
               NIVELA® é uma marca registrada da Bem Beauty Professional. Todos os direitos reservados.
               CNPJ: 51.635.148/0001-33. © 2025 Bem Beauty Professional.
             </p>
