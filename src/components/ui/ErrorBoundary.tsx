@@ -35,14 +35,14 @@ class ErrorBoundary extends Component<Props, State> {
 
       return (
         <div className="flex flex-col items-center justify-center min-h-[200px] p-8 text-center">
-          <AlertTriangle className="w-12 h-12 text-muted mb-4" />
+          <AlertTriangle className="w-12 h-12 text-muted-foreground mb-4" />
           <h3 className="text-lg font-semibold mb-2">Algo deu errado</h3>
-          <p className="text-muted text-sm mb-4">
-            Um erro inesperado ocorreu neste componente.
+          <p className="text-muted-foreground text-sm mb-4">
+            Um erro inesperado ocorreu. Tente recarregar a página.
           </p>
           <button
             onClick={() => window.location.reload()}
-            className="flex items-center gap-2 px-4 py-2 bg-accent text-accent-foreground rounded-lg hover:bg-accent/90 transition-colors"
+            className="flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
           >
             <RefreshCw className="w-4 h-4" />
             Recarregar página
