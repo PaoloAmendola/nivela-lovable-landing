@@ -18,7 +18,7 @@ const TechnologyHeader = () => {
       
       {/* Descrição Principal */}
       <div className="max-w-4xl mx-auto mb-8 lg:mb-12">
-        <p className="text-base md:text-lg font-montserrat text-muted leading-relaxed">
+        <p className="text-tech-description font-montserrat leading-relaxed">
           Desenvolvida ao longo de dois anos de pesquisa molecular avançada, ela atua em escala nanométrica para realinhar a estrutura dos fios com precisão, segurança e alta performance.
         </p>
       </div>

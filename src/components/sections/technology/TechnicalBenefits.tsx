@@ -25,7 +25,6 @@ const TechnicalBenefits = () => {
     }
   ];
 
-
   return (
     <div className="space-y-6">
       {/* Header for Benefits Section */}
@@ -33,7 +32,7 @@ const TechnicalBenefits = () => {
         <h3 className="text-2xl lg:text-3xl font-playfair font-bold gradient-text-animated mb-3">
           Benefícios Técnicos
         </h3>
-        <p className="text-muted-foreground font-montserrat text-base lg:text-lg">
+        <p className="text-tech-description font-montserrat">
           Inovação científica para resultados superiores
         </p>
       </div>
@@ -41,7 +40,7 @@ const TechnicalBenefits = () => {
       {/* Technical Benefits Cards - Vertical Stack for Column Layout */}
       <div className="space-y-4">
         {technicalBenefits.map((benefit, index) => (
-          <Card key={index} className="group bg-background/30 backdrop-blur-sm border border-accent/20 overflow-hidden hover:border-accent/40 hover:bg-background/40 transition-all duration-300">
+          <Card key={index} className="group bg-background/40 backdrop-blur-sm border border-accent/30 overflow-hidden hover:border-accent/50 hover:bg-background/50 transition-all duration-300 hover:shadow-lg">
             <CardContent className="p-4 lg:p-5">
               <div className="flex items-start gap-4">
                 <div className={`p-3 rounded-xl bg-gradient-to-br ${benefit.gradient} group-hover:scale-110 transition-transform duration-300`}>
@@ -53,10 +52,10 @@ const TechnicalBenefits = () => {
                   />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <h4 className="text-base lg:text-lg font-montserrat font-semibold text-foreground mb-2 group-hover:text-accent transition-colors">
+                  <h4 className="text-tech-primary font-montserrat font-bold mb-2 group-hover:text-high-contrast transition-colors">
                     {benefit.title}
                   </h4>
-                  <p className="text-base lg:text-lg font-montserrat text-muted-foreground leading-relaxed">
+                  <p className="text-tech-description font-montserrat leading-relaxed">
                     {benefit.description}
                   </p>
                 </div>
@@ -65,7 +64,6 @@ const TechnicalBenefits = () => {
           </Card>
         ))}
       </div>
-
     </div>
   );
 };

@@ -34,7 +34,7 @@ const AmazonianActives = () => {
         <h3 className="text-2xl lg:text-3xl font-playfair font-bold gradient-text-animated mb-3">
           Ativos Amazônicos
         </h3>
-        <p className="text-muted-foreground font-montserrat text-base lg:text-lg">
+        <p className="text-tech-description font-montserrat">
           O poder da biodiversidade brasileira
         </p>
       </div>
@@ -42,17 +42,17 @@ const AmazonianActives = () => {
       {/* Amazonian Actives Cards - Vertical Stack for Column Layout */}
       <div className="space-y-4">
         {amazonianActives.map((active, index) => (
-          <div key={index} className={`group relative bg-gradient-to-br ${active.bgGradient} backdrop-blur-sm border border-accent/20 rounded-xl p-4 lg:p-5 hover:border-accent/40 hover:shadow-lg transition-all duration-300`}>
+          <div key={index} className={`group relative bg-gradient-to-br ${active.bgGradient} backdrop-blur-sm border border-accent/30 rounded-xl p-4 lg:p-5 hover:border-accent/50 hover:shadow-lg transition-all duration-300`}>
             {/* Floating Icon */}
-            <div className="absolute -top-3 -right-3 w-12 h-12 bg-background/80 backdrop-blur-sm rounded-full border border-accent/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+            <div className="absolute -top-3 -right-3 w-12 h-12 bg-background/90 backdrop-blur-sm rounded-full border border-accent/30 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
               <active.icon className={`w-6 h-6 ${active.colorClass}`} />
             </div>
             
             <div className="pr-8">
-              <h4 className="text-lg lg:text-xl font-playfair font-bold text-foreground mb-2 group-hover:text-accent transition-colors">
+              <h4 className="text-tech-primary font-playfair font-bold mb-2 group-hover:text-high-contrast transition-colors">
                 {active.name}
               </h4>
-              <p className="text-base lg:text-lg font-montserrat text-muted-foreground leading-relaxed">
+              <p className="text-tech-description font-montserrat leading-relaxed">
                 {active.description}
               </p>
             </div>
@@ -62,7 +62,6 @@ const AmazonianActives = () => {
           </div>
         ))}
       </div>
-
     </div>
   );
 };

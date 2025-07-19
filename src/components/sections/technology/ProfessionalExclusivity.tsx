@@ -6,7 +6,7 @@ import { Award, Star } from "lucide-react";
 const ProfessionalExclusivity = () => {
   return (
     <div className="mb-16">
-      <Card className="bg-gradient-to-r from-primary/10 to-accent/10 backdrop-blur-sm border border-primary/20 overflow-hidden">
+      <Card className="bg-gradient-to-r from-primary/10 to-accent/10 backdrop-blur-sm border border-primary/30 overflow-hidden hover:border-primary/40 transition-all duration-300">
         <CardContent className="p-12 text-center">
           <div className="mb-6">
             <StyledIcon 
@@ -23,10 +23,10 @@ const ProfessionalExclusivity = () => {
           </h3>
           
           <div className="space-y-4 max-w-3xl mx-auto">
-            <p className="text-lg text-foreground font-semibold">
+            <p className="text-tech-description font-montserrat font-semibold">
               Resultados reais, cuidado profundo e alta performance profissional.
             </p>
-            <p className="text-xl text-primary font-bold">
+            <p className="text-tech-highlight font-montserrat">
               Exclusivamente para cabeleireiros que buscam excelência.
             </p>
           </div>

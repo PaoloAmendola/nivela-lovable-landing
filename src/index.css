@@ -1,3 +1,4 @@
+
 /* Import Premium Design System */
 @import './styles/design-system.css';
 
@@ -25,14 +26,17 @@
     --muted-brand: 206 16% 66%; /* #A6B8C1 - Muted Sophisticated */
     --teal: 196 43% 22%; /* #254C5A - Teal Color */
     
-    /* Premium Typography Contrast - Optimized for 35-60 Age Group */
-    --muted: 0 0% 85%; /* #D9D9D9 - High contrast for better readability */
-    --muted-foreground: 207 56% 9%;
+    /* CORREÇÃO CRÍTICA - Melhores contrastes para legibilidade */
+    --muted: 0 0% 95%; /* Alterado de 85% para 95% - Muito mais legível */
+    --muted-foreground: 0 0% 90%; /* Alterado de 207 56% 9% para branco quase puro */
 
-    /* Professional Text Hierarchy with Enhanced Contrast */
-    --text-premium: 0 0% 98%; /* #FAFAFA - Premium white for headlines */
-    --text-secondary: 0 0% 92%; /* #EBEBEB - High contrast secondary */
-    --text-tertiary: 0 0% 85%; /* #D9D9D9 - Readable tertiary */
+    /* NOVA HIERARQUIA DE TEXTOS - Alta Legibilidade */
+    --text-premium: 0 0% 98%; /* #FAFAFA - Premium white para headlines */
+    --text-secondary: 0 0% 94%; /* Aumentado de 92% para 94% - Melhor contraste */
+    --text-tertiary: 0 0% 88%; /* Aumentado de 85% para 88% - Mais legível */
+    --text-high-contrast: 0 0% 98%; /* NOVA - Para textos críticos */
+    --text-tech-primary: 0 0% 96%; /* NOVA - Para títulos de tecnologia */
+    --text-tech-description: 0 0% 92%; /* NOVA - Para descrições técnicas */
 
     --card: 207 56% 9%;
     --card-foreground: 0 0% 100%;
@@ -49,7 +53,7 @@
 
     --radius: 0.75rem;
 
-    /* Unified Premium Typography Scale - Mobile-First Approach */
+    /* Unified Premium Typography Scale - Mobile-First Approach - MELHORADO */
     --text-hero: clamp(2.75rem, 8vw, 5rem); /* 44px-80px - Enhanced for impact */
     --text-hero-subtitle: clamp(1.5rem, 4vw, 2.5rem); /* 24px-40px - Better hierarchy */
     --text-hero-description: clamp(1.125rem, 2.5vw, 1.375rem); /* 18px-22px - Improved readability */
@@ -57,6 +61,10 @@
     --text-section-subtitle: clamp(1.375rem, 3vw, 2rem); /* 22px-32px - Better scaling */
     --text-body-large: clamp(1.25rem, 2vw, 1.5rem); /* 20px-24px - Professional readability */
     --text-body: clamp(1.125rem, 1.5vw, 1.25rem); /* 18px-20px - Optimal for 35-60 age group */
+    
+    /* NOVAS VARIÁVEIS PARA TECNOLOGIA - Legibilidade Otimizada */
+    --text-tech-title: clamp(1.25rem, 2.5vw, 1.5rem); /* 20px-24px - Títulos de cards técnicos */
+    --text-tech-body: clamp(1.125rem, 2vw, 1.375rem); /* 18px-22px - Corpo de textos técnicos */
 
     /* Mobile optimization variables */
     --touch-target-min: 44px;
@@ -233,7 +241,7 @@
 }
 
 @layer components {
-  /* PREMIUM TYPOGRAPHY SYSTEM - Playfair + Montserrat */
+  /* PREMIUM TYPOGRAPHY SYSTEM - Playfair + Montserrat - MELHORADO */
   
   /* Hero Typography */
   .text-hero {
@@ -243,6 +251,7 @@
     line-height: 1.1;
     letter-spacing: -0.02em;
     color: hsl(var(--text-premium));
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   }
   
   .text-hero-subtitle {
@@ -297,10 +306,50 @@
     color: hsl(var(--text-tertiary));
   }
 
-  /* Premium Text Utilities */
-  .text-premium { color: hsl(var(--text-premium)); }
-  .text-secondary { color: hsl(var(--text-secondary)); }
-  .text-tertiary { color: hsl(var(--text-tertiary)); }
+  /* NOVAS CLASSES PARA TECNOLOGIA - Alta Legibilidade */
+  .text-tech-primary {
+    font-size: var(--text-tech-title);
+    font-family: theme('fontFamily.montserrat');
+    font-weight: 700; /* Aumentado de 600 para 700 */
+    line-height: 1.3;
+    color: hsl(var(--text-tech-primary));
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  }
+  
+  .text-tech-description {
+    font-size: var(--text-tech-body);
+    font-family: theme('fontFamily.montserrat');
+    font-weight: 500; /* Aumentado de 400 para 500 */
+    line-height: 1.6;
+    color: hsl(var(--text-tech-description));
+  }
+  
+  .text-tech-highlight {
+    font-size: var(--text-tech-title);
+    font-family: theme('fontFamily.montserrat');
+    font-weight: 800; /* Muito pesado para destaques */
+    line-height: 1.3;
+    color: hsl(var(--text-high-contrast));
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Premium Text Utilities - MELHORADAS */
+  .text-premium { 
+    color: hsl(var(--text-premium)); 
+    font-weight: 600;
+  }
+  .text-secondary { 
+    color: hsl(var(--text-secondary)); 
+    font-weight: 500;
+  }
+  .text-tertiary { 
+    color: hsl(var(--text-tertiary)); 
+    font-weight: 400;
+  }
+  .text-high-contrast { 
+    color: hsl(var(--text-high-contrast)); 
+    font-weight: 600;
+  }
 
   /* SISTEMA DE SEÇÕES PADRONIZADO - APLICADO GLOBALMENTE */
   .section-spacing { 
@@ -432,32 +481,33 @@
     border: 1px solid rgba(255, 255, 255, 0.2);
   }
 
-  /* Gradient Text - Cores da Marca NIVELA® */
+  /* Gradient Text - Cores da Marca NIVELA® - MELHORADO */
   .gradient-text {
-    background: linear-gradient(135deg, #9D4916 0%, #D9C0AA 100%);
+    background: linear-gradient(135deg, #B8551A 0%, #9D4916 50%, #D9C0AA 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     -moz-background-clip: text;
     -moz-text-fill-color: transparent;
     background-clip: text;
-    font-weight: 600;
+    font-weight: 700; /* Aumentado de 600 para 700 */
     /* Otimizações para performance e animações */
     will-change: transform;
     backface-visibility: hidden;
     transform: translateZ(0);
     /* Fallback para browsers sem suporte */
     color: #9D4916;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   }
 
-  /* Versão otimizada para títulos com animação */
+  /* Versão otimizada para títulos com animação - MELHORADA */
   .gradient-text-animated {
-    background: linear-gradient(135deg, #9D4916 0%, #D9C0AA 100%);
+    background: linear-gradient(135deg, #B8551A 0%, #9D4916 30%, #D9C0AA 70%, #9D4916 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     -moz-background-clip: text;
     -moz-text-fill-color: transparent;
     background-clip: text;
-    font-weight: 600;
+    font-weight: 800; /* Aumentado de 600 para 800 - Muito mais impactante */
     /* Otimizações específicas para animações */
     will-change: transform, opacity;
     backface-visibility: hidden;
@@ -466,20 +516,26 @@
     color: transparent;
     /* Fallback apenas para browsers muito antigos */
     _color: #9D4916;
+    /* Brilho e profundidade */
+    text-shadow: 0 2px 6px rgba(157, 73, 22, 0.4), 0 1px 2px rgba(0, 0, 0, 0.3);
   }
 
   /* Classes utilitárias para cores da marca */
   .text-brand-primary {
     color: #9D4916;
+    font-weight: 600;
   }
 
   .text-brand-secondary {
     color: #D9C0AA;
+    font-weight: 500;
   }
 
-  /* High contrast text class for accessibility */
+  /* High contrast text class for accessibility - MELHORADA */
   .text-contrast {
-    color: #F5F5F5; /* Maximum contrast on dark backgrounds */
+    color: hsl(var(--text-high-contrast));
+    font-weight: 500;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
   }
 
   /* Premium Button - Updated to use exact brand color */
