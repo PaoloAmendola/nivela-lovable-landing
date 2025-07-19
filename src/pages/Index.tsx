@@ -1,11 +1,14 @@
 
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import ScrollProgressIndicator from "@/components/ui/ScrollProgressIndicator";
 import HeroSection from "@/components/sections/HeroSection";
 import ManifestoTextSection from "@/components/sections/ManifestoTextSection";
 import ManifestoVideoSection from "@/components/sections/ManifestoVideoSection";
-import SmartLazyLoader from "@/components/ui/SmartLazyLoader";
+import TechnologySection from "@/components/sections/TechnologySection";
+import EcosystemSection from "@/components/sections/EcosystemSection";
+import DistributorSection from "@/components/sections/DistributorSection";
+import FAQSection from "@/components/sections/FAQSection";
+import StoreSection from "@/components/sections/StoreSection";
 import WhyChooseNivelaSection from "@/components/sections/WhyChooseNivelaSection";
 import LegalSection from "@/components/sections/LegalSection";
 import SimpleLogo from "@/components/navigation/SimpleLogo";
@@ -16,8 +19,6 @@ import EnhancedMobileCTA from "@/components/ui/EnhancedMobileCTA";
 import PullToRefresh from "@/components/ui/PullToRefresh";
 import SystemHealthCheck from "@/components/ui/SystemHealthCheck";
 import ContrastOptimizer from "@/components/ui/ContrastOptimizer";
-// import { usePerformanceOptimization } from "@/hooks/use-performance-optimization";
-// import { useLoadingOptimization } from "@/hooks/use-loading-optimization";
 import { useToast } from "@/hooks/use-toast";
 
 const Index: React.FC = () => {
@@ -76,46 +77,33 @@ const Index: React.FC = () => {
         </section>
         
         <section data-section="technology" id="technology">
-          <SmartLazyLoader
-            componentPath="../components/sections/TechnologySection"
-            skeleton="section"
-            preload={true}
-            threshold={0.2}
-            rootMargin="100px"
-          />
+          <OptimizedLazySection skeleton="card" delay={150}>
+            <TechnologySection />
+          </OptimizedLazySection>
         </section>
         
         <section data-section="ecosystem" id="ecosystem">
-          <SmartLazyLoader
-            componentPath="../components/sections/EcosystemSection"
-            skeleton="section"
-            threshold={0.2}
-          />
+          <OptimizedLazySection skeleton="card" delay={200}>
+            <EcosystemSection />
+          </OptimizedLazySection>
         </section>
         
         <section data-section="distributor" id="distributor">
-          <SmartLazyLoader
-            componentPath="../components/sections/DistributorSection"
-            skeleton="section"
-            onCTAClick={() => setShowForm(true)}
-            threshold={0.2}
-          />
+          <OptimizedLazySection skeleton="card" delay={250}>
+            <DistributorSection onCTAClick={() => setShowForm(true)} />
+          </OptimizedLazySection>
         </section>
         
         <section data-section="faq" id="faq">
-          <SmartLazyLoader
-            componentPath="../components/sections/FAQSection"
-            skeleton="section"
-            threshold={0.2}
-          />
+          <OptimizedLazySection skeleton="card" delay={300}>
+            <FAQSection />
+          </OptimizedLazySection>
         </section>
         
         <section data-section="store" id="store">
-          <SmartLazyLoader
-            componentPath="../components/sections/StoreSection"
-            skeleton="section"
-            threshold={0.2}
-          />
+          <OptimizedLazySection skeleton="card" delay={350}>
+            <StoreSection />
+          </OptimizedLazySection>
         </section>
         
         <section data-section="footer" id="footer">
