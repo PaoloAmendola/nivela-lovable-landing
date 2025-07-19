@@ -27,17 +27,17 @@ const TechnicalBenefits = () => {
 
   return (
     <div className="space-y-6">
-      {/* Header for Benefits Section */}
+      {/* Header com hierarquia tipográfica clara */}
       <div className="text-center">
-        <h3 className="text-2xl lg:text-3xl font-playfair font-bold gradient-text-animated mb-3">
+        <h3 className="tech-section-title">
           Benefícios Técnicos
         </h3>
-        <p className="text-tech-description font-montserrat">
+        <p className="tech-section-subtitle">
           Inovação científica para resultados superiores
         </p>
       </div>
 
-      {/* Technical Benefits Cards - Vertical Stack for Column Layout */}
+      {/* Technical Benefits Cards com hierarquia melhorada */}
       <div className="space-y-4">
         {technicalBenefits.map((benefit, index) => (
           <Card key={index} className="group bg-background/40 backdrop-blur-sm border border-accent/30 overflow-hidden hover:border-accent/50 hover:bg-background/50 transition-all duration-300 hover:shadow-lg">
@@ -52,10 +52,10 @@ const TechnicalBenefits = () => {
                   />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <h4 className="text-tech-primary font-montserrat font-bold mb-2 group-hover:text-high-contrast transition-colors">
+                  <h4 className="tech-card-title group-hover:text-high-contrast transition-colors">
                     {benefit.title}
                   </h4>
-                  <p className="text-tech-description font-montserrat leading-relaxed">
+                  <p className="tech-description">
                     {benefit.description}
                   </p>
                 </div>

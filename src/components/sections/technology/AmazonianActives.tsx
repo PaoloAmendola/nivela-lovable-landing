@@ -29,17 +29,17 @@ const AmazonianActives = () => {
 
   return (
     <div className="space-y-6">
-      {/* Header for Amazonian Actives */}
+      {/* Header com hierarquia tipográfica clara */}
       <div className="text-center">
-        <h3 className="text-2xl lg:text-3xl font-playfair font-bold gradient-text-animated mb-3">
+        <h3 className="tech-section-title">
           Ativos Amazônicos
         </h3>
-        <p className="text-tech-description font-montserrat">
+        <p className="tech-section-subtitle">
           O poder da biodiversidade brasileira
         </p>
       </div>
       
-      {/* Amazonian Actives Cards - Vertical Stack for Column Layout */}
+      {/* Amazonian Actives Cards com hierarquia melhorada */}
       <div className="space-y-4">
         {amazonianActives.map((active, index) => (
           <div key={index} className={`group relative bg-gradient-to-br ${active.bgGradient} backdrop-blur-sm border border-accent/30 rounded-xl p-4 lg:p-5 hover:border-accent/50 hover:shadow-lg transition-all duration-300`}>
@@ -49,10 +49,10 @@ const AmazonianActives = () => {
             </div>
             
             <div className="pr-8">
-              <h4 className="text-tech-primary font-playfair font-bold mb-2 group-hover:text-high-contrast transition-colors">
+              <h4 className="tech-card-title group-hover:text-high-contrast transition-colors">
                 {active.name}
               </h4>
-              <p className="text-tech-description font-montserrat leading-relaxed">
+              <p className="tech-description">
                 {active.description}
               </p>
             </div>

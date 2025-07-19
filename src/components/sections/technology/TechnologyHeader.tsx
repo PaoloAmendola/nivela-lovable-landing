@@ -12,13 +12,14 @@ const TechnologyHeader = () => {
           Inovação Patenteada
         </Badge>
       </div>
-      <h2 className="text-3xl md:text-4xl lg:text-5xl font-playfair font-bold gradient-text-animated mb-6 lg:mb-8">
+      
+      <h2 className="tech-main-title">
         ASTRO QUAT V3®
       </h2>
       
-      {/* Descrição Principal */}
+      {/* Descrição Principal com hierarquia melhorada */}
       <div className="max-w-4xl mx-auto mb-8 lg:mb-12">
-        <p className="text-tech-description font-montserrat leading-relaxed">
+        <p className="tech-main-description">
           Desenvolvida ao longo de dois anos de pesquisa molecular avançada, ela atua em escala nanométrica para realinhar a estrutura dos fios com precisão, segurança e alta performance.
         </p>
       </div>

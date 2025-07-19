@@ -18,15 +18,15 @@ const ProfessionalExclusivity = () => {
             />
           </div>
           
-          <h3 className="text-2xl md:text-3xl font-playfair font-bold mb-6 gradient-text-animated">
+          <h3 className="tech-section-title mb-6">
             ASTRO QUAT V3® é Inovação com Propósito
           </h3>
           
           <div className="space-y-4 max-w-3xl mx-auto">
-            <p className="text-tech-description font-montserrat font-semibold">
+            <p className="tech-description font-semibold">
               Resultados reais, cuidado profundo e alta performance profissional.
             </p>
-            <p className="text-tech-highlight font-montserrat">
+            <p className="tech-card-title text-accent">
               Exclusivamente para cabeleireiros que buscam excelência.
             </p>
           </div>
