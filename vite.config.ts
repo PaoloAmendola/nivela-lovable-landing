@@ -26,7 +26,16 @@ export default defineConfig(({ mode }) => ({
         manualChunks: {
           'vendor': ['react', 'react-dom'],
           'ui': ['@radix-ui/react-dialog', '@radix-ui/react-accordion', '@radix-ui/react-toast'],
-          'utils': ['framer-motion', 'lucide-react']
+          'utils': ['framer-motion', 'lucide-react'],
+          'sections': [
+            './src/components/sections/TechnologySection',
+            './src/components/sections/ExclusivitySection',
+            './src/components/sections/TrustSection'
+          ],
+          'forms': [
+            './src/components/forms/ContactForm',
+            './src/components/forms/PremiumContactModal'
+          ]
         }
       }
     },
