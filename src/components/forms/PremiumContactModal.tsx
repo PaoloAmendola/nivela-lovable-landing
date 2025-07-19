@@ -63,7 +63,7 @@ const PremiumContactModal = ({ isOpen, onClose }: PremiumContactModalProps) => {
       }, 3000);
       
     } catch (error) {
-      console.error('Erro ao enviar formulário:', error);
+      // Error handling - remove production logging
       setIsSubmitting(false);
       
       toast({

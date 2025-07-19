@@ -29,7 +29,6 @@ interface UseFormValidationReturn {
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     onBlur: () => void;
     error: string | null;
-    touched: boolean;
   };
 }
 
@@ -144,8 +143,7 @@ export const useFormValidation = (
     onBlur: () => {
       setFieldTouched(name);
     },
-    error: fields[name]?.touched ? fields[name]?.error : null,
-    touched: fields[name]?.touched || false
+    error: fields[name]?.touched ? fields[name]?.error : null
   }), [fields, setFieldValue, setFieldTouched]);
 
   const errors = Object.keys(fields).reduce((acc, key) => {

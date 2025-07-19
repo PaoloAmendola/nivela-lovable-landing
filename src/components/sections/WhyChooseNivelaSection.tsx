@@ -62,8 +62,8 @@ const WhyChooseNivelaSection = () => {
                 height={600}
                 priority={true}
                 className="w-full h-auto max-w-sm mx-auto lg:max-w-md"
-                onLoad={() => console.log('Imagem NIVELA carregada com sucesso')}
-                onError={() => console.error('Erro ao carregar imagem NIVELA')}
+                onLoad={() => {/* Image loaded */}}
+                onError={() => {/* Image error handled */}}
               />
             </motion.div>
 

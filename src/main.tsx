@@ -42,7 +42,7 @@ function initializeApp() {
       </StrictMode>
     );
   } catch (error) {
-    console.error('Failed to initialize React app:', error);
+    // Failed to initialize - error handled silently in production
     // Fallback: show error message
     rootElement.innerHTML = '<div style="padding: 20px; text-align: center; color: #333;">Erro ao carregar. Atualize a página.</div>';
   }
