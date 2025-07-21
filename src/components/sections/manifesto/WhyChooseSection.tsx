@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { motion } from 'framer-motion';
 import ConsolidatedImage from '@/components/ui/ConsolidatedImage';
@@ -44,11 +45,11 @@ const WhyChooseSection = () => {
           {/* Descrição */}
           <div className="space-y-4">
             <p className="font-montserrat text-base lg:text-lg text-gray-200 leading-relaxed">
-              NIVELA® é um retexturizador hidro nutritivo de alta performance, uma nova geração de escova progressiva sem formol.
+              NIVELA® é um retexturizador hidro nutritivo de alta performance, representando uma nova geração de escova progressiva completamente livre de formol.
             </p>
             
             <p className="font-montserrat text-base lg:text-lg text-gray-200 leading-relaxed">
-              Combinando tecnologia avançada e ativos naturais da Amazônia, NIVELA® alinha, trata e transforma os fios, em uma única aplicação.
+              Combinando tecnologia avançada com ativos naturais da Amazônia, transforma e trata os fios em uma única aplicação.
             </p>
             
             <p className="font-montserrat text-base lg:text-lg text-gray-200 leading-relaxed font-semibold">
