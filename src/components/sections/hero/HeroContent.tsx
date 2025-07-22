@@ -24,9 +24,9 @@ const HeroContent = ({ onCTAClick, shouldReduceAnimations }: HeroContentProps) =
 
       {/* Título Principal - NIVELA: A Evolução da escova progressiva */}
       <div className="animate-sequential-in opacity-0">
-        <h1 className="text-hero text-center lg:text-left mb-4 lg:mb-6 leading-tight">
-          <span className="wilkysta-title text-[1.15em] bg-gradient-to-r from-[#9D4916] via-[#D9C0AA] to-[#9D4916] bg-clip-text text-transparent">NIVELA</span>
-          <sup className="text-2xl sm:text-3xl lg:text-4xl text-white/80 font-light">®</sup>
+        <h1 className="text-hero text-center lg:text-left mb-6 lg:mb-8 leading-tight">
+          <span className="wilkysta-title text-[1.2em] bg-gradient-to-r from-[#9D4916] via-[#D9C0AA] to-[#9D4916] bg-clip-text text-transparent">NIVELA</span>
+          <sup className="text-2xl sm:text-3xl lg:text-4xl text-white/70 font-light">®</sup>
           <span className="font-playfair font-bold text-white">: A Evolução</span>
           <br />
           <span className="font-playfair font-bold text-white">da Escova Progressiva</span>
@@ -35,7 +35,7 @@ const HeroContent = ({ onCTAClick, shouldReduceAnimations }: HeroContentProps) =
 
       {/* Subheadline em Itálico */}
       <div className="animate-sequential-in opacity-0">
-        <h2 className="text-hero-subtitle text-center lg:text-left mb-6 lg:mb-8 italic leading-relaxed text-gray-300 whitespace-pre-line">
+        <h2 className="text-hero-subtitle text-center lg:text-left mb-8 lg:mb-10 italic leading-relaxed text-gray-200 whitespace-pre-line">
           {"Desenvolvido com tecnologia patenteada,\nsem formol, com ativos da Amazônia e\nrendimento 30% superior."}
         </h2>
       </div>
@@ -46,19 +46,19 @@ const HeroContent = ({ onCTAClick, shouldReduceAnimations }: HeroContentProps) =
           {/* Badge 1 - Accent Color */}
           <div className="creative-pill bg-gradient-to-r from-[#9D4916]/20 to-[#9D4916]/10 border-[#9D4916]/30">
             <div className="creative-pill-dot bg-[#9D4916]"></div>
-            <span className="text-white font-medium text-base lg:text-lg">Livre de formol e derivados</span>
+            <span className="text-white font-semibold text-base lg:text-lg tracking-wide">Livre de formol e derivados</span>
           </div>
 
           {/* Badge 2 - Teal Color */}
           <div className="creative-pill bg-gradient-to-r from-[#254C5A]/20 to-[#254C5A]/10 border-[#254C5A]/30">
             <div className="creative-pill-dot bg-[#254C5A]"></div>
-            <span className="text-white font-medium text-base lg:text-lg">Textura em Gel inovadora</span>
+            <span className="text-white font-semibold text-base lg:text-lg tracking-wide">Textura em Gel inovadora</span>
           </div>
           
           {/* Badge 3 - Secondary Color */}
           <div className="creative-pill bg-gradient-to-r from-[#D9C0AA]/20 to-[#D9C0AA]/10 border-[#D9C0AA]/30">
             <div className="creative-pill-dot bg-[#D9C0AA]"></div>
-            <span className="text-white font-medium text-base lg:text-lg">Tecnologia ASTRO QUAT V3</span>
+            <span className="text-white font-semibold text-base lg:text-lg tracking-wide">Tecnologia ASTRO QUAT V3</span>
           </div>
         </div>
       </div>
