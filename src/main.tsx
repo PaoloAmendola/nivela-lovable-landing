@@ -6,6 +6,13 @@ import './index.css';
 import './styles/fonts.css';
 import { initializeOptimizations, removeProductionLogs } from './utils/deploy-optimization';
 
+// Extend window interface for GTM
+declare global {
+  interface Window {
+    dataLayer?: any[];
+  }
+}
+
 // Remove production logs immediately
 removeProductionLogs();
 
@@ -62,10 +69,19 @@ function initializeApp() {
 
 // Wait for external scripts (GTM) to complete loading before initializing React
 function waitForScriptsAndInitialize() {
-  // Add 50ms delay for GTM script completion as documented in troubleshooting
-  setTimeout(() => {
-    initializeApp();
-  }, 50);
+  // Check if GTM dataLayer is ready, if not wait for it
+  const checkGTMReady = () => {
+    if (typeof window !== 'undefined' && window.dataLayer) {
+      // GTM is ready, proceed with React initialization
+      initializeApp();
+    } else {
+      // Wait a bit more for GTM to load
+      setTimeout(checkGTMReady, 100);
+    }
+  };
+
+  // Start checking after a small initial delay
+  setTimeout(checkGTMReady, 100);
 }
 
 // Initialize when DOM is ready
