@@ -71,10 +71,18 @@ const initializeApp = () => {
     return;
   }
 
+  // Ensure React is available globally
+  if (!React || typeof React.createElement !== 'function') {
+    console.error('React is not properly loaded');
+    return;
+  }
+
   try {
     const root = createRoot(rootElement);
     root.render(
-      React.createElement(StrictMode, null, React.createElement(App))
+      <StrictMode>
+        <App />
+      </StrictMode>
     );
     
     console.log('App rendered successfully');
@@ -88,7 +96,7 @@ const initializeApp = () => {
     // Fallback without StrictMode
     try {
       const root = createRoot(rootElement);
-      root.render(React.createElement(App));
+      root.render(<App />);
       console.log('App rendered with fallback');
       
       // Load GTM after fallback render
