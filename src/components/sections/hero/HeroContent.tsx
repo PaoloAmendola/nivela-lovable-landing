@@ -1,4 +1,3 @@
-
 import { EnhancedButton } from "@/components/ui/EnhancedButton";
 import { MessageSquare } from "lucide-react";
 import { useCallback, useMemo } from "react";
@@ -25,7 +24,7 @@ const HeroContent = ({ onCTAClick, shouldReduceAnimations }: HeroContentProps) =
       {/* Título Principal - NIVELA: A Evolução da escova progressiva */}
       <div className="animate-sequential-in opacity-0">
         <h1 className="text-hero text-center lg:text-left mb-6 lg:mb-8" style={{ lineHeight: 1.1 }}>
-          <span className="wilkysta-title text-[1.2em] bg-gradient-to-r from-[#9D4916] via-[#D9C0AA] to-[#9D4916] bg-clip-text text-transparent">NIVELA</span>
+          <span className="wilkysta-title text-[1em] bg-gradient-to-r from-[#9D4916] via-[#D9C0AA] to-[#9D4916] bg-clip-text text-transparent">NIVELA</span>
           <sup className="text-lg sm:text-xl lg:text-2xl text-white/70 font-light">®</sup>
           <span className="font-playfair font-bold text-white">: A Evolução</span>
           <br />
