@@ -12,6 +12,13 @@ removeProductionLogs();
 // Initialize performance optimizations
 initializeOptimizations();
 
+// Declare window.dataLayer type
+declare global {
+  interface Window {
+    dataLayer: any[];
+  }
+}
+
 // Function to load GTM asynchronously after React is ready
 const loadGTM = () => {
   // Initialize dataLayer
