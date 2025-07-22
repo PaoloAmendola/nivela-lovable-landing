@@ -12,42 +12,6 @@ removeProductionLogs();
 // Initialize performance optimizations
 initializeOptimizations();
 
-// Declare window.dataLayer type
-declare global {
-  interface Window {
-    dataLayer: any[];
-  }
-}
-
-// Function to load GTM asynchronously after React is ready
-const loadGTM = () => {
-  // Initialize dataLayer
-  window.dataLayer = window.dataLayer || [];
-  
-  // GTM script injection
-  const gtmScript = document.createElement('script');
-  gtmScript.async = true;
-  gtmScript.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-KZW3RTWD';
-  
-  // GTM initialization
-  window.dataLayer.push({
-    'gtm.start': new Date().getTime(),
-    event: 'gtm.js'
-  });
-  
-  document.head.appendChild(gtmScript);
-  
-  // Add noscript fallback
-  const noscript = document.createElement('noscript');
-  const iframe = document.createElement('iframe');
-  iframe.src = 'https://www.googletagmanager.com/ns.html?id=GTM-KZW3RTWD';
-  iframe.height = '0';
-  iframe.width = '0';
-  iframe.style.display = 'none';
-  iframe.style.visibility = 'hidden';
-  noscript.appendChild(iframe);
-  document.body.insertBefore(noscript, document.body.firstChild);
-};
 
 // Register service worker for caching
 if ('serviceWorker' in navigator) {
@@ -107,11 +71,6 @@ const initializeApp = async () => {
     );
     
     console.log('App rendered successfully');
-    
-    // Load GTM only after successful React mount
-    setTimeout(() => {
-      requestAnimationFrame(loadGTM);
-    }, 100);
     
   } catch (error) {
     console.error('React initialization failed:', error);
