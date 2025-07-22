@@ -24,7 +24,7 @@ const HeroContent = ({ onCTAClick, shouldReduceAnimations }: HeroContentProps) =
 
       {/* Título Principal - NIVELA®: A Evolução / da Escova Progressiva */}
       <div className="animate-sequential-in opacity-0">
-        <h1 className="text-hero text-center lg:text-left mb-6 lg:mb-8" style={{ lineHeight: 1.05 }}>
+        <h1 className="text-hero text-center lg:text-left mb-6 lg:mb-8" style={{ lineHeight: 1.0 }}>
           <span className="wilkysta-title text-[1em] bg-gradient-to-r from-[#9D4916] via-[#D9C0AA] to-[#9D4916] bg-clip-text text-transparent">NIVELA</span>
           <sup className="text-base sm:text-lg lg:text-xl text-white/70 font-light">®</sup>
           <span className="font-playfair font-bold text-white">: A Evolução</span>

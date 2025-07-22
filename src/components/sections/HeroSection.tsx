@@ -37,7 +37,7 @@ const HeroSection = ({ onCTAClick }: HeroSectionProps) => {
           
           {/* Layout Responsivo: Mobile (coluna única) / Desktop (duas colunas) */}
           <div className="w-full max-w-7xl mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-center">
               
               {/* Conteúdo Textual - Esquerda no Desktop */}
               <div className="text-center lg:text-left order-2 lg:order-1">
