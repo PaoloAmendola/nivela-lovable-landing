@@ -26,8 +26,8 @@ if ('serviceWorker' in navigator) {
   });
 }
 
-// Enhanced React initialization with hook safety
-const initializeApp = async () => {
+// Simple React initialization
+const initializeApp = () => {
   const rootElement = document.getElementById("root");
 
   if (!rootElement) {
@@ -35,34 +35,7 @@ const initializeApp = async () => {
     return;
   }
 
-  // Wait for React to be fully available with hooks
-  let attempts = 0;
-  const maxAttempts = 10;
-  
-  const waitForReact = () => new Promise<void>((resolve, reject) => {
-    const checkReact = () => {
-      attempts++;
-      
-      if (
-        React && 
-        typeof React.createElement === 'function' &&
-        typeof React.useState === 'function' &&
-        typeof React.useEffect === 'function'
-      ) {
-        console.log('React hooks confirmed available');
-        resolve();
-      } else if (attempts >= maxAttempts) {
-        reject(new Error('React hooks not available after waiting'));
-      } else {
-        setTimeout(checkReact, 100);
-      }
-    };
-    checkReact();
-  });
-
   try {
-    await waitForReact();
-    
     const root = createRoot(rootElement);
     root.render(
       <StrictMode>
@@ -90,7 +63,7 @@ const initializeApp = async () => {
       ">
         <h3 style="margin-bottom: 16px; color: #495057;">Erro de Carregamento</h3>
         <p style="margin-bottom: 20px; line-height: 1.5;">
-          React não pôde ser inicializado corretamente. Tente recarregar a página.
+          Erro ao carregar a aplicação. Tente recarregar a página.
         </p>
         <button 
           onclick="location.reload()" 
