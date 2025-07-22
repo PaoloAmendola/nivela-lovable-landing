@@ -1,3 +1,4 @@
+
 import React, { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App.tsx';
@@ -5,34 +6,57 @@ import './index.css';
 import './styles/fonts.css';
 import { initializeOptimizations, removeProductionLogs } from './utils/deploy-optimization';
 
-// Extend window interface for GTM
-declare global {
-  interface Window {
-    dataLayer?: any[];
-  }
-}
-
 // Remove production logs immediately
 removeProductionLogs();
 
 // Initialize performance optimizations
 initializeOptimizations();
 
+// Function to load GTM asynchronously after React is ready
+const loadGTM = () => {
+  // Initialize dataLayer
+  window.dataLayer = window.dataLayer || [];
+  
+  // GTM script injection
+  const gtmScript = document.createElement('script');
+  gtmScript.async = true;
+  gtmScript.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-KZW3RTWD';
+  
+  // GTM initialization
+  window.dataLayer.push({
+    'gtm.start': new Date().getTime(),
+    event: 'gtm.js'
+  });
+  
+  document.head.appendChild(gtmScript);
+  
+  // Add noscript fallback
+  const noscript = document.createElement('noscript');
+  const iframe = document.createElement('iframe');
+  iframe.src = 'https://www.googletagmanager.com/ns.html?id=GTM-KZW3RTWD';
+  iframe.height = '0';
+  iframe.width = '0';
+  iframe.style.display = 'none';
+  iframe.style.visibility = 'hidden';
+  noscript.appendChild(iframe);
+  document.body.insertBefore(noscript, document.body.firstChild);
+};
+
 // Register service worker for caching
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/sw.js')
       .then(() => {
-        // Service worker registered successfully
+        console.log('Service worker registered');
       })
       .catch(() => {
-        // Service worker registration failed
+        console.log('Service worker registration failed');
       });
   });
 }
 
-// Ultra-robust React initialization to prevent hooks errors
-function initializeApp() {
+// Simple and robust React initialization
+const initializeApp = () => {
   const rootElement = document.getElementById("root");
 
   if (!rootElement) {
@@ -40,55 +64,31 @@ function initializeApp() {
     return;
   }
 
-  // Comprehensive React readiness check
-  if (!React || 
-      typeof React.createElement !== 'function' || 
-      typeof React.useState !== 'function' ||
-      typeof React.useEffect !== 'function' ||
-      !createRoot) {
-    console.log('React not fully loaded, retrying in 200ms...');
-    setTimeout(initializeApp, 200);
-    return;
-  }
-
-  // Test React hooks to ensure they work before initializing the app
-  try {
-    // Create a test component to verify hooks functionality
-    const TestHooks = () => {
-      const [state] = React.useState(true);
-      React.useEffect(() => {}, []);
-      return null;
-    };
-    
-    // If we can create this element, React hooks are working
-    React.createElement(TestHooks);
-    console.log('React hooks test passed - initializing app');
-  } catch (hookError) {
-    console.log('React hooks test failed, retrying...', hookError);
-    setTimeout(initializeApp, 300);
-    return;
-  }
-
-  // Create React root and render
   try {
     const root = createRoot(rootElement);
-    console.log('Creating React root...');
-    
-    // Use React.createElement for maximum compatibility
     root.render(
-      React.createElement(StrictMode, null,
-        React.createElement(App, null)
-      )
+      <StrictMode>
+        <App />
+      </StrictMode>
     );
+    
     console.log('App rendered successfully');
+    
+    // Load GTM after React is successfully initialized
+    setTimeout(loadGTM, 1000);
+    
   } catch (error) {
     console.error('Failed to render with StrictMode, trying fallback...', error);
     
     // Fallback without StrictMode
     try {
       const root = createRoot(rootElement);
-      root.render(React.createElement(App, null));
+      root.render(<App />);
       console.log('App rendered with fallback');
+      
+      // Load GTM after fallback render
+      setTimeout(loadGTM, 1000);
+      
     } catch (fallbackError) {
       console.error('Complete render failure:', fallbackError);
       
@@ -132,56 +132,12 @@ function initializeApp() {
       `;
     }
   }
-}
+};
 
-// Enhanced script waiting with timeout protection
-function waitForScriptsAndInitialize() {
-  let attempts = 0;
-  const maxAttempts = 100; // 10 seconds max (100ms * 100)
-  
-  const checkReadiness = () => {
-    attempts++;
-    
-    if (attempts >= maxAttempts) {
-      console.warn('Max initialization attempts reached, forcing start...');
-      initializeApp();
-      return;
-    }
-
-    // Check GTM readiness (allow app to start even if GTM fails)
-    const gtmReady = !window.dataLayer || Array.isArray(window.dataLayer);
-    
-    // Check React readiness
-    const reactReady = React && 
-                      typeof React.createElement === 'function' && 
-                      typeof React.useState === 'function' &&
-                      typeof React.useEffect === 'function';
-
-    if (reactReady) {
-      if (gtmReady) {
-        console.log(`Ready after ${attempts} attempts - starting app`);
-        initializeApp();
-      } else if (attempts > 20) {
-        // Give up on GTM after 2 seconds and start anyway
-        console.log('GTM not ready but proceeding anyway...');
-        initializeApp();
-      } else {
-        setTimeout(checkReadiness, 100);
-      }
-    } else {
-      console.log(`Attempt ${attempts}: React not ready, waiting...`);
-      setTimeout(checkReadiness, 100);
-    }
-  };
-
-  // Start checking after initial delay to let scripts load
-  setTimeout(checkReadiness, 150);
-}
-
-// Initialize when DOM is ready
+// Initialize when DOM is ready - simplified approach
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', waitForScriptsAndInitialize);
+  document.addEventListener('DOMContentLoaded', initializeApp);
 } else {
-  // DOM already loaded
-  waitForScriptsAndInitialize();
+  // DOM already loaded, start immediately
+  initializeApp();
 }
