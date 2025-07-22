@@ -74,15 +74,13 @@ const initializeApp = () => {
   try {
     const root = createRoot(rootElement);
     root.render(
-      <StrictMode>
-        <App />
-      </StrictMode>
+      React.createElement(StrictMode, null, React.createElement(App))
     );
     
     console.log('App rendered successfully');
     
     // Load GTM after React is successfully initialized
-    setTimeout(loadGTM, 1000);
+    setTimeout(loadGTM, 50);
     
   } catch (error) {
     console.error('Failed to render with StrictMode, trying fallback...', error);
@@ -90,11 +88,11 @@ const initializeApp = () => {
     // Fallback without StrictMode
     try {
       const root = createRoot(rootElement);
-      root.render(<App />);
+      root.render(React.createElement(App));
       console.log('App rendered with fallback');
       
       // Load GTM after fallback render
-      setTimeout(loadGTM, 1000);
+      setTimeout(loadGTM, 50);
       
     } catch (fallbackError) {
       console.error('Complete render failure:', fallbackError);
