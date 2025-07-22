@@ -1,3 +1,4 @@
+
 import { EnhancedButton } from "@/components/ui/EnhancedButton";
 import { MessageSquare } from "lucide-react";
 import { useCallback, useMemo } from "react";
@@ -18,43 +19,27 @@ const HeroContent = ({ onCTAClick, shouldReduceAnimations }: HeroContentProps) =
     distributorSection?.scrollIntoView({ behavior: 'smooth' });
   }, []);
 
-  // Memoize static content that doesn't change
-  const staticContent = useMemo(() => ({
-    mainTitle: "NIVELA",
-    subtitle: "A evolução da escova progressiva",
-    mainCopy: "Desenvolvido com tecnologia patenteada e ativos da Amazônia. Rendimento até 30% superior."
-  }), []);
-
   return (
     <div className="max-w-none pt-6 lg:pt-10 lg:pr-8">
 
-      {/* Título Principal - NIVELA® */}
+      {/* Título Principal - NIVELA: A Evolução da escova progressiva */}
       <div className="animate-sequential-in opacity-0">
         <h1 className="text-hero text-center lg:text-left mb-4 lg:mb-6">
-          <span className="wilkysta-title gradient-text-animated">NIVELA</span>
+          <span className="wilkysta-title gradient-text-animated text-[1.1em]">NIVELA</span>
           <sup className="text-2xl sm:text-3xl lg:text-4xl text-primary/80 font-light">®</sup>
+          <span className="font-playfair font-bold">: A Evolução</span>
+          <br />
+          <span className="font-playfair font-bold">da escova progressiva</span>
         </h1>
       </div>
 
-      {/* Subtítulo */}
+      {/* Subheadline em Itálico */}
       <div className="animate-sequential-in opacity-0">
-        <h2 className="text-hero-subtitle text-center lg:text-left mb-4">
-          A evolução da<br />escova progressiva
+        <h2 className="text-hero-subtitle text-center lg:text-left mb-6 lg:mb-8 italic">
+          Desenvolvido com tecnologia patenteada,<br />
+          sem formol, com ativos da Amazônia e<br />
+          rendimento 30% superior.
         </h2>
-      </div>
-
-      {/* Descrição */}
-      <div className="animate-sequential-in opacity-0">
-        <p className="text-hero-description text-center lg:text-left mb-6 lg:mb-8">
-          Desenvolvido com tecnologia patenteada e ativos da Amazônia.
-        </p>
-        
-        {/* Destaque do Rendimento */}
-        <div className="text-center lg:text-left mb-8 lg:mb-10">
-          <span className="inline-block text-2xl lg:text-3xl font-playfair font-bold gradient-text-animated bg-gradient-to-r from-[#9D4916] via-[#D9C0AA] to-[#254C5A] bg-clip-text text-transparent">
-            30% + rendimento
-          </span>
-        </div>
       </div>
 
       {/* Creative Pills */}

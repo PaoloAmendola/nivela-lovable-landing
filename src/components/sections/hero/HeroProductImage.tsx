@@ -1,3 +1,4 @@
+
 import UnifiedImage from "@/components/ui/UnifiedImage";
 
 interface HeroProductImageProps {
