@@ -62,8 +62,8 @@ if ('serviceWorker' in navigator) {
   });
 }
 
-// Simple and robust React initialization
-const initializeApp = () => {
+// Enhanced React initialization with hook safety
+const initializeApp = async () => {
   const rootElement = document.getElementById("root");
 
   if (!rootElement) {
@@ -71,13 +71,34 @@ const initializeApp = () => {
     return;
   }
 
-  // Ensure React is available globally
-  if (!React || typeof React.createElement !== 'function') {
-    console.error('React is not properly loaded');
-    return;
-  }
+  // Wait for React to be fully available with hooks
+  let attempts = 0;
+  const maxAttempts = 10;
+  
+  const waitForReact = () => new Promise<void>((resolve, reject) => {
+    const checkReact = () => {
+      attempts++;
+      
+      if (
+        React && 
+        typeof React.createElement === 'function' &&
+        typeof React.useState === 'function' &&
+        typeof React.useEffect === 'function'
+      ) {
+        console.log('React hooks confirmed available');
+        resolve();
+      } else if (attempts >= maxAttempts) {
+        reject(new Error('React hooks not available after waiting'));
+      } else {
+        setTimeout(checkReact, 100);
+      }
+    };
+    checkReact();
+  });
 
   try {
+    await waitForReact();
+    
     const root = createRoot(rootElement);
     root.render(
       <StrictMode>
@@ -87,63 +108,47 @@ const initializeApp = () => {
     
     console.log('App rendered successfully');
     
-    // Load GTM after React is successfully initialized
-    setTimeout(loadGTM, 50);
+    // Load GTM only after successful React mount
+    setTimeout(() => {
+      requestAnimationFrame(loadGTM);
+    }, 100);
     
   } catch (error) {
-    console.error('Failed to render with StrictMode, trying fallback...', error);
+    console.error('React initialization failed:', error);
     
-    // Fallback without StrictMode
-    try {
-      const root = createRoot(rootElement);
-      root.render(<App />);
-      console.log('App rendered with fallback');
-      
-      // Load GTM after fallback render
-      setTimeout(loadGTM, 50);
-      
-    } catch (fallbackError) {
-      console.error('Complete render failure:', fallbackError);
-      
-      // Final fallback: show error message
-      rootElement.innerHTML = `
-        <div style="
-          padding: 40px 20px; 
-          text-align: center; 
-          color: #333; 
-          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-          max-width: 500px;
-          margin: 50px auto;
-          border-radius: 8px;
-          background: #f8f9fa;
-          border: 1px solid #dee2e6;
-        ">
-          <h3 style="margin-bottom: 16px; color: #495057;">Erro de Carregamento</h3>
-          <p style="margin-bottom: 20px; line-height: 1.5;">
-            Ocorreu um erro ao carregar a aplicação. Isso pode ser causado por:
-          </p>
-          <ul style="text-align: left; margin-bottom: 20px;">
-            <li>Conexão lenta com a internet</li>
-            <li>Scripts externos interferindo com o carregamento</li>
-            <li>Cache do navegador desatualizado</li>
-          </ul>
-          <button 
-            onclick="location.reload()" 
-            style="
-              background: #007bff; 
-              color: white; 
-              border: none; 
-              padding: 12px 24px; 
-              border-radius: 4px; 
-              cursor: pointer;
-              font-size: 14px;
-            "
-          >
-            Recarregar Página
-          </button>
-        </div>
-      `;
-    }
+    // Show error message
+    rootElement.innerHTML = `
+      <div style="
+        padding: 40px 20px; 
+        text-align: center; 
+        color: #333; 
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        max-width: 500px;
+        margin: 50px auto;
+        border-radius: 8px;
+        background: #f8f9fa;
+        border: 1px solid #dee2e6;
+      ">
+        <h3 style="margin-bottom: 16px; color: #495057;">Erro de Carregamento</h3>
+        <p style="margin-bottom: 20px; line-height: 1.5;">
+          React não pôde ser inicializado corretamente. Tente recarregar a página.
+        </p>
+        <button 
+          onclick="location.reload()" 
+          style="
+            background: #007bff; 
+            color: white; 
+            border: none; 
+            padding: 12px 24px; 
+            border-radius: 4px; 
+            cursor: pointer;
+            font-size: 14px;
+          "
+        >
+          Recarregar Página
+        </button>
+      </div>
+    `;
   }
 };
 
