@@ -26,9 +26,9 @@ const HeroContent = ({ onCTAClick, shouldReduceAnimations }: HeroContentProps) =
       <div className="animate-sequential-in opacity-0">
         <h1 className="text-hero text-center lg:text-left mb-6 lg:mb-8 leading-tight">
           <span className="wilkysta-title text-[1.2em] bg-gradient-to-r from-[#9D4916] via-[#D9C0AA] to-[#9D4916] bg-clip-text text-transparent">NIVELA</span>
-          <sup className="text-2xl sm:text-3xl lg:text-4xl text-white/70 font-light">®</sup>
+          <sup className="text-xl sm:text-2xl lg:text-3xl text-white/70 font-light">®</sup>
           <span className="font-playfair font-bold text-white">: A Evolução</span>
-          <br className="hidden lg:block" />
+          <br />
           <span className="font-playfair font-bold text-white">da Escova Progressiva</span>
         </h1>
       </div>
