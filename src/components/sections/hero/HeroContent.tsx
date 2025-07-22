@@ -26,16 +26,16 @@ const HeroContent = ({ onCTAClick, shouldReduceAnimations }: HeroContentProps) =
       <div className="animate-sequential-in opacity-0">
         <h1 className="text-hero text-center lg:text-left mb-4 lg:mb-6 leading-tight">
           <span className="wilkysta-title text-[1.15em] bg-gradient-to-r from-[#9D4916] via-[#D9C0AA] to-[#9D4916] bg-clip-text text-transparent">NIVELA</span>
-          <sup className="text-2xl sm:text-3xl lg:text-4xl text-primary/80 font-light">®</sup>
-          <span className="font-playfair font-bold text-accent">: A Evolução</span>
+          <sup className="text-2xl sm:text-3xl lg:text-4xl text-white/80 font-light">®</sup>
+          <span className="font-playfair font-bold text-white">: A Evolução</span>
           <br />
-          <span className="font-playfair font-bold text-white">da escova progressiva</span>
+          <span className="font-playfair font-bold text-white">da Escova Progressiva</span>
         </h1>
       </div>
 
       {/* Subheadline em Itálico */}
       <div className="animate-sequential-in opacity-0">
-        <h2 className="text-hero-subtitle text-center lg:text-left mb-6 lg:mb-8 italic leading-relaxed text-text-secondary whitespace-pre-line">
+        <h2 className="text-hero-subtitle text-center lg:text-left mb-6 lg:mb-8 italic leading-relaxed text-gray-300 whitespace-pre-line">
           {"Desenvolvido com tecnologia patenteada,\nsem formol, com ativos da Amazônia e\nrendimento 30% superior."}
         </h2>
       </div>

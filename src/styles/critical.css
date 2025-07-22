@@ -10,8 +10,8 @@
   --text-secondary: 0 0% 92%;
   --section-spacing-mobile: 4rem;
   --section-spacing-desktop: 6rem;
-  --text-hero: clamp(2rem, 6vw, 3.5rem);
-  --text-hero-subtitle: clamp(1.25rem, 3vw, 1.8rem);
+  --text-hero: clamp(1.5rem, 4.5vw, 2.75rem);
+  --text-hero-subtitle: clamp(1rem, 2.5vw, 1.4rem);
   --text-hero-description: clamp(1.125rem, 2.5vw, 1.375rem);
 }
 
@@ -45,10 +45,10 @@ body {
 
 .text-hero-subtitle {
   font-size: var(--text-hero-subtitle);
-  font-weight: 600;
-  line-height: 1.3;
+  font-weight: 300;
+  line-height: 1.4;
   letter-spacing: -0.01em;
-  color: hsl(var(--text-premium));
+  color: #d1d5db;
 }
 
 .text-hero-description {
