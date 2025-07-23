@@ -1,24 +1,21 @@
 
-import { StrictMode } from 'react';
+import React from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App.tsx';
 import './index.css';
 import './styles/fonts.css';
 
-// Basic initialization without optimization functions that might interfere
+// Ensure React is available globally
+(window as any).React = React;
+
 const rootElement = document.getElementById("root");
 
 if (!rootElement) {
   throw new Error('Root element not found');
 }
 
-// Create root and render immediately - no async operations
 const root = createRoot(rootElement);
-root.render(
-  <StrictMode>
-    <App />
-  </StrictMode>
-);
+root.render(React.createElement(App));
 
 // Register service worker after React is mounted
 if ('serviceWorker' in navigator) {

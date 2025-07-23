@@ -4,12 +4,10 @@ import { Toaster } from "@/components/ui/toaster";
 import ErrorBoundary from "@/components/ui/ErrorBoundary";
 import Index from "./pages/Index";
 
-const App: React.FC = () => {
-  return (
-    <ErrorBoundary>
-      <Index />
-      <Toaster />
-    </ErrorBoundary>
+const App = () => {
+  return React.createElement(ErrorBoundary, null,
+    React.createElement(Index),
+    React.createElement(Toaster)
   );
 };
 
