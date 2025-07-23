@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import { useState } from "react";
 import ScrollProgressIndicator from "@/components/ui/ScrollProgressIndicator";
 import HeroSection from "@/components/sections/HeroSection";
 import ManifestoTextSection from "@/components/sections/ManifestoTextSection";
@@ -21,7 +21,7 @@ import SystemHealthCheck from "@/components/ui/SystemHealthCheck";
 import ContrastOptimizer from "@/components/ui/ContrastOptimizer";
 import { useToast } from "@/hooks/use-toast";
 
-const Index: React.FC = () => {
+const Index = () => {
   const [showForm, setShowForm] = useState(false);
   const { toast } = useToast();
   
