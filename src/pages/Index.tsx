@@ -24,6 +24,7 @@ import { useToast } from "@/hooks/use-toast";
 const Index = () => {
   console.log('Index component render - React available:', !!React);
   console.log('Index component render - useState available:', !!useState);
+  
   const [showForm, setShowForm] = useState(false);
   const { toast } = useToast();
   
@@ -45,86 +46,116 @@ const Index = () => {
     });
   };
 
-  return (
-    <PullToRefresh onRefresh={handleRefresh}>
-      <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
-        <ScrollProgressIndicator />
-        
-        {/* Accessibility Enhancements */}
-        <AccessibilityEnhancements />
-        
-        {/* Contrast Optimizer - WCAG AA Compliance */}
-        <ContrastOptimizer />
-        
-        {/* Simplified Header with Centered Logo */}
-        <SimpleLogo />
-        
-        {/* Hero Section */}
-        <section data-section="hero" id="hero">
-          <HeroSection onCTAClick={() => setShowForm(true)} />
-        </section>
-        
-        <section data-section="manifesto-text" id="manifesto-text">
-          <ManifestoTextSection />
-        </section>
-        
-        <section data-section="manifesto-video" id="manifesto-video">
-          <ManifestoVideoSection />
-        </section>
-        
-        <section data-section="why-choose" id="why-choose">
-          <OptimizedLazySection skeleton="card" delay={100}>
-            <WhyChooseNivelaSection />
-          </OptimizedLazySection>
-        </section>
-        
-        <section data-section="technology" id="technology">
-          <OptimizedLazySection skeleton="card" delay={150}>
-            <TechnologySection />
-          </OptimizedLazySection>
-        </section>
-        
-        <section data-section="ecosystem" id="ecosystem">
-          <OptimizedLazySection skeleton="card" delay={200}>
-            <EcosystemSection />
-          </OptimizedLazySection>
-        </section>
-        
-        <section data-section="distributor" id="distributor">
-          <OptimizedLazySection skeleton="card" delay={250}>
-            <DistributorSection onCTAClick={() => setShowForm(true)} />
-          </OptimizedLazySection>
-        </section>
-        
-        <section data-section="faq" id="faq">
-          <OptimizedLazySection skeleton="card" delay={300}>
-            <FAQSection />
-          </OptimizedLazySection>
-        </section>
-        
-        <section data-section="store" id="store">
-          <OptimizedLazySection skeleton="card" delay={350}>
-            <StoreSection />
-          </OptimizedLazySection>
-        </section>
-        
-        <section data-section="footer" id="footer">
-          <LegalSection />
-        </section>
+  return React.createElement(PullToRefresh, { onRefresh: handleRefresh },
+    React.createElement('div', { 
+      className: "min-h-screen bg-background text-foreground overflow-x-hidden" 
+    },
+      React.createElement(ScrollProgressIndicator),
+      
+      // Accessibility Enhancements
+      React.createElement(AccessibilityEnhancements),
+      
+      // Contrast Optimizer - WCAG AA Compliance
+      React.createElement(ContrastOptimizer),
+      
+      // Simplified Header with Centered Logo
+      React.createElement(SimpleLogo),
+      
+      // Hero Section
+      React.createElement('section', { 
+        'data-section': 'hero', 
+        id: 'hero' 
+      },
+        React.createElement(HeroSection, { onCTAClick: () => setShowForm(true) })
+      ),
+      
+      React.createElement('section', { 
+        'data-section': 'manifesto-text', 
+        id: 'manifesto-text' 
+      },
+        React.createElement(ManifestoTextSection)
+      ),
+      
+      React.createElement('section', { 
+        'data-section': 'manifesto-video', 
+        id: 'manifesto-video' 
+      },
+        React.createElement(ManifestoVideoSection)
+      ),
+      
+      React.createElement('section', { 
+        'data-section': 'why-choose', 
+        id: 'why-choose' 
+      },
+        React.createElement(OptimizedLazySection, { skeleton: 'card', delay: 100 },
+          React.createElement(WhyChooseNivelaSection)
+        )
+      ),
+      
+      React.createElement('section', { 
+        'data-section': 'technology', 
+        id: 'technology' 
+      },
+        React.createElement(OptimizedLazySection, { skeleton: 'card', delay: 150 },
+          React.createElement(TechnologySection)
+        )
+      ),
+      
+      React.createElement('section', { 
+        'data-section': 'ecosystem', 
+        id: 'ecosystem' 
+      },
+        React.createElement(OptimizedLazySection, { skeleton: 'card', delay: 200 },
+          React.createElement(EcosystemSection)
+        )
+      ),
+      
+      React.createElement('section', { 
+        'data-section': 'distributor', 
+        id: 'distributor' 
+      },
+        React.createElement(OptimizedLazySection, { skeleton: 'card', delay: 250 },
+          React.createElement(DistributorSection, { onCTAClick: () => setShowForm(true) })
+        )
+      ),
+      
+      React.createElement('section', { 
+        'data-section': 'faq', 
+        id: 'faq' 
+      },
+        React.createElement(OptimizedLazySection, { skeleton: 'card', delay: 300 },
+          React.createElement(FAQSection)
+        )
+      ),
+      
+      React.createElement('section', { 
+        'data-section': 'store', 
+        id: 'store' 
+      },
+        React.createElement(OptimizedLazySection, { skeleton: 'card', delay: 350 },
+          React.createElement(StoreSection)
+        )
+      ),
+      
+      React.createElement('section', { 
+        'data-section': 'footer', 
+        id: 'footer' 
+      },
+        React.createElement(LegalSection)
+      ),
 
-        {/* Enhanced Mobile CTA */}
-        <EnhancedMobileCTA onClick={() => setShowForm(true)} />
+      // Enhanced Mobile CTA
+      React.createElement(EnhancedMobileCTA, { onClick: () => setShowForm(true) }),
 
-        {/* Premium Contact Modal */}
-        <PremiumContactModal 
-          isOpen={showForm} 
-          onClose={() => setShowForm(false)} 
-        />
+      // Premium Contact Modal
+      React.createElement(PremiumContactModal, { 
+        isOpen: showForm, 
+        onClose: () => setShowForm(false)
+      }),
 
-        {/* System Health Check - Development Mode */}
-        {process.env.NODE_ENV === 'development' && <SystemHealthCheck />}
-      </div>
-    </PullToRefresh>
+      // System Health Check - Development Mode
+      process.env.NODE_ENV === 'development' && React.createElement(SystemHealthCheck)
+    )
   );
 };
 
