@@ -5,8 +5,10 @@ import App from './App.tsx';
 import './index.css';
 import './styles/fonts.css';
 
-// Ensure React is available globally
+// Ensure React is available globally before any imports
 (window as any).React = React;
+console.log('main.tsx - React available globally:', !!React);
+console.log('main.tsx - window.React available:', !!(window as any).React);
 
 const rootElement = document.getElementById("root");
 

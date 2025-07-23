@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import React, { useState } from "react";
 import ScrollProgressIndicator from "@/components/ui/ScrollProgressIndicator";
 import HeroSection from "@/components/sections/HeroSection";
 import ManifestoTextSection from "@/components/sections/ManifestoTextSection";
@@ -22,6 +22,8 @@ import ContrastOptimizer from "@/components/ui/ContrastOptimizer";
 import { useToast } from "@/hooks/use-toast";
 
 const Index = () => {
+  console.log('Index component render - React available:', !!React);
+  console.log('Index component render - useState available:', !!useState);
   const [showForm, setShowForm] = useState(false);
   const { toast } = useToast();
   
